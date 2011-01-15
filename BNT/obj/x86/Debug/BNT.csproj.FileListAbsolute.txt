@@ -9,3 +9,14 @@ c:\users\lukesky\documents\visual studio 2010\Projects\BNT\BNT\obj\x86\Debug\Gen
 c:\users\lukesky\documents\visual studio 2010\Projects\BNT\BNT\obj\x86\Debug\GenerateResource.write.1.tlog
 c:\users\lukesky\documents\visual studio 2010\Projects\BNT\BNT\obj\x86\Debug\BNT.exe
 c:\users\lukesky\documents\visual studio 2010\Projects\BNT\BNT\obj\x86\Debug\BNT.pdb
+D:\Dokumenty\Visual Studio 2008\Projects\_C#\BNT\BNT\bin\Debug\BNT.exe.config
+D:\Dokumenty\Visual Studio 2008\Projects\_C#\BNT\BNT\obj\x86\Debug\BNT.exe
+D:\Dokumenty\Visual Studio 2008\Projects\_C#\BNT\BNT\obj\x86\Debug\BNT.pdb
+D:\Dokumenty\Visual Studio 2008\Projects\_C#\BNT\BNT\bin\Debug\Baza_BNT.sdf
+D:\Dokumenty\Visual Studio 2008\Projects\_C#\BNT\BNT\bin\Debug\BNT.exe
+D:\Dokumenty\Visual Studio 2008\Projects\_C#\BNT\BNT\bin\Debug\BNT.pdb
+D:\Dokumenty\Visual Studio 2008\Projects\_C#\BNT\BNT\obj\x86\Debug\ResolveAssemblyReference.cache
+D:\Dokumenty\Visual Studio 2008\Projects\_C#\BNT\BNT\obj\x86\Debug\BNT.Form1.resources
+D:\Dokumenty\Visual Studio 2008\Projects\_C#\BNT\BNT\obj\x86\Debug\BNT.Properties.Resources.resources
+D:\Dokumenty\Visual Studio 2008\Projects\_C#\BNT\BNT\obj\x86\Debug\GenerateResource.read.1.tlog
+D:\Dokumenty\Visual Studio 2008\Projects\_C#\BNT\BNT\obj\x86\Debug\GenerateResource.write.1.tlog
