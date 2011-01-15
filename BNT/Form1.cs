@@ -24,21 +24,22 @@ namespace BNT
             SqlCeDataReader rdr = null;
 
             cn.Open();
-            cmd = new SqlCeCommand(@"INSERT INTO Firmy (imie, nazwisko) VALUES ('Alojzy','Piątek')", cn);
-            //cmd.Parameters.AddWithValue("@imie","Mietek");
-            //cmd.Parameters.AddWithValue("@nazwisko", "Szczesniak");
-            /*
+            //cmd = new SqlCeCommand("INSERT INTO Firmy (imie, nazwisko) VALUES ('Alojzy','Piątek')", cn);
+
+            //cmd.ExecuteNonQuery();
+            //cmd.Dispose();
+
+            cmd = new SqlCeCommand("SELECT firmy.nazwa,modele.nazwa FROM firmy JOIN nadajniki ON firmy.id=nadajniki.id_firmy JOIN modele ON modele.id=nadajniki.id_modelu", cn);
             rdr = cmd.ExecuteReader();
 
             while (rdr.Read())
             {
-                Console.WriteLine(rdr[0]);
+                //MessageBox.Show(rdr[1].ToString() + " | " + rdr[2].ToString() + " | " + rdr[3].ToString() + " | " + rdr[4].ToString() + " | " + rdr[5].ToString() + " | " + rdr[6].ToString());
+                MessageBox.Show(rdr[0].ToString() + " | " + rdr[1].ToString());
             }
-            */
 
-            cmd.ExecuteNonQuery();
             cmd.Dispose();
-            //cn.Close();
+            cn.Close();
         }
     }
 }

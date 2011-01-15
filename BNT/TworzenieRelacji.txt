@@ -1,0 +1,27 @@
+﻿ALTER TABLE slupy
+ADD CONSTRAINT fk_miasta
+FOREIGN KEY (id_miasta) REFERENCES miasta(id);
+
+ALTER TABLE nadajniki
+ADD CONSTRAINT fk_firmy_nadajnika
+FOREIGN KEY (id_firmy) REFERENCES firmy(id);
+
+ALTER TABLE nadajniki
+ADD CONSTRAINT fk_slupu
+FOREIGN KEY (id_slupu) REFERENCES slupy(id);
+
+ALTER TABLE nadajniki
+ADD CONSTRAINT fk_modelu
+FOREIGN KEY (id_modelu) REFERENCES modele(id);
+
+ALTER TABLE nadajniki
+ADD CONSTRAINT fk_faktury
+FOREIGN KEY (id_faktury) REFERENCES faktury(id);
+
+ALTER TABLE firmy
+ADD CONSTRAINT fk_firmy_miasta
+FOREIGN KEY (id_miasta) REFERENCES miasta(id);
+
+//usunięcie relacji
+ALTER TABLE slupy
+DROP CONSTRAINT fk_miasta;
