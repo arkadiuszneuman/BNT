@@ -1,4 +1,3 @@
-c:\users\lukesky\documents\visual studio 2010\Projects\BNT\BNT\bin\Debug\Baza_BNT.sdf
 c:\users\lukesky\documents\visual studio 2010\Projects\BNT\BNT\bin\Debug\BNT.exe.config
 c:\users\lukesky\documents\visual studio 2010\Projects\BNT\BNT\bin\Debug\BNT.exe
 c:\users\lukesky\documents\visual studio 2010\Projects\BNT\BNT\bin\Debug\BNT.pdb

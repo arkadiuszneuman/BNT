@@ -19,13 +19,14 @@ namespace BNT
 
         private void button1_Click(object sender, EventArgs e)
         {
-            SqlCeConnection cn = new SqlCeConnection("Data Source=Baza_BNT.sdf;");
+            SqlCeConnection cn = new SqlCeConnection("Data Source=..\\..\\Baza_BNT.sdf;Persist Security Info=False;");
             SqlCeCommand cmd;
             SqlCeDataReader rdr = null;
 
             cn.Open();
-            cmd = new SqlCeCommand("INSERT INTO Firmy (imie,nazwisko) VALUES ('Mietek','Szczesniak')", cn);
-
+            cmd = new SqlCeCommand(@"INSERT INTO Firmy (imie, nazwisko) VALUES ('Alojzy','Piątek')", cn);
+            //cmd.Parameters.AddWithValue("@imie","Mietek");
+            //cmd.Parameters.AddWithValue("@nazwisko", "Szczesniak");
             /*
             rdr = cmd.ExecuteReader();
 
@@ -35,9 +36,9 @@ namespace BNT
             }
             */
 
-            //cmd.ExecuteNonQuery();
+            cmd.ExecuteNonQuery();
             cmd.Dispose();
-            cn.Close();
+            //cn.Close();
         }
     }
 }
