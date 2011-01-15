@@ -19,42 +19,26 @@ namespace BNT
 
         private void button1_Click(object sender, EventArgs e)
         {
-            /*SqlCeConnection cn = new SqlCeConnection("Data Source=Baza_BNT.sdf;");
+            SqlCeConnection cn = new SqlCeConnection("Data Source=..\\..\\Baza_BNT.sdf;Persist Security Info=False;");
             SqlCeCommand cmd;
             SqlCeDataReader rdr = null;
 
             cn.Open();
-            cmd = new SqlCeCommand("INSERT INTO Firmy (imie,nazwisko) VALUES ('Mietek','Szczesniak')", cn);
-            //cmd = new SqlCeCommand("SELECT * FROM Firmy", cn);
-            
+            cmd = new SqlCeCommand(@"INSERT INTO Firmy (imie, nazwisko) VALUES ('Alojzy','Piątek')", cn);
+            //cmd.Parameters.AddWithValue("@imie","Mietek");
+            //cmd.Parameters.AddWithValue("@nazwisko", "Szczesniak");
+            /*
             rdr = cmd.ExecuteReader();
 
             while (rdr.Read())
             {
-                MessageBox.Show(rdr[0].ToString()+" "+rdr[1].ToString()+" "+rdr[2].ToString());
+                Console.WriteLine(rdr[0]);
             }
-            
+            */
 
-            //cmd.ExecuteNonQuery();
+            cmd.ExecuteNonQuery();
             cmd.Dispose();
-            cn.Close();*/
-
-            string conString = Properties.Settings.Default.Baza_BNTConnectionString;
-
-            // Open the connection using the connection string.
-            using (SqlCeConnection con = new SqlCeConnection(conString))
-            {
-                con.Open();
-
-                // Insert into the SqlCe table. ExecuteNonQuery is best for inserts.
-
-                using (SqlCeCommand com = new SqlCeCommand("INSERT INTO Firmy (imie,nazwisko) VALUES ('Mietekkkk','Szczesniak')", con))
-                {
-                    //com.Parameters.AddWithValue("@num", num);
-                    com.ExecuteNonQuery();
-                    
-                }
-            }
+            //cn.Close();
         }
     }
 }
