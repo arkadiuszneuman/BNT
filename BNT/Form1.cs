@@ -24,7 +24,7 @@ namespace BNT
             SqlCeDataReader rdr = null;
 
             cn.Open();
-            cmd = new SqlCeCommand(@"INSERT INTO Firmy (imie, nazwisko) VALUES ('Alojzy','Piątek')", cn);
+            cmd = new SqlCeCommand(@"INSERT INTO Firmy (imie, nazwisko) VALUES ('Arek','Piątek')", cn);
             //cmd.Parameters.AddWithValue("@imie","Mietek");
             //cmd.Parameters.AddWithValue("@nazwisko", "Szczesniak");
             /*

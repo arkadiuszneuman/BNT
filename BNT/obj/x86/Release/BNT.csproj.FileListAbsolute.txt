@@ -1,5 +1,4 @@
 D:\Dokumenty\Visual Studio 2008\Projects\_C#\BNT\BNT\bin\Release\BNT.exe.config
-D:\Dokumenty\Visual Studio 2008\Projects\_C#\BNT\BNT\bin\Release\Baza_BNT.sdf
 D:\Dokumenty\Visual Studio 2008\Projects\_C#\BNT\BNT\bin\Release\BNT.exe
 D:\Dokumenty\Visual Studio 2008\Projects\_C#\BNT\BNT\bin\Release\BNT.pdb
 D:\Dokumenty\Visual Studio 2008\Projects\_C#\BNT\BNT\obj\x86\Release\ResolveAssemblyReference.cache
