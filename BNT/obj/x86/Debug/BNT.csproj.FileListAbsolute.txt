@@ -1,0 +1,11 @@
+c:\users\lukesky\documents\visual studio 2010\Projects\BNT\BNT\bin\Debug\Baza_BNT.sdf
+c:\users\lukesky\documents\visual studio 2010\Projects\BNT\BNT\bin\Debug\BNT.exe.config
+c:\users\lukesky\documents\visual studio 2010\Projects\BNT\BNT\bin\Debug\BNT.exe
+c:\users\lukesky\documents\visual studio 2010\Projects\BNT\BNT\bin\Debug\BNT.pdb
+c:\users\lukesky\documents\visual studio 2010\Projects\BNT\BNT\obj\x86\Debug\ResolveAssemblyReference.cache
+c:\users\lukesky\documents\visual studio 2010\Projects\BNT\BNT\obj\x86\Debug\BNT.Form1.resources
+c:\users\lukesky\documents\visual studio 2010\Projects\BNT\BNT\obj\x86\Debug\BNT.Properties.Resources.resources
+c:\users\lukesky\documents\visual studio 2010\Projects\BNT\BNT\obj\x86\Debug\GenerateResource.read.1.tlog
+c:\users\lukesky\documents\visual studio 2010\Projects\BNT\BNT\obj\x86\Debug\GenerateResource.write.1.tlog
+c:\users\lukesky\documents\visual studio 2010\Projects\BNT\BNT\obj\x86\Debug\BNT.exe
+c:\users\lukesky\documents\visual studio 2010\Projects\BNT\BNT\obj\x86\Debug\BNT.pdb
