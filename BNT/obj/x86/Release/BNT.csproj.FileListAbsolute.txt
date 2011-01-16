@@ -8,3 +8,4 @@ D:\Dokumenty\Visual Studio 2008\Projects\_C#\BNT\BNT\obj\x86\Release\GenerateRes
 D:\Dokumenty\Visual Studio 2008\Projects\_C#\BNT\BNT\obj\x86\Release\BNT.exe
 D:\Dokumenty\Visual Studio 2008\Projects\_C#\BNT\BNT\obj\x86\Release\BNT.pdb
 D:\Dokumenty\Visual Studio 2008\Projects\_C#\BNT\BNT\obj\x86\Release\BNT.FormaGlowna.resources
+D:\Dokumenty\Visual Studio 2008\Projects\_C#\BNT\BNT\obj\x86\Release\BNT.NazwaMiasta.resources

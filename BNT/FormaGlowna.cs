@@ -12,35 +12,41 @@ namespace BNT
 {
     public partial class FormaGlowna : Form
     {
-        MapBtn m;
+        //MapBtn m;
+        SQL sql = new SQL();
+        bool dodawajMiasto = false;
 
         public FormaGlowna()
         {
             InitializeComponent();
             string v = "0.1";
             Text = "BNT - Baza Nadajników Trakcyjnych v" + v;
-            m = new MapBtn(tabMapa);
-        }
-
-        private void button1_Click(object sender, EventArgs e)
-        {
-            //SQL sql = new SQL();
-            //sql.Przyklad();
-
-            
-            //m.Maluj();
-        }
-
-        private void pictureBoxMapa_MouseMove(object sender, MouseEventArgs e)
-        {
+            foreach (string[] miasta in sql.CzytajMiasta())
+            {
+                new MapBtn(tabMapa, panelMiasto, miasta[0], short.Parse(miasta[1]), short.Parse(miasta[2]));
+            }
+            //m = new MapBtn(tabMapa);
             pictureBoxMapa.SendToBack();
-           // m.Odswiez(e);
-            Text = e.X.ToString() + " " + e.Y.ToString();
         }
 
-        private void pictureBoxMapa_MouseEnter(object sender, EventArgs e)
+        private void buttonDodajMiasto_Click(object sender, EventArgs e)
         {
+            if (MessageBox.Show("Dodaj miasto klikając w odpowiednie miejsce na mapie. Czy chcesz kontynuować?", "Dodaj miasto", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == System.Windows.Forms.DialogResult.Yes)
+                dodawajMiasto = true;
+        }
 
+        private void pictureBoxMapa_Click(object sender, EventArgs e)
+        {
+            if (dodawajMiasto)
+            {
+                NazwaMiasta dialog = new NazwaMiasta();
+                if (dialog.ShowDialog() == System.Windows.Forms.DialogResult.OK)
+                {
+                    sql.DodajMiasto(dialog.Nazwa, new Point(((MouseEventArgs)e).X, ((MouseEventArgs)e).Y));
+                }
+            }
+
+            Text = ((MouseEventArgs)e).X.ToString() + " " + ((MouseEventArgs)e).Y.ToString();
         }
     }
 }
