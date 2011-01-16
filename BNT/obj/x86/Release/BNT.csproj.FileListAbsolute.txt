@@ -2,9 +2,9 @@ D:\Dokumenty\Visual Studio 2008\Projects\_C#\BNT\BNT\bin\Release\BNT.exe.config
 D:\Dokumenty\Visual Studio 2008\Projects\_C#\BNT\BNT\bin\Release\BNT.exe
 D:\Dokumenty\Visual Studio 2008\Projects\_C#\BNT\BNT\bin\Release\BNT.pdb
 D:\Dokumenty\Visual Studio 2008\Projects\_C#\BNT\BNT\obj\x86\Release\ResolveAssemblyReference.cache
-D:\Dokumenty\Visual Studio 2008\Projects\_C#\BNT\BNT\obj\x86\Release\BNT.Form1.resources
 D:\Dokumenty\Visual Studio 2008\Projects\_C#\BNT\BNT\obj\x86\Release\BNT.Properties.Resources.resources
 D:\Dokumenty\Visual Studio 2008\Projects\_C#\BNT\BNT\obj\x86\Release\GenerateResource.read.1.tlog
 D:\Dokumenty\Visual Studio 2008\Projects\_C#\BNT\BNT\obj\x86\Release\GenerateResource.write.1.tlog
 D:\Dokumenty\Visual Studio 2008\Projects\_C#\BNT\BNT\obj\x86\Release\BNT.exe
 D:\Dokumenty\Visual Studio 2008\Projects\_C#\BNT\BNT\obj\x86\Release\BNT.pdb
+D:\Dokumenty\Visual Studio 2008\Projects\_C#\BNT\BNT\obj\x86\Release\BNT.FormaGlowna.resources

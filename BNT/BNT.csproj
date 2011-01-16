@@ -68,16 +68,24 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Baza_BNT.xsd</DependentUpon>
     </Compile>
-    <Compile Include="Form1.cs">
+    <Compile Include="Baza_BNTDataSet.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Baza_BNTDataSet.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="FormaGlowna.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Form1.Designer.cs">
-      <DependentUpon>Form1.cs</DependentUpon>
+    <Compile Include="FormaGlowna.Designer.cs">
+      <DependentUpon>FormaGlowna.cs</DependentUpon>
     </Compile>
+    <Compile Include="MapBtn.cs" />
+    <Compile Include="MapButton.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <EmbeddedResource Include="Form1.resx">
-      <DependentUpon>Form1.cs</DependentUpon>
+    <Compile Include="SQL.cs" />
+    <EmbeddedResource Include="FormaGlowna.resx">
+      <DependentUpon>FormaGlowna.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
@@ -87,6 +95,7 @@
     <Compile Include="Properties\Resources.Designer.cs">
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
+      <DesignTime>True</DesignTime>
     </Compile>
     <None Include="app.config" />
     <None Include="Baza_BNT.xsc">
@@ -99,6 +108,17 @@
     </None>
     <None Include="Baza_BNT.xss">
       <DependentUpon>Baza_BNT.xsd</DependentUpon>
+    </None>
+    <None Include="Baza_BNTDataSet.xsc">
+      <DependentUpon>Baza_BNTDataSet.xsd</DependentUpon>
+    </None>
+    <None Include="Baza_BNTDataSet.xsd">
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>Baza_BNTDataSet.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Baza_BNTDataSet.xss">
+      <DependentUpon>Baza_BNTDataSet.xsd</DependentUpon>
     </None>
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
@@ -139,6 +159,10 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Baza_BNT.sdf" />
+    <None Include="Resources\button_green_vsmall.png" />
+    <None Include="Resources\button_purple_small.png" />
+    <None Include="Resources\button_green_small.png" />
+    <None Include="Resources\polska_kontur_maly.jpg" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
