@@ -29,7 +29,9 @@ namespace BNT
             //cmd.ExecuteNonQuery();
             //cmd.Dispose();
 
-            cmd = new SqlCeCommand("SELECT firmy.nazwa,modele.nazwa FROM firmy JOIN nadajniki ON firmy.id=nadajniki.id_firmy JOIN modele ON modele.id=nadajniki.id_modelu", cn);
+            cmd = new SqlCeCommand("SELECT firmy.nazwa, modele.cena FROM firmy JOIN nadajniki ON firmy.id=nadajniki.id_firmy JOIN modele ON modele.id=nadajniki.id_modelu", cn);
+            cmd = new SqlCeCommand("SELECT firmy.nazwa, miasta.nazwa FROM firmy INNER JOIN nadajniki ON firmy.id = nadajniki.id_firmy INNER JOIN slupy ON slupy.id = nadajniki.id_slupu INNER JOIN miasta ON miasta.id = slupy.id_miasta", cn);
+            // zapytanie - jaka firma w jakim mieście ma nadajniki
             rdr = cmd.ExecuteReader();
 
             while (rdr.Read())
