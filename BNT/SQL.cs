@@ -104,5 +104,75 @@ namespace BNT
 
             return tablica.ToArray();
         }
+
+        public string[] CzytajFirmy()
+        {
+            List<string> tablica = new List<string>();
+            string zapytanie = "SELECT nazwa FROM firmy";
+            SqlCeDataReader rdr = Zapytanie(zapytanie);
+            while (rdr.Read())
+            {
+                string s = rdr[0].ToString();
+                tablica.Add(s);
+            }
+            return tablica.ToArray();
+        }
+
+        public string[][] CzytajFakture(string nazwaFirmy)
+        {
+            List<string[]> tablica = new List<string[]>();
+            for (int rok = 2008; rok <= DateTime.Now.Year; rok++)
+            {
+                for (int miesiac = 1; miesiac <= 12; miesiac++)
+                {
+                    string[] s = new string[3];
+                    s[0] = CzytajNajpozniejszaDateZaplaty(nazwaFirmy,miesiac,rok);
+                    s[1] = CzytajKwoteMiesieczna(nazwaFirmy,miesiac,rok);
+                    s[2] = "Przycisk";
+                    tablica.Add(s);
+                }
+            }
+            return tablica.ToArray();
+        }
+
+        public int DzienMiesiaca(int miesiac, int rok)
+        {
+            switch (miesiac)
+            {
+                case 4:
+                case 6:
+                case 9:
+                case 11:
+                    return 30;
+                case 2:
+                    if (rok % 4 == 0)
+                        return 28;
+                    else
+                        return 29;
+                default:
+                    return 31;
+            }
+        }
+
+        public string CzytajKwoteMiesieczna(string nazwaFirmy, int numerMiesiaca, int numerRoku)
+        {
+            string zapytanie = "SELECT SUM((slupy.cena + modele.cena * nadajniki.ilosc) * faktury.wartosc) AS ILOSC FROM faktury LEFT OUTER JOIN nadajniki ON nadajniki.id_faktury = faktury.id LEFT OUTER JOIN firmy ON firmy.id = nadajniki.id_firmy LEFT OUTER JOIN slupy ON slupy.id = nadajniki.id_slupu LEFT OUTER JOIN modele ON modele.id = nadajniki.id_modelu WHERE (firmy.nazwa = '" + nazwaFirmy + "') AND (faktury.data_zaplaty BETWEEN '" + numerRoku + "-" + numerMiesiaca + "-01' AND '" + numerRoku + "-" + numerMiesiaca + "-" + numerDnia + "')";
+            SqlCeDataReader rdr = Zapytanie(zapytanie);
+            if(rdr.Read())
+                return rdr[0].ToString();
+            else
+                return null;
+        }
+
+        public string CzytajNajpozniejszaDateZaplaty(string nazwaFirmy, int numerMiesiaca, int numerRoku)
+        {
+            string zapytanie = "SELECT MAX(faktury.data_zaplaty) AS DATA FROM faktury LEFT OUTER JOIN nadajniki ON nadajniki.id_faktury = faktury.id LEFT OUTER JOIN firmy ON firmy.id = nadajniki.id_firmy WHERE (firmy.nazwa = '" + nazwaFirmy + "') AND (faktury.data_zaplaty BETWEEN '" + numerRoku + "-" + numerMiesiaca + "-01' AND '" + numerRoku + "-" + numerMiesiaca + "-" + numerDnia + "')";
+            SqlCeDataReader rdr = Zapytanie(zapytanie);
+            if (rdr.Read())
+                return rdr[0].ToString();
+            else
+                return null;
+        }
+
     }
 }

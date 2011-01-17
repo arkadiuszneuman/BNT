@@ -9,3 +9,14 @@ D:\Dokumenty\Visual Studio 2008\Projects\_C#\BNT\BNT\obj\x86\Release\BNT.exe
 D:\Dokumenty\Visual Studio 2008\Projects\_C#\BNT\BNT\obj\x86\Release\BNT.pdb
 D:\Dokumenty\Visual Studio 2008\Projects\_C#\BNT\BNT\obj\x86\Release\BNT.FormaGlowna.resources
 D:\Dokumenty\Visual Studio 2008\Projects\_C#\BNT\BNT\obj\x86\Release\BNT.NazwaMiasta.resources
+C:\Users\LukeSky\documents\visual studio 2010\Projects\BNT\BNT\bin\Release\BNT.exe.config
+C:\Users\LukeSky\documents\visual studio 2010\Projects\BNT\BNT\obj\x86\Release\BNT.exe
+C:\Users\LukeSky\documents\visual studio 2010\Projects\BNT\BNT\obj\x86\Release\BNT.pdb
+C:\Users\LukeSky\documents\visual studio 2010\Projects\BNT\BNT\bin\Release\BNT.exe
+C:\Users\LukeSky\documents\visual studio 2010\Projects\BNT\BNT\bin\Release\BNT.pdb
+C:\Users\LukeSky\documents\visual studio 2010\Projects\BNT\BNT\obj\x86\Release\ResolveAssemblyReference.cache
+C:\Users\LukeSky\documents\visual studio 2010\Projects\BNT\BNT\obj\x86\Release\BNT.FormaGlowna.resources
+C:\Users\LukeSky\documents\visual studio 2010\Projects\BNT\BNT\obj\x86\Release\BNT.NazwaMiasta.resources
+C:\Users\LukeSky\documents\visual studio 2010\Projects\BNT\BNT\obj\x86\Release\BNT.Properties.Resources.resources
+C:\Users\LukeSky\documents\visual studio 2010\Projects\BNT\BNT\obj\x86\Release\GenerateResource.read.1.tlog
+C:\Users\LukeSky\documents\visual studio 2010\Projects\BNT\BNT\obj\x86\Release\GenerateResource.write.1.tlog

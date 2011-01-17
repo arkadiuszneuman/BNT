@@ -57,7 +57,12 @@ namespace BNT
                 case 1: //reakcja na klikniecie na slupy
                     new Slupy(dataGridSlupy);
                     break;
+                case 5:
+                    new Faktury(comboFirmy,comboMiesiace,comboRok,buttonGeneruj,dataGridFaktury);
+                    break;
             }
         }
+
+
     }
 }
