@@ -18,6 +18,5 @@
 *.lib
 *.sbr
 *.sdf
-bin/
-obj/
-Release/
+[Bb]in/
+[Oo]bj/
