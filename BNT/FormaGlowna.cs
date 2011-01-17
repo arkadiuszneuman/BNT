@@ -48,5 +48,16 @@ namespace BNT
 
             Text = ((MouseEventArgs)e).X.ToString() + " " + ((MouseEventArgs)e).Y.ToString();
         }
+
+        //tutaj dodawac swoje klasy, reakcja na zmiane karty (zakladki)
+        private void tabControl_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            switch (((TabControl)sender).SelectedIndex)
+            {
+                case 1: //reakcja na klikniecie na slupy
+                    new Slupy(dataGridSlupy);
+                    break;
+            }
+        }
     }
 }

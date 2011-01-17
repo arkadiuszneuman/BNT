@@ -85,5 +85,24 @@ namespace BNT
 
             return tablica.ToArray();
         }
+
+        //TODO jak wychiagnac jeszcze firmy?
+        public string[][] CzytajNadajniki() 
+        {
+            List<string[]> tablica = new List<string[]>();
+
+            string zapytanie = "SELECT miasta.nazwa, slupy.wsp_x, slupy.wsp_y, slupy.cena FROM slupy, miasta WHERE slupy.id_miasta=miasta.id";
+            SqlCeDataReader rdr = Zapytanie(zapytanie);
+            while (rdr.Read())
+            {
+                string[] s = new string[3];
+                s[0] = rdr[0].ToString();
+                s[1] = rdr[1].ToString()+";"+rdr[2].ToString();
+                s[2] = rdr[3].ToString();
+                tablica.Add(s);
+            }
+
+            return tablica.ToArray();
+        }
     }
 }
