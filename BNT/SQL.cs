@@ -156,7 +156,7 @@ namespace BNT
 
         public string CzytajKwoteMiesieczna(string nazwaFirmy, int numerMiesiaca, int numerRoku)
         {
-            string zapytanie = "SELECT SUM((slupy.cena + modele.cena * nadajniki.ilosc) * faktury.wartosc) AS ILOSC FROM faktury LEFT OUTER JOIN nadajniki ON nadajniki.id_faktury = faktury.id LEFT OUTER JOIN firmy ON firmy.id = nadajniki.id_firmy LEFT OUTER JOIN slupy ON slupy.id = nadajniki.id_slupu LEFT OUTER JOIN modele ON modele.id = nadajniki.id_modelu WHERE (firmy.nazwa = '" + nazwaFirmy + "') AND (faktury.data_zaplaty BETWEEN '" + numerRoku + "-" + numerMiesiaca + "-01' AND '" + numerRoku + "-" + numerMiesiaca + "-" + numerDnia + "')";
+            string zapytanie = "SELECT SUM((slupy.cena + modele.cena * nadajniki.ilosc) * faktury.wartosc) AS ILOSC FROM faktury LEFT OUTER JOIN nadajniki ON nadajniki.id_faktury = faktury.id LEFT OUTER JOIN firmy ON firmy.id = nadajniki.id_firmy LEFT OUTER JOIN slupy ON slupy.id = nadajniki.id_slupu LEFT OUTER JOIN modele ON modele.id = nadajniki.id_modelu WHERE (firmy.nazwa = '" + nazwaFirmy + "') AND (faktury.data_zaplaty BETWEEN '" + numerRoku + "-" + numerMiesiaca + "-01' AND '" + numerRoku + "-" + numerMiesiaca + "-" + DzienMiesiaca(numerMiesiaca,numerRoku) + "')";
             SqlCeDataReader rdr = Zapytanie(zapytanie);
             if(rdr.Read())
                 return rdr[0].ToString();
@@ -166,7 +166,7 @@ namespace BNT
 
         public string CzytajNajpozniejszaDateZaplaty(string nazwaFirmy, int numerMiesiaca, int numerRoku)
         {
-            string zapytanie = "SELECT MAX(faktury.data_zaplaty) AS DATA FROM faktury LEFT OUTER JOIN nadajniki ON nadajniki.id_faktury = faktury.id LEFT OUTER JOIN firmy ON firmy.id = nadajniki.id_firmy WHERE (firmy.nazwa = '" + nazwaFirmy + "') AND (faktury.data_zaplaty BETWEEN '" + numerRoku + "-" + numerMiesiaca + "-01' AND '" + numerRoku + "-" + numerMiesiaca + "-" + numerDnia + "')";
+            string zapytanie = "SELECT MAX(faktury.data_zaplaty) AS DATA FROM faktury LEFT OUTER JOIN nadajniki ON nadajniki.id_faktury = faktury.id LEFT OUTER JOIN firmy ON firmy.id = nadajniki.id_firmy WHERE (firmy.nazwa = '" + nazwaFirmy + "') AND (faktury.data_zaplaty BETWEEN '" + numerRoku + "-" + numerMiesiaca + "-01' AND '" + numerRoku + "-" + numerMiesiaca + "-" + DzienMiesiaca(numerMiesiaca, numerRoku) + "')";
             SqlCeDataReader rdr = Zapytanie(zapytanie);
             if (rdr.Read())
                 return rdr[0].ToString();
