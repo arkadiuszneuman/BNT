@@ -13,11 +13,10 @@ namespace BNT
         ComboBox comboRok;
         Button buttonGeneruj;
         DataGridView dataGridFaktury;
-        SQL sql;
+        SQL sql = new SQL();
 
         public Faktury(ComboBox comboFirmy, ComboBox comboMiesiace, ComboBox comboRok, Button buttonGeneruj, DataGridView dataGridFaktury)
         {
-            SQL sql = new SQL();
             this.comboFirmy = comboFirmy;
             this.comboMiesiace = comboMiesiace;
             this.comboRok = comboRok;
@@ -25,10 +24,12 @@ namespace BNT
             this.dataGridFaktury = dataGridFaktury;
             this.comboFirmy.Items.AddRange(sql.CzytajFirmy());
             this.comboFirmy.SelectedIndexChanged += new System.EventHandler(this.KlikZmienFirme);
+            this.dataGridFaktury.MouseClick += new MouseEventHandler(this.KlikTabelaFaktury);
         }
 
         private void KlikZmienFirme(object sender, EventArgs e)
         {
+            dataGridFaktury.Rows.Clear();
             if (comboFirmy.Items.Count > 0)
             {
                 comboMiesiace.SelectedIndex = DateTime.Now.Month - 1;
@@ -36,11 +37,17 @@ namespace BNT
                 comboMiesiace.Enabled = true;
                 comboRok.Enabled = true;
                 buttonGeneruj.Enabled = true;
-                string[][] dane = sql.CzytajFakture(comboFirmy.SelectedItem.ToString());
-
+                dataGridFaktury.Enabled = true;
+                string[][] dane = sql.CzytajFaktury(comboFirmy.SelectedItem.ToString());
                 for (int j = 0; j < dane.Length; ++j)
                     dataGridFaktury.Rows.Add(dane[j]);
             }
         }
+
+        public void KlikTabelaFaktury(object sender, EventArgs e)
+        {
+
+        }
+
     }
 }
