@@ -36,8 +36,6 @@ namespace BNT {
         
         private slupyDataTable tableslupy;
         
-        private global::System.Data.DataRelation relationfk_firmy_miasta;
-        
         private global::System.Data.DataRelation relationfk_faktury;
         
         private global::System.Data.DataRelation relationfk_firmy_nadajnika;
@@ -47,6 +45,8 @@ namespace BNT {
         private global::System.Data.DataRelation relationfk_slupu;
         
         private global::System.Data.DataRelation relationfk_miasta;
+        
+        private global::System.Data.DataRelation relationfk_firmy_miasta;
         
         private global::System.Data.SchemaSerializationMode _schemaSerializationMode = global::System.Data.SchemaSerializationMode.IncludeSchema;
         
@@ -326,12 +326,12 @@ namespace BNT {
                     this.tableslupy.InitVars();
                 }
             }
-            this.relationfk_firmy_miasta = this.Relations["fk_firmy_miasta"];
             this.relationfk_faktury = this.Relations["fk_faktury"];
             this.relationfk_firmy_nadajnika = this.Relations["fk_firmy_nadajnika"];
             this.relationfk_modelu = this.Relations["fk_modelu"];
             this.relationfk_slupu = this.Relations["fk_slupu"];
             this.relationfk_miasta = this.Relations["fk_miasta"];
+            this.relationfk_firmy_miasta = this.Relations["fk_firmy_miasta"];
         }
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -354,10 +354,6 @@ namespace BNT {
             base.Tables.Add(this.tablenadajniki);
             this.tableslupy = new slupyDataTable();
             base.Tables.Add(this.tableslupy);
-            this.relationfk_firmy_miasta = new global::System.Data.DataRelation("fk_firmy_miasta", new global::System.Data.DataColumn[] {
-                        this.tablemiasta.idColumn}, new global::System.Data.DataColumn[] {
-                        this.tablefirmy.id_miastaColumn}, false);
-            this.Relations.Add(this.relationfk_firmy_miasta);
             this.relationfk_faktury = new global::System.Data.DataRelation("fk_faktury", new global::System.Data.DataColumn[] {
                         this.tablefaktury.idColumn}, new global::System.Data.DataColumn[] {
                         this.tablenadajniki.id_fakturyColumn}, false);
@@ -378,6 +374,10 @@ namespace BNT {
                         this.tablemiasta.idColumn}, new global::System.Data.DataColumn[] {
                         this.tableslupy.id_miastaColumn}, false);
             this.Relations.Add(this.relationfk_miasta);
+            this.relationfk_firmy_miasta = new global::System.Data.DataRelation("fk_firmy_miasta", new global::System.Data.DataColumn[] {
+                        this.tablefirmy.id_miastaColumn}, new global::System.Data.DataColumn[] {
+                        this.tablemiasta.idColumn}, false);
+            this.Relations.Add(this.relationfk_firmy_miasta);
         }
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -958,7 +958,7 @@ namespace BNT {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public firmyRow AddfirmyRow(string nazwa, string imie, string nazwisko, string ulica, string kod_pocztowy, miastaRow parentmiastaRowByfk_firmy_miasta, string nip, string regon, string telefon) {
+            public firmyRow AddfirmyRow(string nazwa, string imie, string nazwisko, string ulica, string kod_pocztowy, int id_miasta, string nip, string regon, string telefon) {
                 firmyRow rowfirmyRow = ((firmyRow)(this.NewRow()));
                 object[] columnValuesArray = new object[] {
                         null,
@@ -967,13 +967,10 @@ namespace BNT {
                         nazwisko,
                         ulica,
                         kod_pocztowy,
-                        null,
+                        id_miasta,
                         nip,
                         regon,
                         telefon};
-                if ((parentmiastaRowByfk_firmy_miasta != null)) {
-                    columnValuesArray[6] = parentmiastaRowByfk_firmy_miasta[0];
-                }
                 rowfirmyRow.ItemArray = columnValuesArray;
                 this.Rows.Add(rowfirmyRow);
                 return rowfirmyRow;
@@ -2633,23 +2630,23 @@ namespace BNT {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public miastaRow miastaRow {
-                get {
-                    return ((miastaRow)(this.GetParentRow(this.Table.ParentRelations["fk_firmy_miasta"])));
-                }
-                set {
-                    this.SetParentRow(value, this.Table.ParentRelations["fk_firmy_miasta"]);
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
             public nadajnikiRow[] GetnadajnikiRows() {
                 if ((this.Table.ChildRelations["fk_firmy_nadajnika"] == null)) {
                     return new nadajnikiRow[0];
                 }
                 else {
                     return ((nadajnikiRow[])(base.GetChildRows(this.Table.ChildRelations["fk_firmy_nadajnika"])));
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public miastaRow[] GetmiastaRows() {
+                if ((this.Table.ChildRelations["fk_firmy_miasta"] == null)) {
+                    return new miastaRow[0];
+                }
+                else {
+                    return ((miastaRow[])(base.GetChildRows(this.Table.ChildRelations["fk_firmy_miasta"])));
                 }
             }
         }
@@ -2692,12 +2689,12 @@ namespace BNT {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public firmyRow[] GetfirmyRows() {
-                if ((this.Table.ChildRelations["fk_firmy_miasta"] == null)) {
-                    return new firmyRow[0];
+            public firmyRow firmyRow {
+                get {
+                    return ((firmyRow)(this.GetParentRow(this.Table.ParentRelations["fk_firmy_miasta"])));
                 }
-                else {
-                    return ((firmyRow[])(base.GetChildRows(this.Table.ChildRelations["fk_firmy_miasta"])));
+                set {
+                    this.SetParentRow(value, this.Table.ParentRelations["fk_firmy_miasta"]);
                 }
             }
             
@@ -5324,6 +5321,15 @@ namespace BNT.Baza_BNTDataSetTableAdapters {
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
         private int UpdateUpdatedRows(Baza_BNTDataSet dataSet, global::System.Collections.Generic.List<global::System.Data.DataRow> allChangedRows, global::System.Collections.Generic.List<global::System.Data.DataRow> allAddedRows) {
             int result = 0;
+            if ((this._firmyTableAdapter != null)) {
+                global::System.Data.DataRow[] updatedRows = dataSet.firmy.Select(null, null, global::System.Data.DataViewRowState.ModifiedCurrent);
+                updatedRows = this.GetRealUpdatedRows(updatedRows, allAddedRows);
+                if (((updatedRows != null) 
+                            && (0 < updatedRows.Length))) {
+                    result = (result + this._firmyTableAdapter.Update(updatedRows));
+                    allChangedRows.AddRange(updatedRows);
+                }
+            }
             if ((this._miastaTableAdapter != null)) {
                 global::System.Data.DataRow[] updatedRows = dataSet.miasta.Select(null, null, global::System.Data.DataViewRowState.ModifiedCurrent);
                 updatedRows = this.GetRealUpdatedRows(updatedRows, allAddedRows);
@@ -5348,15 +5354,6 @@ namespace BNT.Baza_BNTDataSetTableAdapters {
                 if (((updatedRows != null) 
                             && (0 < updatedRows.Length))) {
                     result = (result + this._fakturyTableAdapter.Update(updatedRows));
-                    allChangedRows.AddRange(updatedRows);
-                }
-            }
-            if ((this._firmyTableAdapter != null)) {
-                global::System.Data.DataRow[] updatedRows = dataSet.firmy.Select(null, null, global::System.Data.DataViewRowState.ModifiedCurrent);
-                updatedRows = this.GetRealUpdatedRows(updatedRows, allAddedRows);
-                if (((updatedRows != null) 
-                            && (0 < updatedRows.Length))) {
-                    result = (result + this._firmyTableAdapter.Update(updatedRows));
                     allChangedRows.AddRange(updatedRows);
                 }
             }
@@ -5388,6 +5385,14 @@ namespace BNT.Baza_BNTDataSetTableAdapters {
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
         private int UpdateInsertedRows(Baza_BNTDataSet dataSet, global::System.Collections.Generic.List<global::System.Data.DataRow> allAddedRows) {
             int result = 0;
+            if ((this._firmyTableAdapter != null)) {
+                global::System.Data.DataRow[] addedRows = dataSet.firmy.Select(null, null, global::System.Data.DataViewRowState.Added);
+                if (((addedRows != null) 
+                            && (0 < addedRows.Length))) {
+                    result = (result + this._firmyTableAdapter.Update(addedRows));
+                    allAddedRows.AddRange(addedRows);
+                }
+            }
             if ((this._miastaTableAdapter != null)) {
                 global::System.Data.DataRow[] addedRows = dataSet.miasta.Select(null, null, global::System.Data.DataViewRowState.Added);
                 if (((addedRows != null) 
@@ -5409,14 +5414,6 @@ namespace BNT.Baza_BNTDataSetTableAdapters {
                 if (((addedRows != null) 
                             && (0 < addedRows.Length))) {
                     result = (result + this._fakturyTableAdapter.Update(addedRows));
-                    allAddedRows.AddRange(addedRows);
-                }
-            }
-            if ((this._firmyTableAdapter != null)) {
-                global::System.Data.DataRow[] addedRows = dataSet.firmy.Select(null, null, global::System.Data.DataViewRowState.Added);
-                if (((addedRows != null) 
-                            && (0 < addedRows.Length))) {
-                    result = (result + this._firmyTableAdapter.Update(addedRows));
                     allAddedRows.AddRange(addedRows);
                 }
             }
@@ -5462,14 +5459,6 @@ namespace BNT.Baza_BNTDataSetTableAdapters {
                     allChangedRows.AddRange(deletedRows);
                 }
             }
-            if ((this._firmyTableAdapter != null)) {
-                global::System.Data.DataRow[] deletedRows = dataSet.firmy.Select(null, null, global::System.Data.DataViewRowState.Deleted);
-                if (((deletedRows != null) 
-                            && (0 < deletedRows.Length))) {
-                    result = (result + this._firmyTableAdapter.Update(deletedRows));
-                    allChangedRows.AddRange(deletedRows);
-                }
-            }
             if ((this._fakturyTableAdapter != null)) {
                 global::System.Data.DataRow[] deletedRows = dataSet.faktury.Select(null, null, global::System.Data.DataViewRowState.Deleted);
                 if (((deletedRows != null) 
@@ -5491,6 +5480,14 @@ namespace BNT.Baza_BNTDataSetTableAdapters {
                 if (((deletedRows != null) 
                             && (0 < deletedRows.Length))) {
                     result = (result + this._miastaTableAdapter.Update(deletedRows));
+                    allChangedRows.AddRange(deletedRows);
+                }
+            }
+            if ((this._firmyTableAdapter != null)) {
+                global::System.Data.DataRow[] deletedRows = dataSet.firmy.Select(null, null, global::System.Data.DataViewRowState.Deleted);
+                if (((deletedRows != null) 
+                            && (0 < deletedRows.Length))) {
+                    result = (result + this._firmyTableAdapter.Update(deletedRows));
                     allChangedRows.AddRange(deletedRows);
                 }
             }

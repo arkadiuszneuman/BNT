@@ -42,11 +42,6 @@
             this.pictureBoxMapa = new System.Windows.Forms.PictureBox();
             this.tabSlupy = new System.Windows.Forms.TabPage();
             this.dataGridSlupy = new System.Windows.Forms.DataGridView();
-            this.colMiasto = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colWsp = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.celCena = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colFirmy = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colPrzychod = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.tabNadajniki = new System.Windows.Forms.TabPage();
             this.tabModele = new System.Windows.Forms.TabPage();
             this.tabFirmy = new System.Windows.Forms.TabPage();
@@ -63,6 +58,11 @@
             this.napis_rok = new System.Windows.Forms.Label();
             this.napis_miesiac = new System.Windows.Forms.Label();
             this.napis_firma = new System.Windows.Forms.Label();
+            this.colMiasto = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colWsp = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.celCena = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colFirmy = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colPrzychod = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.tabControl.SuspendLayout();
             this.tabMapa.SuspendLayout();
             this.panelMiasto.SuspendLayout();
@@ -104,6 +104,7 @@
             // 
             // panelMiasto
             // 
+            this.panelMiasto.BackColor = System.Drawing.Color.LightGoldenrodYellow;
             this.panelMiasto.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.panelMiasto.Controls.Add(this.labelFirmy);
             this.panelMiasto.Controls.Add(this.labelNadajniki);
@@ -219,31 +220,6 @@
             this.dataGridSlupy.Name = "dataGridSlupy";
             this.dataGridSlupy.Size = new System.Drawing.Size(545, 438);
             this.dataGridSlupy.TabIndex = 0;
-            // 
-            // colMiasto
-            // 
-            this.colMiasto.HeaderText = "Miasto";
-            this.colMiasto.Name = "colMiasto";
-            // 
-            // colWsp
-            // 
-            this.colWsp.HeaderText = "Współrzędne";
-            this.colWsp.Name = "colWsp";
-            // 
-            // celCena
-            // 
-            this.celCena.HeaderText = "Cena";
-            this.celCena.Name = "celCena";
-            // 
-            // colFirmy
-            // 
-            this.colFirmy.HeaderText = "Firmy";
-            this.colFirmy.Name = "colFirmy";
-            // 
-            // colPrzychod
-            // 
-            this.colPrzychod.HeaderText = "Przychód miesięczny";
-            this.colPrzychod.Name = "colPrzychod";
             // 
             // tabNadajniki
             // 
@@ -405,6 +381,32 @@
             this.napis_firma.TabIndex = 0;
             this.napis_firma.Text = "Firma:";
             // 
+            // colMiasto
+            // 
+            this.colMiasto.HeaderText = "Miasto";
+            this.colMiasto.Name = "colMiasto";
+            // 
+            // colWsp
+            // 
+            this.colWsp.HeaderText = "Współrzędne";
+            this.colWsp.Name = "colWsp";
+            // 
+            // celCena
+            // 
+            this.celCena.HeaderText = "Cena";
+            this.celCena.Name = "celCena";
+            // 
+            // colFirmy
+            // 
+            this.colFirmy.HeaderText = "Firmy";
+            this.colFirmy.Name = "colFirmy";
+            this.colFirmy.Width = 130;
+            // 
+            // colPrzychod
+            // 
+            this.colPrzychod.HeaderText = "Przychód miesięczny";
+            this.colPrzychod.Name = "colPrzychod";
+            // 
             // FormaGlowna
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -448,11 +450,6 @@
         private System.Windows.Forms.TabPage tabModele;
         private System.Windows.Forms.TabPage tabFirmy;
         private System.Windows.Forms.TabPage tabFaktury;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colMiasto;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colWsp;
-        private System.Windows.Forms.DataGridViewTextBoxColumn celCena;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colFirmy;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colPrzychod;
         private System.Windows.Forms.ComboBox comboFirmy;
         private System.Windows.Forms.Label napis_rok;
         private System.Windows.Forms.Label napis_miesiac;
@@ -465,6 +462,11 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn colDataWystawienia;
         private System.Windows.Forms.DataGridViewTextBoxColumn colMnoznik;
         private System.Windows.Forms.DataGridViewTextBoxColumn colPokaz;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colMiasto;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colWsp;
+        private System.Windows.Forms.DataGridViewTextBoxColumn celCena;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colFirmy;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colPrzychod;
     }
 }
 
