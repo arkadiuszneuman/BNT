@@ -52,10 +52,6 @@
             this.tabFirmy = new System.Windows.Forms.TabPage();
             this.tabFaktury = new System.Windows.Forms.TabPage();
             this.dataGridFaktury = new System.Windows.Forms.DataGridView();
-            this.colLp = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colDataWystawienia = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colMnoznik = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colPokaz = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.buttonGeneruj = new System.Windows.Forms.Button();
             this.comboRok = new System.Windows.Forms.ComboBox();
             this.comboMiesiace = new System.Windows.Forms.ComboBox();
@@ -63,6 +59,10 @@
             this.napis_rok = new System.Windows.Forms.Label();
             this.napis_miesiac = new System.Windows.Forms.Label();
             this.napis_firma = new System.Windows.Forms.Label();
+            this.colLp = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colDataWystawienia = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colMnoznik = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colPokaz = new System.Windows.Forms.DataGridViewButtonColumn();
             this.tabControl.SuspendLayout();
             this.tabMapa.SuspendLayout();
             this.panelMiasto.SuspendLayout();
@@ -291,6 +291,7 @@
             // 
             // dataGridFaktury
             // 
+            this.dataGridFaktury.AllowUserToAddRows = false;
             this.dataGridFaktury.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dataGridFaktury.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.colLp,
@@ -300,31 +301,9 @@
             this.dataGridFaktury.Enabled = false;
             this.dataGridFaktury.Location = new System.Drawing.Point(8, 104);
             this.dataGridFaktury.Name = "dataGridFaktury";
+            this.dataGridFaktury.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
             this.dataGridFaktury.Size = new System.Drawing.Size(540, 387);
             this.dataGridFaktury.TabIndex = 7;
-            // 
-            // colLp
-            // 
-            this.colLp.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.ColumnHeader;
-            this.colLp.HeaderText = "Lp";
-            this.colLp.Name = "colLp";
-            this.colLp.Width = 44;
-            // 
-            // colDataWystawienia
-            // 
-            this.colDataWystawienia.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            this.colDataWystawienia.HeaderText = "Data Wystawienia Faktury";
-            this.colDataWystawienia.Name = "colDataWystawienia";
-            // 
-            // colMnoznik
-            // 
-            this.colMnoznik.HeaderText = "Do zapłaty";
-            this.colMnoznik.Name = "colMnoznik";
-            // 
-            // colPokaz
-            // 
-            this.colPokaz.HeaderText = "Pokaż Fakturę";
-            this.colPokaz.Name = "colPokaz";
             // 
             // buttonGeneruj
             // 
@@ -405,6 +384,31 @@
             this.napis_firma.TabIndex = 0;
             this.napis_firma.Text = "Firma:";
             // 
+            // colLp
+            // 
+            this.colLp.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.ColumnHeader;
+            this.colLp.HeaderText = "Lp";
+            this.colLp.Name = "colLp";
+            this.colLp.Width = 44;
+            // 
+            // colDataWystawienia
+            // 
+            this.colDataWystawienia.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.colDataWystawienia.HeaderText = "Data Wystawienia Faktury";
+            this.colDataWystawienia.Name = "colDataWystawienia";
+            // 
+            // colMnoznik
+            // 
+            this.colMnoznik.HeaderText = "Do zapłaty";
+            this.colMnoznik.Name = "colMnoznik";
+            this.colMnoznik.Width = 140;
+            // 
+            // colPokaz
+            // 
+            this.colPokaz.HeaderText = "Pokaż Fakturę";
+            this.colPokaz.Name = "colPokaz";
+            this.colPokaz.Width = 140;
+            // 
             // FormaGlowna
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -464,7 +468,7 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn colLp;
         private System.Windows.Forms.DataGridViewTextBoxColumn colDataWystawienia;
         private System.Windows.Forms.DataGridViewTextBoxColumn colMnoznik;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colPokaz;
+        private System.Windows.Forms.DataGridViewButtonColumn colPokaz;
     }
 }
 

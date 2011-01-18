@@ -118,24 +118,29 @@ namespace BNT
             return tablica.ToArray();
         }
 
-        public string[][] CzytajFakture(string nazwaFirmy)
+        public string[][] CzytajFaktury(string nazwaFirmy)
         {
+            int licznik = 1;
             List<string[]> tablica = new List<string[]>();
             for (int rok = 2008; rok <= DateTime.Now.Year; rok++)
             {
                 for (int miesiac = 1; miesiac <= 12; miesiac++)
                 {
-                    string[] s = new string[3];
-                    s[0] = CzytajNajpozniejszaDateZaplaty(nazwaFirmy,miesiac,rok);
-                    s[1] = CzytajKwoteMiesieczna(nazwaFirmy,miesiac,rok);
-                    s[2] = "Przycisk";
+                    string[] s = new string[4];
+                    s[0] = licznik.ToString();
+                    s[1] = CzytajNajpozniejszaDateZaplaty(nazwaFirmy,miesiac,rok);
+                    if (s[1] == null)
+                        continue;
+                    s[2] = float.Parse(CzytajKwoteMiesieczna(nazwaFirmy,miesiac,rok)).ToString("F") + " zł";
+                    s[3] = "Pokaż";
                     tablica.Add(s);
+                    licznik++;
                 }
             }
             return tablica.ToArray();
         }
 
-        public int DzienMiesiaca(int miesiac, int rok)
+        private int DzienMiesiaca(int miesiac, int rok)
         {
             switch (miesiac)
             {
@@ -145,33 +150,46 @@ namespace BNT
                 case 11:
                     return 30;
                 case 2:
-                    if (rok % 4 == 0)
-                        return 28;
-                    else
+                    if ((rok % 4) == 0)
                         return 29;
+                    else
+                        return 28;
                 default:
                     return 31;
             }
         }
 
-        public string CzytajKwoteMiesieczna(string nazwaFirmy, int numerMiesiaca, int numerRoku)
+        private string CzytajKwoteMiesieczna(string nazwaFirmy, int numerMiesiaca, int numerRoku)
         {
             string zapytanie = "SELECT SUM((slupy.cena + modele.cena * nadajniki.ilosc) * faktury.wartosc) AS ILOSC FROM faktury LEFT OUTER JOIN nadajniki ON nadajniki.id_faktury = faktury.id LEFT OUTER JOIN firmy ON firmy.id = nadajniki.id_firmy LEFT OUTER JOIN slupy ON slupy.id = nadajniki.id_slupu LEFT OUTER JOIN modele ON modele.id = nadajniki.id_modelu WHERE (firmy.nazwa = '" + nazwaFirmy + "') AND (faktury.data_zaplaty BETWEEN '" + numerRoku + "-" + numerMiesiaca + "-01' AND '" + numerRoku + "-" + numerMiesiaca + "-" + DzienMiesiaca(numerMiesiaca,numerRoku) + "')";
             SqlCeDataReader rdr = Zapytanie(zapytanie);
-            if(rdr.Read())
-                return rdr[0].ToString();
+
+            // cenę słupa trzeba brać jednorazowo, a nie za każdy model, trzeba dopisać jeszcze jedno zapytanie
+
+            if (rdr.Read())
+            {
+                if (rdr[0].ToString() == "")
+                    return null;
+                else
+                    return rdr[0].ToString();
+            }
             else
-                return null;
+                return "Błąd: Złe zapytanie.";
         }
 
-        public string CzytajNajpozniejszaDateZaplaty(string nazwaFirmy, int numerMiesiaca, int numerRoku)
+        private string CzytajNajpozniejszaDateZaplaty(string nazwaFirmy, int numerMiesiaca, int numerRoku)
         {
             string zapytanie = "SELECT MAX(faktury.data_zaplaty) AS DATA FROM faktury LEFT OUTER JOIN nadajniki ON nadajniki.id_faktury = faktury.id LEFT OUTER JOIN firmy ON firmy.id = nadajniki.id_firmy WHERE (firmy.nazwa = '" + nazwaFirmy + "') AND (faktury.data_zaplaty BETWEEN '" + numerRoku + "-" + numerMiesiaca + "-01' AND '" + numerRoku + "-" + numerMiesiaca + "-" + DzienMiesiaca(numerMiesiaca, numerRoku) + "')";
             SqlCeDataReader rdr = Zapytanie(zapytanie);
             if (rdr.Read())
-                return rdr[0].ToString();
+            {
+                if (rdr[0].ToString() == "")
+                    return null;
+                else
+                    return rdr[0].ToString().Substring(0, 10);
+            }
             else
-                return null;
+                return "Błąd: Złe zapytanie.";
         }
 
     }
