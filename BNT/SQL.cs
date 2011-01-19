@@ -87,19 +87,44 @@ namespace BNT
         }
 
         //TODO jak wychiagnac jeszcze firmy?
-        public string[][] CzytajNadajniki() 
+        public string[][] CzytajSlupy() 
         {
             List<string[]> tablica = new List<string[]>();
-
-            string zapytanie = "SELECT miasta.nazwa, slupy.wsp_x, slupy.wsp_y, slupy.cena FROM slupy, miasta WHERE slupy.id_miasta=miasta.id";
+            List<string> tabId = new List<string>(); //zapisanie tutaj idikow po kolei
+            
+            string zapytanie = "SELECT slupy.id, miasta.nazwa, slupy.wsp_x, slupy.wsp_y, slupy.cena FROM slupy, miasta WHERE slupy.id_miasta=miasta.id";
             SqlCeDataReader rdr = Zapytanie(zapytanie);
             while (rdr.Read())
             {
-                string[] s = new string[3];
-                s[0] = rdr[0].ToString();
-                s[1] = rdr[1].ToString()+";"+rdr[2].ToString();
-                s[2] = rdr[3].ToString();
+                string[] s = new string[5];
+                tabId.Add(rdr[0].ToString());
+                s[0] = rdr[1].ToString();
+                s[1] = rdr[2].ToString()+";"+rdr[3].ToString(); //wspolrzedne x i y w jednej kolumnie beda
+                s[2] = rdr[4].ToString() + " zł";
+                
                 tablica.Add(s);
+            }
+
+            for (int i = 0; i < tabId.Count; ++i)
+            {
+                string zapytanieFirmy = "SELECT firmy.nazwa FROM firmy, nadajniki WHERE firmy.id IN (SELECT nadajniki.id_firmy FROM nadajniki WHERE nadajniki.id_slupu=" + tabId[i] + ") GROUP BY firmy.nazwa";
+                rdr = Zapytanie(zapytanieFirmy);
+                string firmy = "";
+                while (rdr.Read())
+                {
+                    firmy += rdr[0].ToString() + ", ";
+                }
+
+                if (firmy.Length > 0) //zapisanie firm
+                    tablica[i][3] = firmy.Remove(firmy.Length - 2); //usuniecie ostatniej spacji i zapisanie firm do tablicy
+                else
+                    tablica[i][3] = "Nikt nie dzierżawi";
+
+                //zapisanie ceny
+                if (firmy.Length > 0)
+                    tablica[i][4] = (float.Parse(tablica[i][2].Remove(tablica[i][2].Length - 3)) * (firmy.Split(',').Length - 1)).ToString() + " zł";
+                else
+                    tablica[i][4] = "0";
             }
 
             return tablica.ToArray();
