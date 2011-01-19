@@ -75,6 +75,10 @@
     <Compile Include="FormaGlowna.Designer.cs">
       <DependentUpon>FormaGlowna.cs</DependentUpon>
     </Compile>
+    <Compile Include="FrmSlupy.cs" />
+    <Compile Include="FrmSlupy.Designer.cs">
+      <DependentUpon>FrmSlupy.cs</DependentUpon>
+    </Compile>
     <Compile Include="MapBtn.cs" />
     <Compile Include="NazwaMiasta.cs">
       <SubType>Form</SubType>
@@ -89,6 +93,9 @@
     <EmbeddedResource Include="FormaGlowna.resx">
       <DependentUpon>FormaGlowna.cs</DependentUpon>
       <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FrmSlupy.resx">
+      <DependentUpon>FrmSlupy.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="NazwaMiasta.resx">
       <DependentUpon>NazwaMiasta.cs</DependentUpon>

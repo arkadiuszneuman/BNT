@@ -42,6 +42,12 @@
             this.pictureBoxMapa = new System.Windows.Forms.PictureBox();
             this.tabSlupy = new System.Windows.Forms.TabPage();
             this.dataGridSlupy = new System.Windows.Forms.DataGridView();
+            this.colNr = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colMiasto = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colWsp = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colCena = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colFirmy = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colPrzychod = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.tabNadajniki = new System.Windows.Forms.TabPage();
             this.tabModele = new System.Windows.Forms.TabPage();
             this.tabFirmy = new System.Windows.Forms.TabPage();
@@ -58,19 +64,23 @@
             this.napis_rok = new System.Windows.Forms.Label();
             this.napis_miesiac = new System.Windows.Forms.Label();
             this.napis_firma = new System.Windows.Forms.Label();
-            this.colMiasto = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colWsp = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.celCena = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colFirmy = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colPrzychod = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dataGridView1 = new System.Windows.Forms.DataGridView();
+            this.dataGridViewTextBoxColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dataGridViewTextBoxColumn2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dataGridViewTextBoxColumn3 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dataGridViewTextBoxColumn4 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dataGridViewTextBoxColumn5 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dataGridViewTextBoxColumn6 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.tabControl.SuspendLayout();
             this.tabMapa.SuspendLayout();
             this.panelMiasto.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxMapa)).BeginInit();
             this.tabSlupy.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridSlupy)).BeginInit();
+            this.tabNadajniki.SuspendLayout();
             this.tabFaktury.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridFaktury)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.SuspendLayout();
             // 
             // tabControl
@@ -207,22 +217,69 @@
             // 
             // dataGridSlupy
             // 
+            this.dataGridSlupy.AllowUserToAddRows = false;
+            this.dataGridSlupy.AllowUserToDeleteRows = false;
             this.dataGridSlupy.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
                         | System.Windows.Forms.AnchorStyles.Right)));
             this.dataGridSlupy.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dataGridSlupy.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.colNr,
             this.colMiasto,
             this.colWsp,
-            this.celCena,
+            this.colCena,
             this.colFirmy,
             this.colPrzychod});
             this.dataGridSlupy.Location = new System.Drawing.Point(3, 3);
+            this.dataGridSlupy.MultiSelect = false;
             this.dataGridSlupy.Name = "dataGridSlupy";
-            this.dataGridSlupy.Size = new System.Drawing.Size(545, 438);
+            this.dataGridSlupy.ReadOnly = true;
+            this.dataGridSlupy.RowHeadersVisible = false;
+            this.dataGridSlupy.RowTemplate.Resizable = System.Windows.Forms.DataGridViewTriState.False;
+            this.dataGridSlupy.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
+            this.dataGridSlupy.Size = new System.Drawing.Size(545, 459);
             this.dataGridSlupy.TabIndex = 0;
+            // 
+            // colNr
+            // 
+            this.colNr.HeaderText = "Nr";
+            this.colNr.Name = "colNr";
+            this.colNr.ReadOnly = true;
+            this.colNr.Width = 30;
+            // 
+            // colMiasto
+            // 
+            this.colMiasto.HeaderText = "Miasto";
+            this.colMiasto.Name = "colMiasto";
+            this.colMiasto.ReadOnly = true;
+            // 
+            // colWsp
+            // 
+            this.colWsp.HeaderText = "Współrzędne";
+            this.colWsp.Name = "colWsp";
+            this.colWsp.ReadOnly = true;
+            // 
+            // colCena
+            // 
+            this.colCena.HeaderText = "Cena";
+            this.colCena.Name = "colCena";
+            this.colCena.ReadOnly = true;
+            // 
+            // colFirmy
+            // 
+            this.colFirmy.HeaderText = "Firmy";
+            this.colFirmy.Name = "colFirmy";
+            this.colFirmy.ReadOnly = true;
+            this.colFirmy.Width = 130;
+            // 
+            // colPrzychod
+            // 
+            this.colPrzychod.HeaderText = "Przychód miesięczny";
+            this.colPrzychod.Name = "colPrzychod";
+            this.colPrzychod.ReadOnly = true;
             // 
             // tabNadajniki
             // 
+            this.tabNadajniki.Controls.Add(this.dataGridView1);
             this.tabNadajniki.Location = new System.Drawing.Point(4, 22);
             this.tabNadajniki.Name = "tabNadajniki";
             this.tabNadajniki.Size = new System.Drawing.Size(556, 499);
@@ -381,31 +438,67 @@
             this.napis_firma.TabIndex = 0;
             this.napis_firma.Text = "Firma:";
             // 
-            // colMiasto
+            // dataGridView1
             // 
-            this.colMiasto.HeaderText = "Miasto";
-            this.colMiasto.Name = "colMiasto";
+            this.dataGridView1.AllowUserToAddRows = false;
+            this.dataGridView1.AllowUserToDeleteRows = false;
+            this.dataGridView1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
+                        | System.Windows.Forms.AnchorStyles.Right)));
+            this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dataGridView1.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.dataGridViewTextBoxColumn1,
+            this.dataGridViewTextBoxColumn2,
+            this.dataGridViewTextBoxColumn3,
+            this.dataGridViewTextBoxColumn4,
+            this.dataGridViewTextBoxColumn5,
+            this.dataGridViewTextBoxColumn6});
+            this.dataGridView1.Location = new System.Drawing.Point(3, 3);
+            this.dataGridView1.MultiSelect = false;
+            this.dataGridView1.Name = "dataGridView1";
+            this.dataGridView1.ReadOnly = true;
+            this.dataGridView1.RowHeadersVisible = false;
+            this.dataGridView1.RowTemplate.Resizable = System.Windows.Forms.DataGridViewTriState.False;
+            this.dataGridView1.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
+            this.dataGridView1.Size = new System.Drawing.Size(545, 459);
+            this.dataGridView1.TabIndex = 1;
             // 
-            // colWsp
+            // dataGridViewTextBoxColumn1
             // 
-            this.colWsp.HeaderText = "Współrzędne";
-            this.colWsp.Name = "colWsp";
+            this.dataGridViewTextBoxColumn1.HeaderText = "Nr";
+            this.dataGridViewTextBoxColumn1.Name = "dataGridViewTextBoxColumn1";
+            this.dataGridViewTextBoxColumn1.ReadOnly = true;
+            this.dataGridViewTextBoxColumn1.Width = 30;
             // 
-            // celCena
+            // dataGridViewTextBoxColumn2
             // 
-            this.celCena.HeaderText = "Cena";
-            this.celCena.Name = "celCena";
+            this.dataGridViewTextBoxColumn2.HeaderText = "Miasto";
+            this.dataGridViewTextBoxColumn2.Name = "dataGridViewTextBoxColumn2";
+            this.dataGridViewTextBoxColumn2.ReadOnly = true;
             // 
-            // colFirmy
+            // dataGridViewTextBoxColumn3
             // 
-            this.colFirmy.HeaderText = "Firmy";
-            this.colFirmy.Name = "colFirmy";
-            this.colFirmy.Width = 130;
+            this.dataGridViewTextBoxColumn3.HeaderText = "Współrzędne";
+            this.dataGridViewTextBoxColumn3.Name = "dataGridViewTextBoxColumn3";
+            this.dataGridViewTextBoxColumn3.ReadOnly = true;
             // 
-            // colPrzychod
+            // dataGridViewTextBoxColumn4
             // 
-            this.colPrzychod.HeaderText = "Przychód miesięczny";
-            this.colPrzychod.Name = "colPrzychod";
+            this.dataGridViewTextBoxColumn4.HeaderText = "Cena";
+            this.dataGridViewTextBoxColumn4.Name = "dataGridViewTextBoxColumn4";
+            this.dataGridViewTextBoxColumn4.ReadOnly = true;
+            // 
+            // dataGridViewTextBoxColumn5
+            // 
+            this.dataGridViewTextBoxColumn5.HeaderText = "Firmy";
+            this.dataGridViewTextBoxColumn5.Name = "dataGridViewTextBoxColumn5";
+            this.dataGridViewTextBoxColumn5.ReadOnly = true;
+            this.dataGridViewTextBoxColumn5.Width = 130;
+            // 
+            // dataGridViewTextBoxColumn6
+            // 
+            this.dataGridViewTextBoxColumn6.HeaderText = "Przychód miesięczny";
+            this.dataGridViewTextBoxColumn6.Name = "dataGridViewTextBoxColumn6";
+            this.dataGridViewTextBoxColumn6.ReadOnly = true;
             // 
             // FormaGlowna
             // 
@@ -414,6 +507,7 @@
             this.ClientSize = new System.Drawing.Size(564, 525);
             this.Controls.Add(this.tabControl);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
+            this.MaximizeBox = false;
             this.Name = "FormaGlowna";
             this.Text = "Form1";
             this.tabControl.ResumeLayout(false);
@@ -423,9 +517,11 @@
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxMapa)).EndInit();
             this.tabSlupy.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.dataGridSlupy)).EndInit();
+            this.tabNadajniki.ResumeLayout(false);
             this.tabFaktury.ResumeLayout(false);
             this.tabFaktury.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridFaktury)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -462,11 +558,19 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn colDataWystawienia;
         private System.Windows.Forms.DataGridViewTextBoxColumn colMnoznik;
         private System.Windows.Forms.DataGridViewTextBoxColumn colPokaz;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colNr;
         private System.Windows.Forms.DataGridViewTextBoxColumn colMiasto;
         private System.Windows.Forms.DataGridViewTextBoxColumn colWsp;
-        private System.Windows.Forms.DataGridViewTextBoxColumn celCena;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colCena;
         private System.Windows.Forms.DataGridViewTextBoxColumn colFirmy;
         private System.Windows.Forms.DataGridViewTextBoxColumn colPrzychod;
+        private System.Windows.Forms.DataGridView dataGridView1;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn1;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn2;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn3;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn4;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn5;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn6;
     }
 }
 

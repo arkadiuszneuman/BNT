@@ -24,10 +24,12 @@ namespace BNT
 
         private SqlCeDataReader Zapytanie(string zapytanie)
         {
-            SqlCeDataReader rdr;
+            SqlCeDataReader rdr = null;
 
             using (SqlCeCommand cmd = new SqlCeCommand(zapytanie, cn))
+            {
                 rdr = cmd.ExecuteReader();
+            }
 
             return rdr;
         }
@@ -38,18 +40,35 @@ namespace BNT
             Zapytanie(zapytanie);
         }
 
-        public string[][] CzytajMiasta()
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="czyWsp">czy zwracac wspolrzedne</param>
+        /// <returns></returns>
+        public string[][] CzytajMiasta(bool czyWsp)
         {
             List<string[]> tablica = new List<string[]>();
 
-            string zapytanie = "SELECT nazwa, wsp_x, wsp_y FROM miasta";
+            string zapytanie = "SELECT nazwa";
+            if (czyWsp)
+                zapytanie += ", wsp_x, wsp_y";
+            zapytanie += " FROM miasta";
+            
             SqlCeDataReader rdr = Zapytanie(zapytanie);
             while (rdr.Read())
             {
-                string[] s = new string[3];
+                string[] s;
+                if (czyWsp)
+                    s = new string[3];
+                else
+                    s = new string[1];
+
                 s[0] = rdr[0].ToString();
-                s[1] = rdr[1].ToString();
-                s[2] = rdr[2].ToString();
+                if (czyWsp)
+                {
+                    s[1] = rdr[1].ToString();
+                    s[2] = rdr[2].ToString();
+                }
                 tablica.Add(s);
             }
 
@@ -61,11 +80,11 @@ namespace BNT
             List<int> tablica = new List<int>();
 
             //ilosc slupow
-            string zapytanie = "SELECT COUNT(*) as howmany FROM miasta LEFT JOIN slupy ON miasta.id=slupy.id_miasta WHERE miasta.nazwa='"+miasto+"'";
+            string zapytanie = "SELECT COUNT(*) as howmany FROM miasta RIGHT JOIN slupy ON miasta.id=slupy.id_miasta WHERE miasta.nazwa='"+miasto+"'";
             SqlCeDataReader rdr = Zapytanie(zapytanie);
 
             while (rdr.Read())
-                tablica.Add(Int32.Parse(rdr[0].ToString()));
+                tablica.Add(Convert.ToInt16(rdr[0]));
             
             //ilosc nadajnikow
             zapytanie = "SELECT COUNT(*) as howmany FROM miasta, slupy, nadajniki WHERE miasta.id=slupy.id_miasta AND slupy.id=nadajniki.id_slupu "+
@@ -86,28 +105,27 @@ namespace BNT
             return tablica.ToArray();
         }
 
-        //TODO jak wychiagnac jeszcze firmy?
         public string[][] CzytajSlupy() 
         {
             List<string[]> tablica = new List<string[]>();
-            List<string> tabId = new List<string>(); //zapisanie tutaj idikow po kolei
+            //List<string> tabId = new List<string>(); //zapisanie tutaj idikow po kolei
             
             string zapytanie = "SELECT slupy.id, miasta.nazwa, slupy.wsp_x, slupy.wsp_y, slupy.cena FROM slupy, miasta WHERE slupy.id_miasta=miasta.id";
             SqlCeDataReader rdr = Zapytanie(zapytanie);
             while (rdr.Read())
             {
-                string[] s = new string[5];
-                tabId.Add(rdr[0].ToString());
-                s[0] = rdr[1].ToString();
-                s[1] = rdr[2].ToString()+";"+rdr[3].ToString(); //wspolrzedne x i y w jednej kolumnie beda
-                s[2] = rdr[4].ToString() + " zł";
+                string[] s = new string[6];
+                s[0] = rdr[0].ToString();
+                s[1] = rdr[1].ToString();
+                s[2] = rdr[2].ToString()+";"+rdr[3].ToString(); //wspolrzedne x i y w jednej kolumnie beda
+                s[3] = rdr[4].ToString() + " zł";
                 
                 tablica.Add(s);
             }
 
-            for (int i = 0; i < tabId.Count; ++i)
+            for (int i = 0; i < tablica.Count; ++i)
             {
-                string zapytanieFirmy = "SELECT firmy.nazwa FROM firmy, nadajniki WHERE firmy.id IN (SELECT nadajniki.id_firmy FROM nadajniki WHERE nadajniki.id_slupu=" + tabId[i] + ") GROUP BY firmy.nazwa";
+                string zapytanieFirmy = "SELECT firmy.nazwa FROM firmy, nadajniki WHERE firmy.id IN (SELECT nadajniki.id_firmy FROM nadajniki WHERE nadajniki.id_slupu=" + tablica[i][0] + ") GROUP BY firmy.nazwa";
                 rdr = Zapytanie(zapytanieFirmy);
                 string firmy = "";
                 while (rdr.Read())
@@ -116,18 +134,60 @@ namespace BNT
                 }
 
                 if (firmy.Length > 0) //zapisanie firm
-                    tablica[i][3] = firmy.Remove(firmy.Length - 2); //usuniecie ostatniej spacji i zapisanie firm do tablicy
+                    tablica[i][4] = firmy.Remove(firmy.Length - 2); //usuniecie ostatniej spacji i zapisanie firm do tablicy
                 else
-                    tablica[i][3] = "Nikt nie dzierżawi";
+                    tablica[i][4] = "Nikt nie dzierżawi";
 
                 //zapisanie ceny
                 if (firmy.Length > 0)
-                    tablica[i][4] = (float.Parse(tablica[i][2].Remove(tablica[i][2].Length - 3)) * (firmy.Split(',').Length - 1)).ToString() + " zł";
+                    tablica[i][5] = (float.Parse(tablica[i][3].Remove(tablica[i][3].Length - 3)) * (firmy.Split(',').Length - 1)).ToString() + " zł";
                 else
-                    tablica[i][4] = "0";
+                    tablica[i][5] = "0 zł";
             }
 
             return tablica.ToArray();
+        }
+
+        public void DodajSlup(string miasto, Point wsp, decimal cena)
+        {
+            string zapytanie = "INSERT INTO slupy (wsp_x, wsp_y, cena, id_miasta) SELECT " 
+                + wsp.X + ", " + wsp.Y + ", " + cena.ToString().Replace(',', '.') + ", id FROM miasta WHERE (miasta.nazwa = '" + miasto + "')";
+            Zapytanie(zapytanie);
+        }
+
+        public void EdytujSlup(int id, string miasto, Point wsp, decimal cena)
+        {
+            //string zapytanie = "UPDATE slupy SET wsp_x=" + wsp.X + ", wsp_y=" + wsp.Y + ", cena="
+            //    + cena.ToString().Replace(',', '.') + ", id_miasta=(SELECT id FROM miasta WHERE nazwa='"+miasto+"') WHERE id="+id+"";
+
+            string zapytanie = "SELECT id FROM miasta WHERE nazwa='" + miasto + "'";
+            SqlCeDataReader rdr = Zapytanie(zapytanie);
+            while (rdr.Read())
+                zapytanie = "UPDATE slupy SET wsp_x='" + wsp.X + "', wsp_y='" + wsp.Y + "', cena='"
+                    + cena.ToString().Replace(',', '.') + "', id_miasta='"+rdr[0].ToString()+"' WHERE id="+id+"";
+            Zapytanie(zapytanie);
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns>true jesli usuniety, false jesli istnieje nadajnik na tym slupie</returns>
+        public bool UsunSlup(int id)
+        {
+            string zapytanie = "SELECT COUNT(*) as howmany FROM nadajniki WHERE nadajniki.id_slupu="+id+"";
+            SqlCeDataReader rdr = Zapytanie(zapytanie);
+            while (rdr.Read())
+            {
+                if (Convert.ToInt32(rdr[0]) > 0)
+                {
+                    return false; //wyswietlic messageboxa
+                }
+            }
+
+            zapytanie = "DELETE FROM slupy WHERE id="+id+"";
+            Zapytanie(zapytanie);
+            return true;
         }
 
         public string[] CzytajFirmy()
