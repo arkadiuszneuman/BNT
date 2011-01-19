@@ -18,9 +18,9 @@ namespace BNT
         {
             InitializeComponent();
 
-            this.tabelka = tabelka;
-
             WypelnijCombo();
+
+            this.tabelka = tabelka;
         }
 
         /// <summary>
@@ -29,28 +29,39 @@ namespace BNT
         /// /// <param name="wspolrzedne">jesli sa</param>
         /// <param name="miasto">jesli sa</param>
         /// <param name="cena">jesli jest</param>
-        public FrmNadajniki(string miasto, string wspolrzedne, string cena, DataGridView tabelka, int id)
+        public FrmNadajniki(string slup, string model, int ilosc, DataGridView tabelka, int id)
         {
             InitializeComponent();
 
             WypelnijCombo();
-            cena = cena.Remove(cena.Length - 3); //usuniecie zł
-            numericN.Value = decimal.Parse(wspolrzedne.Split(';')[0]);
-            numericS.Value = decimal.Parse(wspolrzedne.Split(';')[1]);
-            numericZl.Value = decimal.Parse(cena);
+
+            for (int i = 0; i < comboBoxSlupy.Items.Count; ++i)
+            {
+                if (comboBoxSlupy.Items[i].ToString().Split(' ')[0] == slup)
+                {
+                    comboBoxSlupy.SelectedIndex = i;
+                    break;
+                }
+            }
 
             buttonDodajLubZmien.Text = "Edytuj";
-            this.id = id;
 
-            comboBoxMiasto.SelectedItem = miasto;
+            comboBoxModel.SelectedItem = model;
+            numericIlosc.Value = ilosc;
+
+            this.id = id;
+            
             this.tabelka = tabelka;
         }
 
         private void WypelnijCombo()
-        {         
-            string[][] miasta = sql.CzytajMiasta(false);
-            for (int i = 0; i < miasta.Length; ++i)
-                comboBoxMiasto.Items.Add(miasta[i][0]);
+        {
+            string[][] modele = sql.CzytajModele(true);
+            for (int i = 0; i < modele.Length; ++i)
+                comboBoxModel.Items.Add(modele[i][0]);
+
+            foreach (string s in sql.CzytajSlupy(true))
+                comboBoxSlupy.Items.Add(s);
         }
 
         private void buttonAnuluj_Click(object sender, EventArgs e)
@@ -60,7 +71,7 @@ namespace BNT
 
         private void OdswiezTabelke()
         {
-            string[][] dane = sql.CzytajSlupy();
+            string[][] dane = sql.CzytajNadajniki();
             if (dane.Length > 0)
                 tabelka.Rows.Clear();
 
@@ -70,7 +81,7 @@ namespace BNT
 
         private void buttonDodajLubZmien_Click(object sender, EventArgs e)
         {
-            if (comboBoxMiasto.SelectedIndex < 0)
+            if (comboBoxSlupy.SelectedIndex < 0)
             {
                 MessageBox.Show("Nie ma takiego miasta");
                 return;
@@ -78,11 +89,11 @@ namespace BNT
 
             if (buttonDodajLubZmien.Text == "Edytuj")
             {
-                sql.EdytujSlup(id, comboBoxMiasto.SelectedItem.ToString(), new Point((int)numericN.Value, (int)numericS.Value), numericZl.Value);
+                sql.EdytujNadajnik(id, int.Parse(comboBoxSlupy.SelectedItem.ToString().Split(' ')[0]), comboBoxModel.SelectedItem.ToString(), Convert.ToInt32(numericIlosc.Value));
             }
             else //dodawanie
             {
-                sql.DodajSlup(comboBoxMiasto.SelectedItem.ToString(), new Point((int)numericN.Value, (int)numericS.Value), numericZl.Value);
+                sql.DodajNadajnik(int.Parse(comboBoxSlupy.SelectedItem.ToString().Split(' ')[0]), comboBoxModel.SelectedItem.ToString(), Convert.ToInt32(numericIlosc.Value));
             }
 
             OdswiezTabelke();

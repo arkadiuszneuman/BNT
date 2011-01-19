@@ -50,7 +50,7 @@ namespace BNT
 
         private void OdswiezTabelke()
         {
-            string[][] dane = sql.CzytajModele();
+            string[][] dane = sql.CzytajModele(false);
             if (dane.Length > 0)
                 tabelka.Rows.Clear();
 

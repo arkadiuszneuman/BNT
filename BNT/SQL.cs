@@ -122,7 +122,7 @@ namespace BNT
                 
                 tablica.Add(s);
             }
-            System.Threading.Thread.Sleep(1000);
+            
             for (int i = 0; i < tablica.Count; ++i)
             {
                 string zapytanieFirmy = "SELECT firmy.nazwa FROM firmy, nadajniki WHERE firmy.id IN (SELECT nadajniki.id_firmy FROM nadajniki WHERE nadajniki.id_slupu=" + tablica[i][0] + ") GROUP BY firmy.nazwa";
@@ -151,6 +151,21 @@ namespace BNT
                     tablica[i][5] = (float.Parse(tablica[i][3].Remove(tablica[i][3].Length - 3)) * (firmy.Split(',').Length - 1)).ToString() + " zł";
                 else
                     tablica[i][5] = "0 zł";
+            }
+
+            return tablica.ToArray();
+        }
+
+        public string[] CzytajSlupy(bool czyTylkoSlupIMiasto)
+        {
+            List<string> tablica = new List<string>();
+            string zapytanie = "SELECT slupy.id, miasta.nazwa FROM slupy, miasta WHERE slupy.id_miasta=miasta.id ORDER BY slupy.id";
+            SqlCeDataReader rdr = Zapytanie(zapytanie);
+            while (rdr.Read())
+            {
+                string s = rdr[0].ToString() + " (" + rdr[1].ToString() + ")";
+
+                tablica.Add(s);
             }
 
             return tablica.ToArray();
@@ -201,9 +216,8 @@ namespace BNT
         public string[][] CzytajNadajniki()
         {
             List<string[]> tablica = new List<string[]>();
-            //List<string> tabId = new List<string>(); //zapisanie tutaj idikow po kolei
-
-            string zapytanie = "SELECT nadajniki.id, firmy.nazwa, nadajniki.id_slupu, modele.nazwa, nadajniki.ilosc FROM nadajniki, firmy, modele WHERE nadajniki.id_firmy=firmy.id AND nadajniki.id_modelu=modele.id";
+           
+            string zapytanie = "SELECT nadajniki.id, firmy.nazwa, nadajniki.id_slupu, modele.nazwa, nadajniki.ilosc FROM nadajniki LEFT JOIN firmy ON nadajniki.id_firmy=firmy.id JOIN modele ON nadajniki.id_modelu=modele.id";
             SqlCeDataReader rdr = Zapytanie(zapytanie);
             while (rdr.Read())
             {
@@ -221,20 +235,58 @@ namespace BNT
             return tablica.ToArray();
         }
 
-        public string[][] CzytajModele()
+        public void DodajNadajnik(int slup, string model, int ilosc)
+        {
+            //string zapytanie = "INSERT INTO nadajniki (id_slupu, id_modelu, ilosc) VALUES ('" + slup + "','" + model + "','" + ilosc + "')";
+            string zapytanie = "INSERT INTO nadajniki (id_slupu, ilosc, id_modelu) SELECT "
+                + slup + ", "+ ilosc + ", id FROM modele WHERE (modele.nazwa = '" + model + "')";
+
+            Zapytanie(zapytanie);
+        }
+
+        public void EdytujNadajnik(int id, int slup, string model, int ilosc)
+        {
+            string zapytanie = "SELECT id FROM modele WHERE nazwa='" + model + "'";
+            SqlCeDataReader rdr = Zapytanie(zapytanie);
+            while (rdr.Read())
+                zapytanie = "UPDATE nadajniki SET id_slupu='" + slup + "', id_modelu='" + rdr[0].ToString() + "', ilosc='"
+                    + ilosc + "' WHERE id=" + id + "";
+            Zapytanie(zapytanie);
+        }
+
+        public bool UsunNadajnik(int id)
+        {
+            string zapytanie = "DELETE FROM nadajniki WHERE id=" + id + "";
+            Zapytanie(zapytanie);
+            return true;
+        }
+
+        public string[][] CzytajModele(bool czyTylkoNazwy)
         {
             List<string[]> tablica = new List<string[]>();
             //List<string> tabId = new List<string>(); //zapisanie tutaj idikow po kolei
 
-            string zapytanie = "SELECT * FROM modele";
+            string zapytanie = null;
+            if (!czyTylkoNazwy)
+                zapytanie = "SELECT * FROM modele";
+            else
+                zapytanie = "SELECT nazwa FROM modele ORDER BY nazwa";
+
             SqlCeDataReader rdr = Zapytanie(zapytanie);
             while (rdr.Read())
             {
-                string[] s = new string[4];
+                string[] s;
+                if (!czyTylkoNazwy)
+                    s = new string[4];
+                else
+                    s = new string[1];
                 s[0] = rdr[0].ToString();
-                s[1] = rdr[1].ToString();
-                s[2] = rdr[2].ToString();
-                s[3] = rdr[3].ToString() + " zł";
+                if (!czyTylkoNazwy)
+                {
+                    s[1] = rdr[1].ToString();
+                    s[2] = rdr[2].ToString();
+                    s[3] = rdr[3].ToString() + " zł";
+                }
 
                 tablica.Add(s);
             }

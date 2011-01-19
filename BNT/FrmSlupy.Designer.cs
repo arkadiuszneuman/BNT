@@ -1,6 +1,6 @@
 ﻿namespace BNT
 {
-    partial class FrmNadajniki
+    partial class FrmSlupy
     {
         /// <summary>
         /// Required designer variable.

@@ -65,7 +65,7 @@ namespace BNT
 
         private void buttonDodaj_Click(object sender, EventArgs e)
         {
-            new FrmNadajniki(tabelka).ShowDialog();
+            new FrmSlupy(tabelka).ShowDialog();
         }
 
         private void buttonEdytuj_Click(object sender, EventArgs e)
@@ -74,8 +74,8 @@ namespace BNT
             string miasto = tabelka.Rows[tabelka.SelectedRows[0].Index].Cells["colMiasto"].Value.ToString();
             string wspolrzedne = tabelka.Rows[tabelka.SelectedRows[0].Index].Cells["colWsp"].Value.ToString();
             string cena = tabelka.Rows[tabelka.SelectedRows[0].Index].Cells["colCena"].Value.ToString();
-            
-            new FrmNadajniki(miasto, wspolrzedne, cena, tabelka, id).ShowDialog();
+
+            new FrmSlupy(miasto, wspolrzedne, cena, tabelka, id).ShowDialog();
         }
 
         private void buttonUsun_Click(object sender, EventArgs e)

@@ -9,12 +9,12 @@ using System.Windows.Forms;
 
 namespace BNT
 {
-    public partial class FrmNadajniki : Form
+    public partial class FrmSlupy : Form
     {
         SQL sql = new SQL();
         DataGridView tabelka;
         int id = 0;
-        public FrmNadajniki(DataGridView tabelka)
+        public FrmSlupy(DataGridView tabelka)
         {
             InitializeComponent();
 
@@ -29,7 +29,7 @@ namespace BNT
         /// /// <param name="wspolrzedne">jesli sa</param>
         /// <param name="miasto">jesli sa</param>
         /// <param name="cena">jesli jest</param>
-        public FrmNadajniki(string miasto, string wspolrzedne, string cena, DataGridView tabelka, int id)
+        public FrmSlupy(string miasto, string wspolrzedne, string cena, DataGridView tabelka, int id)
         {
             InitializeComponent();
 
