@@ -68,6 +68,12 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Baza_BNTDataSet.xsd</DependentUpon>
     </Compile>
+    <Compile Include="FrmModele.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FrmModele.Designer.cs">
+      <DependentUpon>FrmModele.cs</DependentUpon>
+    </Compile>
     <Compile Include="Faktury.cs" />
     <Compile Include="FormaGlowna.cs">
       <SubType>Form</SubType>
@@ -75,11 +81,15 @@
     <Compile Include="FormaGlowna.Designer.cs">
       <DependentUpon>FormaGlowna.cs</DependentUpon>
     </Compile>
-    <Compile Include="FrmSlupy.cs" />
+    <Compile Include="FrmSlupy.cs">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="FrmSlupy.Designer.cs">
       <DependentUpon>FrmSlupy.cs</DependentUpon>
     </Compile>
     <Compile Include="MapBtn.cs" />
+    <Compile Include="Modele.cs" />
+    <Compile Include="Nadajniki.cs" />
     <Compile Include="NazwaMiasta.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -90,6 +100,9 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Slupy.cs" />
     <Compile Include="SQL.cs" />
+    <EmbeddedResource Include="FrmModele.resx">
+      <DependentUpon>FrmModele.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="FormaGlowna.resx">
       <DependentUpon>FormaGlowna.cs</DependentUpon>
       <SubType>Designer</SubType>

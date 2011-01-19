@@ -9,18 +9,16 @@ using System.Windows.Forms;
 
 namespace BNT
 {
-    public partial class FrmNadajniki : Form
+    public partial class FrmModele : Form
     {
         SQL sql = new SQL();
         DataGridView tabelka;
         int id = 0;
-        public FrmNadajniki(DataGridView tabelka)
+        public FrmModele(DataGridView tabelka)
         {
             InitializeComponent();
 
             this.tabelka = tabelka;
-
-            WypelnijCombo();
         }
 
         /// <summary>
@@ -29,29 +27,21 @@ namespace BNT
         /// /// <param name="wspolrzedne">jesli sa</param>
         /// <param name="miasto">jesli sa</param>
         /// <param name="cena">jesli jest</param>
-        public FrmNadajniki(string miasto, string wspolrzedne, string cena, DataGridView tabelka, int id)
+        public FrmModele(string nazwa, int zasieg, string cena, DataGridView tabelka, int id)
         {
             InitializeComponent();
 
-            WypelnijCombo();
             cena = cena.Remove(cena.Length - 3); //usuniecie zł
-            numericN.Value = decimal.Parse(wspolrzedne.Split(';')[0]);
-            numericS.Value = decimal.Parse(wspolrzedne.Split(';')[1]);
-            numericZl.Value = decimal.Parse(cena);
+            textBoxNazwa.Text = nazwa;
+            numericZasieg.Value = zasieg;
+            numericCena.Value = decimal.Parse(cena);
 
             buttonDodajLubZmien.Text = "Edytuj";
             this.id = id;
 
-            comboBoxMiasto.SelectedItem = miasto;
             this.tabelka = tabelka;
         }
 
-        private void WypelnijCombo()
-        {         
-            string[][] miasta = sql.CzytajMiasta(false);
-            for (int i = 0; i < miasta.Length; ++i)
-                comboBoxMiasto.Items.Add(miasta[i][0]);
-        }
 
         private void buttonAnuluj_Click(object sender, EventArgs e)
         {
@@ -60,7 +50,7 @@ namespace BNT
 
         private void OdswiezTabelke()
         {
-            string[][] dane = sql.CzytajSlupy();
+            string[][] dane = sql.CzytajModele();
             if (dane.Length > 0)
                 tabelka.Rows.Clear();
 
@@ -70,19 +60,13 @@ namespace BNT
 
         private void buttonDodajLubZmien_Click(object sender, EventArgs e)
         {
-            if (comboBoxMiasto.SelectedIndex < 0)
-            {
-                MessageBox.Show("Nie ma takiego miasta");
-                return;
-            }
-
             if (buttonDodajLubZmien.Text == "Edytuj")
             {
-                sql.EdytujSlup(id, comboBoxMiasto.SelectedItem.ToString(), new Point((int)numericN.Value, (int)numericS.Value), numericZl.Value);
+                sql.EdytujModel(id, textBoxNazwa.Text, (int)numericZasieg.Value, numericCena.Value);
             }
             else //dodawanie
             {
-                sql.DodajSlup(comboBoxMiasto.SelectedItem.ToString(), new Point((int)numericN.Value, (int)numericS.Value), numericZl.Value);
+                sql.DodajModel(textBoxNazwa.Text, (int)numericZasieg.Value, numericCena.Value);
             }
 
             OdswiezTabelke();

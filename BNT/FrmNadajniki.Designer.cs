@@ -172,7 +172,7 @@
             this.numericZl.TabIndex = 12;
             this.numericZl.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             // 
-            // FrmSlupy
+            // FrmNadajniki
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -191,8 +191,8 @@
             this.Controls.Add(this.buttonDodajLubZmien);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.MaximizeBox = false;
-            this.Name = "FrmSlupy";
-            this.Text = "Słupy";
+            this.Name = "FrmNadajniki";
+            this.Text = "Nadajniki";
             ((System.ComponentModel.ISupportInitialize)(this.numericN)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.numericS)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.numericZl)).EndInit();

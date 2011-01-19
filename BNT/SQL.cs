@@ -122,15 +122,23 @@ namespace BNT
                 
                 tablica.Add(s);
             }
-
+            System.Threading.Thread.Sleep(1000);
             for (int i = 0; i < tablica.Count; ++i)
             {
                 string zapytanieFirmy = "SELECT firmy.nazwa FROM firmy, nadajniki WHERE firmy.id IN (SELECT nadajniki.id_firmy FROM nadajniki WHERE nadajniki.id_slupu=" + tablica[i][0] + ") GROUP BY firmy.nazwa";
                 rdr = Zapytanie(zapytanieFirmy);
                 string firmy = "";
-                while (rdr.Read())
+                try
                 {
-                    firmy += rdr[0].ToString() + ", ";
+                    while (rdr.Read())
+                    {
+                        firmy += rdr[0].ToString() + ", ";
+                    }
+                }
+                catch (SqlCeLockTimeoutException)
+                {
+                    MessageBox.Show("Przekroczono limit czasu");
+                    return tablica.ToArray();
                 }
 
                 if (firmy.Length > 0) //zapisanie firm
@@ -186,6 +194,86 @@ namespace BNT
             }
 
             zapytanie = "DELETE FROM slupy WHERE id="+id+"";
+            Zapytanie(zapytanie);
+            return true;
+        }
+
+        public string[][] CzytajNadajniki()
+        {
+            List<string[]> tablica = new List<string[]>();
+            //List<string> tabId = new List<string>(); //zapisanie tutaj idikow po kolei
+
+            string zapytanie = "SELECT nadajniki.id, firmy.nazwa, nadajniki.id_slupu, modele.nazwa, nadajniki.ilosc FROM nadajniki, firmy, modele WHERE nadajniki.id_firmy=firmy.id AND nadajniki.id_modelu=modele.id";
+            SqlCeDataReader rdr = Zapytanie(zapytanie);
+            while (rdr.Read())
+            {
+                string[] s = new string[5];
+                s[0] = rdr[0].ToString();
+                s[1] = rdr[1].ToString();
+                s[2] = rdr[2].ToString();
+                s[3] = rdr[3].ToString();
+                s[4] = rdr[4].ToString();
+
+                tablica.Add(s);
+            }
+
+
+            return tablica.ToArray();
+        }
+
+        public string[][] CzytajModele()
+        {
+            List<string[]> tablica = new List<string[]>();
+            //List<string> tabId = new List<string>(); //zapisanie tutaj idikow po kolei
+
+            string zapytanie = "SELECT * FROM modele";
+            SqlCeDataReader rdr = Zapytanie(zapytanie);
+            while (rdr.Read())
+            {
+                string[] s = new string[4];
+                s[0] = rdr[0].ToString();
+                s[1] = rdr[1].ToString();
+                s[2] = rdr[2].ToString();
+                s[3] = rdr[3].ToString() + " zł";
+
+                tablica.Add(s);
+            }
+
+
+            return tablica.ToArray();
+        }
+
+        public void DodajModel(string nazwa, int zasieg, decimal cena)
+        {
+            string zapytanie = "INSERT INTO modele (nazwa, zasieg, cena) VALUES ('"+nazwa+"','"+zasieg+"','"+cena.ToString().Replace(',', '.')+"')";
+            Zapytanie(zapytanie);
+        }
+
+        public void EdytujModel(int id, string nazwa, int zasieg, decimal cena)
+        {
+            string zapytanie = "UPDATE modele SET nazwa='" + nazwa + "', zasieg='" + zasieg + "', cena='" + cena.ToString().Replace(',', '.') + "' WHERE id='"+id+"'";
+
+            Zapytanie(zapytanie);
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns>true jesli usuniety, false jesli istnieje nadajnik na tym slupie</returns>
+        public bool UsunModel(int id)
+        {
+            /*string zapytanie = "SELECT COUNT(*) as howmany FROM nadajniki WHERE nadajniki.id_slupu=" + id + "";
+            SqlCeDataReader rdr = Zapytanie(zapytanie);
+            while (rdr.Read())
+            {
+                if (Convert.ToInt32(rdr[0]) > 0)
+                {
+                    return false; //wyswietlic messageboxa
+                }
+            }*/
+
+            string zapytanie = "DELETE FROM modele WHERE id=" + id + "";
             Zapytanie(zapytanie);
             return true;
         }

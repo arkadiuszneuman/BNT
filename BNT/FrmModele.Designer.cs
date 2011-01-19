@@ -1,6 +1,6 @@
 ﻿namespace BNT
 {
-    partial class FrmNadajniki
+    partial class FrmModele
     {
         /// <summary>
         /// Required designer variable.
@@ -33,16 +33,13 @@
             this.label1 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
-            this.comboBoxMiasto = new System.Windows.Forms.ComboBox();
-            this.numericN = new System.Windows.Forms.NumericUpDown();
-            this.numericS = new System.Windows.Forms.NumericUpDown();
-            this.label4 = new System.Windows.Forms.Label();
+            this.numericZasieg = new System.Windows.Forms.NumericUpDown();
             this.label5 = new System.Windows.Forms.Label();
             this.label6 = new System.Windows.Forms.Label();
-            this.numericZl = new System.Windows.Forms.NumericUpDown();
-            ((System.ComponentModel.ISupportInitialize)(this.numericN)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.numericS)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.numericZl)).BeginInit();
+            this.numericCena = new System.Windows.Forms.NumericUpDown();
+            this.textBoxNazwa = new System.Windows.Forms.TextBox();
+            ((System.ComponentModel.ISupportInitialize)(this.numericZasieg)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numericCena)).BeginInit();
             this.SuspendLayout();
             // 
             // buttonDodajLubZmien
@@ -72,118 +69,90 @@
             this.label1.AutoSize = true;
             this.label1.Location = new System.Drawing.Point(12, 25);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(41, 13);
+            this.label1.Size = new System.Drawing.Size(43, 13);
             this.label1.TabIndex = 2;
-            this.label1.Text = "Miasto:";
+            this.label1.Text = "Nazwa:";
             // 
             // label2
             // 
             this.label2.AutoSize = true;
             this.label2.Location = new System.Drawing.Point(12, 51);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(74, 13);
+            this.label2.Size = new System.Drawing.Size(39, 13);
             this.label2.TabIndex = 3;
-            this.label2.Text = "Współrzędne:";
+            this.label2.Text = "Zasięg";
             // 
             // label3
             // 
             this.label3.AutoSize = true;
             this.label3.Location = new System.Drawing.Point(12, 78);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(99, 13);
+            this.label3.Size = new System.Drawing.Size(35, 13);
             this.label3.TabIndex = 4;
-            this.label3.Text = "Cena za dzierżawę:";
+            this.label3.Text = "Cena:";
             // 
-            // comboBoxMiasto
+            // numericZasieg
             // 
-            this.comboBoxMiasto.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.Suggest;
-            this.comboBoxMiasto.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems;
-            this.comboBoxMiasto.FormattingEnabled = true;
-            this.comboBoxMiasto.Location = new System.Drawing.Point(131, 22);
-            this.comboBoxMiasto.MaxDropDownItems = 100;
-            this.comboBoxMiasto.Name = "comboBoxMiasto";
-            this.comboBoxMiasto.Size = new System.Drawing.Size(165, 21);
-            this.comboBoxMiasto.TabIndex = 5;
-            // 
-            // numericN
-            // 
-            this.numericN.Location = new System.Drawing.Point(131, 49);
-            this.numericN.Maximum = new decimal(new int[] {
+            this.numericZasieg.Location = new System.Drawing.Point(131, 49);
+            this.numericZasieg.Maximum = new decimal(new int[] {
             1000,
             0,
             0,
             0});
-            this.numericN.Name = "numericN";
-            this.numericN.Size = new System.Drawing.Size(59, 20);
-            this.numericN.TabIndex = 6;
-            this.numericN.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
-            // 
-            // numericS
-            // 
-            this.numericS.Location = new System.Drawing.Point(217, 49);
-            this.numericS.Maximum = new decimal(new int[] {
-            1000,
-            0,
-            0,
-            0});
-            this.numericS.Name = "numericS";
-            this.numericS.Size = new System.Drawing.Size(59, 20);
-            this.numericS.TabIndex = 7;
-            this.numericS.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
-            // 
-            // label4
-            // 
-            this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(196, 51);
-            this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(15, 13);
-            this.label4.TabIndex = 8;
-            this.label4.Text = "N";
+            this.numericZasieg.Name = "numericZasieg";
+            this.numericZasieg.Size = new System.Drawing.Size(118, 20);
+            this.numericZasieg.TabIndex = 7;
+            this.numericZasieg.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             // 
             // label5
             // 
             this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(282, 51);
+            this.label5.Location = new System.Drawing.Point(255, 51);
             this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(14, 13);
+            this.label5.Size = new System.Drawing.Size(21, 13);
             this.label5.TabIndex = 9;
-            this.label5.Text = "S";
+            this.label5.Text = "km";
             // 
             // label6
             // 
             this.label6.AutoSize = true;
-            this.label6.Location = new System.Drawing.Point(280, 78);
+            this.label6.Location = new System.Drawing.Point(255, 78);
             this.label6.Name = "label6";
             this.label6.Size = new System.Drawing.Size(16, 13);
             this.label6.TabIndex = 11;
             this.label6.Text = "zł";
             // 
-            // numericZl
+            // numericCena
             // 
-            this.numericZl.DecimalPlaces = 2;
-            this.numericZl.Location = new System.Drawing.Point(131, 76);
-            this.numericZl.Maximum = new decimal(new int[] {
+            this.numericCena.DecimalPlaces = 2;
+            this.numericCena.Location = new System.Drawing.Point(131, 76);
+            this.numericCena.Maximum = new decimal(new int[] {
             999999,
             0,
             0,
             0});
-            this.numericZl.Name = "numericZl";
-            this.numericZl.Size = new System.Drawing.Size(143, 20);
-            this.numericZl.TabIndex = 12;
-            this.numericZl.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            this.numericCena.Name = "numericCena";
+            this.numericCena.Size = new System.Drawing.Size(118, 20);
+            this.numericCena.TabIndex = 12;
+            this.numericCena.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             // 
-            // FrmSlupy
+            // textBoxNazwa
+            // 
+            this.textBoxNazwa.Location = new System.Drawing.Point(131, 22);
+            this.textBoxNazwa.Name = "textBoxNazwa";
+            this.textBoxNazwa.Size = new System.Drawing.Size(145, 20);
+            this.textBoxNazwa.TabIndex = 13;
+            // 
+            // FrmModele
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(363, 149);
-            this.Controls.Add(this.numericZl);
+            this.Controls.Add(this.textBoxNazwa);
+            this.Controls.Add(this.numericCena);
             this.Controls.Add(this.label6);
             this.Controls.Add(this.label5);
-            this.Controls.Add(this.label4);
-            this.Controls.Add(this.numericS);
-            this.Controls.Add(this.numericN);
-            this.Controls.Add(this.comboBoxMiasto);
+            this.Controls.Add(this.numericZasieg);
             this.Controls.Add(this.label3);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.label1);
@@ -191,11 +160,10 @@
             this.Controls.Add(this.buttonDodajLubZmien);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.MaximizeBox = false;
-            this.Name = "FrmSlupy";
+            this.Name = "FrmModele";
             this.Text = "Słupy";
-            ((System.ComponentModel.ISupportInitialize)(this.numericN)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.numericS)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.numericZl)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numericZasieg)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numericCena)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -208,12 +176,10 @@
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label label3;
-        private System.Windows.Forms.ComboBox comboBoxMiasto;
-        private System.Windows.Forms.NumericUpDown numericN;
-        private System.Windows.Forms.NumericUpDown numericS;
-        private System.Windows.Forms.Label label4;
+        private System.Windows.Forms.NumericUpDown numericZasieg;
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.Label label6;
-        private System.Windows.Forms.NumericUpDown numericZl;
+        private System.Windows.Forms.NumericUpDown numericCena;
+        private System.Windows.Forms.TextBox textBoxNazwa;
     }
 }
