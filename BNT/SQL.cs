@@ -157,8 +157,14 @@ namespace BNT
 
         public void EdytujSlup(int id, string miasto, Point wsp, decimal cena)
         {
-            string zapytanie = "UPDATE slupy SET wsp_x='" + wsp.X + "', wsp_y='" + wsp.Y + "', cena='"
-                + cena.ToString().Replace(',', '.') + "', id_miasta='(SELECT id FROM miasta WHERE nazwa='"+miasto+"')' WHERE id="+id+"";
+            //string zapytanie = "UPDATE slupy SET wsp_x=" + wsp.X + ", wsp_y=" + wsp.Y + ", cena="
+            //    + cena.ToString().Replace(',', '.') + ", id_miasta=(SELECT id FROM miasta WHERE nazwa='"+miasto+"') WHERE id="+id+"";
+
+            string zapytanie = "SELECT id FROM miasta WHERE nazwa='" + miasto + "'";
+            SqlCeDataReader rdr = Zapytanie(zapytanie);
+            while (rdr.Read())
+                zapytanie = "UPDATE slupy SET wsp_x='" + wsp.X + "', wsp_y='" + wsp.Y + "', cena='"
+                    + cena.ToString().Replace(',', '.') + "', id_miasta='"+rdr[0].ToString()+"' WHERE id="+id+"";
             Zapytanie(zapytanie);
         }
 
