@@ -16,7 +16,6 @@ namespace BNT
         static Bitmap bgSmall = global::BNT.Properties.Resources.button_green_small;
         static Bitmap bp = global::BNT.Properties.Resources.button_purple;
         Rectangle pozycja;
-        bool czyMaly = true;
         TransparentPictureBox ikona = new TransparentPictureBox();
         TransparentLabel nazwaMiasta = new TransparentLabel();
         Panel panelMiasto;

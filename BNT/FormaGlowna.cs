@@ -21,11 +21,10 @@ namespace BNT
             InitializeComponent();
             string v = "0.1";
             Text = "BNT - Baza Nadajników Trakcyjnych v" + v;
-            foreach (string[] miasta in sql.CzytajMiasta())
+            foreach (string[] miasta in sql.CzytajMiasta(true))
             {
                 new MapBtn(tabMapa, panelMiasto, miasta[0], short.Parse(miasta[1]), short.Parse(miasta[2]));
             }
-            //m = new MapBtn(tabMapa);
             pictureBoxMapa.SendToBack();
         }
 
@@ -55,14 +54,12 @@ namespace BNT
             switch (((TabControl)sender).SelectedIndex)
             {
                 case 1: //reakcja na klikniecie na slupy
-                    new Slupy(dataGridSlupy);
+                    new Slupy(dataGridSlupy, tabSlupy);
                     break;
                 case 5:
                     new Faktury(comboFirmy,comboMiesiace,comboRok,buttonGeneruj,dataGridFaktury);
                     break;
             }
         }
-
-
     }
 }

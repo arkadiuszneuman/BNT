@@ -39,7 +39,6 @@
             this.label1 = new System.Windows.Forms.Label();
             this.labelMiasto = new System.Windows.Forms.Label();
             this.buttonDodajMiasto = new System.Windows.Forms.Button();
-            this.pictureBoxMapa = new System.Windows.Forms.PictureBox();
             this.tabSlupy = new System.Windows.Forms.TabPage();
             this.dataGridSlupy = new System.Windows.Forms.DataGridView();
             this.tabNadajniki = new System.Windows.Forms.TabPage();
@@ -58,19 +57,21 @@
             this.napis_rok = new System.Windows.Forms.Label();
             this.napis_miesiac = new System.Windows.Forms.Label();
             this.napis_firma = new System.Windows.Forms.Label();
+            this.pictureBoxMapa = new System.Windows.Forms.PictureBox();
+            this.colNr = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colMiasto = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colWsp = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.celCena = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colCena = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colFirmy = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colPrzychod = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.tabControl.SuspendLayout();
             this.tabMapa.SuspendLayout();
             this.panelMiasto.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBoxMapa)).BeginInit();
             this.tabSlupy.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridSlupy)).BeginInit();
             this.tabFaktury.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridFaktury)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBoxMapa)).BeginInit();
             this.SuspendLayout();
             // 
             // tabControl
@@ -185,16 +186,6 @@
             this.buttonDodajMiasto.UseVisualStyleBackColor = true;
             this.buttonDodajMiasto.Click += new System.EventHandler(this.buttonDodajMiasto_Click);
             // 
-            // pictureBoxMapa
-            // 
-            this.pictureBoxMapa.Image = global::BNT.Properties.Resources.polska_kontur_maly;
-            this.pictureBoxMapa.Location = new System.Drawing.Point(0, 0);
-            this.pictureBoxMapa.Name = "pictureBoxMapa";
-            this.pictureBoxMapa.Size = new System.Drawing.Size(544, 503);
-            this.pictureBoxMapa.TabIndex = 0;
-            this.pictureBoxMapa.TabStop = false;
-            this.pictureBoxMapa.Click += new System.EventHandler(this.pictureBoxMapa_Click);
-            // 
             // tabSlupy
             // 
             this.tabSlupy.Controls.Add(this.dataGridSlupy);
@@ -207,18 +198,26 @@
             // 
             // dataGridSlupy
             // 
+            this.dataGridSlupy.AllowUserToAddRows = false;
+            this.dataGridSlupy.AllowUserToDeleteRows = false;
             this.dataGridSlupy.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
                         | System.Windows.Forms.AnchorStyles.Right)));
             this.dataGridSlupy.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dataGridSlupy.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.colNr,
             this.colMiasto,
             this.colWsp,
-            this.celCena,
+            this.colCena,
             this.colFirmy,
             this.colPrzychod});
             this.dataGridSlupy.Location = new System.Drawing.Point(3, 3);
+            this.dataGridSlupy.MultiSelect = false;
             this.dataGridSlupy.Name = "dataGridSlupy";
-            this.dataGridSlupy.Size = new System.Drawing.Size(545, 438);
+            this.dataGridSlupy.ReadOnly = true;
+            this.dataGridSlupy.RowHeadersVisible = false;
+            this.dataGridSlupy.RowTemplate.Resizable = System.Windows.Forms.DataGridViewTriState.False;
+            this.dataGridSlupy.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
+            this.dataGridSlupy.Size = new System.Drawing.Size(545, 459);
             this.dataGridSlupy.TabIndex = 0;
             // 
             // tabNadajniki
@@ -381,31 +380,53 @@
             this.napis_firma.TabIndex = 0;
             this.napis_firma.Text = "Firma:";
             // 
+            // pictureBoxMapa
+            // 
+            this.pictureBoxMapa.Image = global::BNT.Properties.Resources.polska_kontur_maly;
+            this.pictureBoxMapa.Location = new System.Drawing.Point(0, 0);
+            this.pictureBoxMapa.Name = "pictureBoxMapa";
+            this.pictureBoxMapa.Size = new System.Drawing.Size(544, 503);
+            this.pictureBoxMapa.TabIndex = 0;
+            this.pictureBoxMapa.TabStop = false;
+            this.pictureBoxMapa.Click += new System.EventHandler(this.pictureBoxMapa_Click);
+            // 
+            // colNr
+            // 
+            this.colNr.HeaderText = "Nr";
+            this.colNr.Name = "colNr";
+            this.colNr.ReadOnly = true;
+            this.colNr.Width = 30;
+            // 
             // colMiasto
             // 
             this.colMiasto.HeaderText = "Miasto";
             this.colMiasto.Name = "colMiasto";
+            this.colMiasto.ReadOnly = true;
             // 
             // colWsp
             // 
             this.colWsp.HeaderText = "Współrzędne";
             this.colWsp.Name = "colWsp";
+            this.colWsp.ReadOnly = true;
             // 
-            // celCena
+            // colCena
             // 
-            this.celCena.HeaderText = "Cena";
-            this.celCena.Name = "celCena";
+            this.colCena.HeaderText = "Cena";
+            this.colCena.Name = "colCena";
+            this.colCena.ReadOnly = true;
             // 
             // colFirmy
             // 
             this.colFirmy.HeaderText = "Firmy";
             this.colFirmy.Name = "colFirmy";
+            this.colFirmy.ReadOnly = true;
             this.colFirmy.Width = 130;
             // 
             // colPrzychod
             // 
             this.colPrzychod.HeaderText = "Przychód miesięczny";
             this.colPrzychod.Name = "colPrzychod";
+            this.colPrzychod.ReadOnly = true;
             // 
             // FormaGlowna
             // 
@@ -414,18 +435,19 @@
             this.ClientSize = new System.Drawing.Size(564, 525);
             this.Controls.Add(this.tabControl);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
+            this.MaximizeBox = false;
             this.Name = "FormaGlowna";
             this.Text = "Form1";
             this.tabControl.ResumeLayout(false);
             this.tabMapa.ResumeLayout(false);
             this.panelMiasto.ResumeLayout(false);
             this.panelMiasto.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBoxMapa)).EndInit();
             this.tabSlupy.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.dataGridSlupy)).EndInit();
             this.tabFaktury.ResumeLayout(false);
             this.tabFaktury.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridFaktury)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBoxMapa)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -462,9 +484,10 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn colDataWystawienia;
         private System.Windows.Forms.DataGridViewTextBoxColumn colMnoznik;
         private System.Windows.Forms.DataGridViewTextBoxColumn colPokaz;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colNr;
         private System.Windows.Forms.DataGridViewTextBoxColumn colMiasto;
         private System.Windows.Forms.DataGridViewTextBoxColumn colWsp;
-        private System.Windows.Forms.DataGridViewTextBoxColumn celCena;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colCena;
         private System.Windows.Forms.DataGridViewTextBoxColumn colFirmy;
         private System.Windows.Forms.DataGridViewTextBoxColumn colPrzychod;
     }
