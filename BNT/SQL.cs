@@ -165,56 +165,51 @@ namespace BNT
             return tablica.ToArray();
         }
 
-        private int DzienMiesiaca(int miesiac, int rok)
-        {
-            switch (miesiac)
-            {
-                case 4:
-                case 6:
-                case 9:
-                case 11:
-                    return 30;
-                case 2:
-                    if ((rok % 4) == 0)
-                        return 29;
-                    else
-                        return 28;
-                default:
-                    return 31;
-            }
-        }
-
         private string CzytajKwoteMiesieczna(string nazwaFirmy, int numerMiesiaca, int numerRoku)
         {
-            string zapytanie = "SELECT SUM((slupy.cena + modele.cena * nadajniki.ilosc) * faktury.wartosc) AS ILOSC FROM faktury LEFT OUTER JOIN nadajniki ON nadajniki.id_faktury = faktury.id LEFT OUTER JOIN firmy ON firmy.id = nadajniki.id_firmy LEFT OUTER JOIN slupy ON slupy.id = nadajniki.id_slupu LEFT OUTER JOIN modele ON modele.id = nadajniki.id_modelu WHERE (firmy.nazwa = '" + nazwaFirmy + "') AND (faktury.data_zaplaty BETWEEN '" + numerRoku + "-" + numerMiesiaca + "-01' AND '" + numerRoku + "-" + numerMiesiaca + "-" + DzienMiesiaca(numerMiesiaca,numerRoku) + "')";
+            float cena = 0;
+            string zapytanie = "SELECT DISTINCT slupy.cena, slupy.id FROM slupy LEFT OUTER JOIN nadajniki ON slupy.id = nadajniki.id_slupu LEFT OUTER JOIN faktury ON nadajniki.id_faktury = faktury.id LEFT OUTER JOIN firmy ON nadajniki.id_firmy = firmy.id WHERE (firmy.nazwa = '" + nazwaFirmy + "')";
             SqlCeDataReader rdr = Zapytanie(zapytanie);
 
-            // cenę słupa trzeba brać jednorazowo, a nie za każdy model, trzeba dopisać jeszcze jedno zapytanie
+            while (rdr.Read())
+                cena += float.Parse(rdr[0].ToString());
+
+
+            zapytanie = "SELECT SUM(modele.cena * nadajniki.ilosc) FROM faktury LEFT OUTER JOIN nadajniki ON nadajniki.id_faktury = faktury.id LEFT OUTER JOIN firmy ON firmy.id = nadajniki.id_firmy LEFT OUTER JOIN modele ON modele.id = nadajniki.id_modelu WHERE (firmy.nazwa = '" + nazwaFirmy + "') AND (faktury.data_zaplaty BETWEEN '" + numerRoku + "-" + numerMiesiaca + "-01' AND '" + numerRoku + "-" + numerMiesiaca + "-" + DateTime.DaysInMonth(numerRoku,numerMiesiaca) + "')";
+            rdr = Zapytanie(zapytanie);
 
             if (rdr.Read())
             {
                 if (rdr[0].ToString() == "")
                     return null;
                 else
-                    return rdr[0].ToString();
+                    cena += float.Parse(rdr[0].ToString());
             }
-            else
-                return "Błąd: Złe zapytanie.";
+
+            zapytanie = "SELECT faktury.wartosc FROM faktury LEFT OUTER JOIN nadajniki ON nadajniki.id_faktury = faktury.id LEFT OUTER JOIN firmy ON " +
+                "firmy.id = nadajniki.id_firmy WHERE (firmy.nazwa = '" + nazwaFirmy + "') AND (faktury.data_zaplaty BETWEEN '" + numerRoku + "-" + 
+                numerMiesiaca + "-01' AND '" + numerRoku + "-" + numerMiesiaca + "-" + DateTime.DaysInMonth(numerRoku, numerMiesiaca) + 
+                "') ORDER BY faktury.data_zaplaty DESC";
+            rdr = Zapytanie(zapytanie);
+
+            if (rdr.Read())
+                cena *= float.Parse(rdr[0].ToString());
+
+
+            return cena.ToString();
+
         }
 
         private string CzytajNajpozniejszaDateZaplaty(string nazwaFirmy, int numerMiesiaca, int numerRoku)
         {
-            string zapytanie = "SELECT MAX(faktury.data_zaplaty) AS DATA FROM faktury LEFT OUTER JOIN nadajniki ON nadajniki.id_faktury = faktury.id LEFT OUTER JOIN firmy ON firmy.id = nadajniki.id_firmy WHERE (firmy.nazwa = '" + nazwaFirmy + "') AND (faktury.data_zaplaty BETWEEN '" + numerRoku + "-" + numerMiesiaca + "-01' AND '" + numerRoku + "-" + numerMiesiaca + "-" + DzienMiesiaca(numerMiesiaca, numerRoku) + "')";
+            string zapytanie = "SELECT faktury.data_zaplaty FROM faktury LEFT OUTER JOIN nadajniki ON nadajniki.id_faktury = faktury.id " +
+                "LEFT OUTER JOIN firmy ON firmy.id = nadajniki.id_firmy WHERE (firmy.nazwa = '" + nazwaFirmy + "') AND (faktury.data_zaplaty BETWEEN '" +
+                numerRoku + "-" + numerMiesiaca + "-01' AND '" + numerRoku + "-" + numerMiesiaca + "-" + DateTime.DaysInMonth(numerRoku, numerMiesiaca) + 
+                "') ORDER BY faktury.data_zaplaty DESC";
             SqlCeDataReader rdr = Zapytanie(zapytanie);
             if (rdr.Read())
-            {
-                if (rdr[0].ToString() == "")
-                    return null;
-                else
-                    return rdr[0].ToString().Substring(0, 10);
-            }
-            else
-                return "Błąd: Złe zapytanie.";
+                return rdr[0].ToString().Substring(0, 10);
+            return null;
         }
 
     }
