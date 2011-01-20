@@ -87,15 +87,12 @@
     <Compile Include="FormaGlowna.Designer.cs">
       <DependentUpon>FormaGlowna.cs</DependentUpon>
     </Compile>
-<<<<<<< HEAD
     <Compile Include="FrmFaktury.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="FrmFaktury.Designer.cs">
       <DependentUpon>FrmFaktury.cs</DependentUpon>
     </Compile>
-=======
->>>>>>> origin/master
     <Compile Include="FrmSlupy.cs">
       <SubType>Form</SubType>
     </Compile>
