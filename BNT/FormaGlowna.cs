@@ -57,9 +57,10 @@ namespace BNT
                     new Slupy(dataGridSlupy, tabSlupy);
                     break;
                 case 5:
-                    new Faktury(comboFirmy,comboMiesiace,comboRok,buttonGeneruj,dataGridFaktury);
+                    new Faktury(comboFirmy,comboMiesiace,comboRok,buttonPokaz,buttonStworzFakture,dataGridFaktury, radioTabela, radioData);
                     break;
             }
         }
+
     }
 }

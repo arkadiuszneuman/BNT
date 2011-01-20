@@ -75,9 +75,23 @@
     <Compile Include="FormaGlowna.Designer.cs">
       <DependentUpon>FormaGlowna.cs</DependentUpon>
     </Compile>
-    <Compile Include="FrmSlupy.cs" />
+    <Compile Include="FrmFaktury.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FrmFaktury.Designer.cs">
+      <DependentUpon>FrmFaktury.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FrmSlupy.cs">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="FrmSlupy.Designer.cs">
       <DependentUpon>FrmSlupy.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FrmStworzFakture.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FrmStworzFakture.Designer.cs">
+      <DependentUpon>FrmStworzFakture.cs</DependentUpon>
     </Compile>
     <Compile Include="MapBtn.cs" />
     <Compile Include="NazwaMiasta.cs">
@@ -94,8 +108,14 @@
       <DependentUpon>FormaGlowna.cs</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
+    <EmbeddedResource Include="FrmFaktury.resx">
+      <DependentUpon>FrmFaktury.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="FrmSlupy.resx">
       <DependentUpon>FrmSlupy.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FrmStworzFakture.resx">
+      <DependentUpon>FrmStworzFakture.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="NazwaMiasta.resx">
       <DependentUpon>NazwaMiasta.cs</DependentUpon>
