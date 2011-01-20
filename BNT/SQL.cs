@@ -354,9 +354,10 @@ namespace BNT
                 {
                     string[] s = new string[4];
                     s[0] = licznik.ToString();
-                    s[1] = CzytajNajpozniejszaDateZaplaty(nazwaFirmy,miesiac,rok);
+                    s[1] = CzytajNajpozniejszaDateZaplaty(nazwaFirmy,miesiac,rok)[0];
                     if (s[1] == null)
                         continue;
+                    s[1] = s[1].Substring(0, 10);
                     s[2] = float.Parse(CzytajKwoteMiesieczna(nazwaFirmy,miesiac,rok)).ToString("F") + " zł";
                     s[3] = "Pokaż";
                     tablica.Add(s);
@@ -366,19 +367,75 @@ namespace BNT
             return tablica.ToArray();
         }
 
+
+        public string[][] CzytajKwotySlupowFirmy(string nazwaFirmy)
+        {
+            string zapytanie = "SELECT DISTINCT slupy.cena, miasta.nazwa, slupy.id FROM slupy LEFT OUTER JOIN nadajniki " + 
+                "ON slupy.id = nadajniki.id_slupu LEFT OUTER JOIN faktury ON nadajniki.id_faktury = faktury.id " +
+                "LEFT OUTER JOIN firmy ON nadajniki.id_firmy = firmy.id LEFT OUTER JOIN miasta ON slupy.id_miasta = slupy.id " +
+                "WHERE (firmy.nazwa = '" + nazwaFirmy + "')";
+
+            List<string[]> tablica = new List<string[]>();
+            SqlCeDataReader rdr = Zapytanie(zapytanie);
+            while (rdr.Read())
+            {
+                string[] s = new string[2];
+                s[0] = rdr[0].ToString();  // cena
+                s[1] = rdr[1].ToString();  // miasto
+                tablica.Add(s);
+            }
+
+            return tablica.ToArray();
+
+        }
+
+        public string[][] CzytajNadajniki(string nazwaFirmy, int numerMiesiaca, int numerRoku)
+        {
+            string zapytanie = "SELECT modele.nazwa, nadajniki.ilosc, modele.cena, faktury.wartosc FROM faktury LEFT OUTER JOIN nadajniki " +
+                "ON nadajniki.id_faktury = faktury.id LEFT OUTER JOIN firmy ON firmy.id = nadajniki.id_firmy LEFT OUTER JOIN " +
+                "modele ON modele.id = nadajniki.id_modelu WHERE (firmy.nazwa = '" + nazwaFirmy + "') AND " + 
+                "(faktury.data_zaplaty BETWEEN '" + numerRoku + "-" + numerMiesiaca + "-01' AND '" + numerRoku + "-" 
+                + numerMiesiaca + "-" + DateTime.DaysInMonth(numerRoku, numerMiesiaca) + "')";
+
+            List<string[]> tablica = new List<string[]>();
+            SqlCeDataReader rdr = Zapytanie(zapytanie);
+            while (rdr.Read())
+            {
+                string[] s = new string[4];
+                s[0] = rdr[0].ToString();  // nazwa modelu
+                s[1] = rdr[1].ToString();  // ilosc
+                s[2] = rdr[2].ToString();  // cena modelu
+                s[3] = rdr[3].ToString();  // stawka
+                tablica.Add(s);
+            }
+
+            return tablica.ToArray();
+        }
+
+
         private string CzytajKwoteMiesieczna(string nazwaFirmy, int numerMiesiaca, int numerRoku)
         {
             float cena = 0;
-            string zapytanie = "SELECT DISTINCT slupy.cena, slupy.id FROM slupy LEFT OUTER JOIN nadajniki ON slupy.id = nadajniki.id_slupu LEFT OUTER JOIN faktury ON nadajniki.id_faktury = faktury.id LEFT OUTER JOIN firmy ON nadajniki.id_firmy = firmy.id WHERE (firmy.nazwa = '" + nazwaFirmy + "')";
-            SqlCeDataReader rdr = Zapytanie(zapytanie);
+            //string zapytanie; // = "SELECT DISTINCT slupy.cena, slupy.id FROM slupy LEFT OUTER JOIN nadajniki ON slupy.id = nadajniki.id_slupu LEFT OUTER JOIN faktury ON nadajniki.id_faktury = faktury.id LEFT OUTER JOIN firmy ON nadajniki.id_firmy = firmy.id WHERE (firmy.nazwa = '" + nazwaFirmy + "')";
+            //SqlCeDataReader rdr; // = Zapytanie(zapytanie);
 
-            while (rdr.Read())
-                cena += float.Parse(rdr[0].ToString());
+            string[][] KwotySlupow = (CzytajKwotySlupowFirmy(nazwaFirmy));
 
+            for(int i=0; i<KwotySlupow.Length; i++)
+            {
+                cena += float.Parse(KwotySlupow[i][0].ToString());
+            }
 
-            zapytanie = "SELECT SUM(modele.cena * nadajniki.ilosc) FROM faktury LEFT OUTER JOIN nadajniki ON nadajniki.id_faktury = faktury.id LEFT OUTER JOIN firmy ON firmy.id = nadajniki.id_firmy LEFT OUTER JOIN modele ON modele.id = nadajniki.id_modelu WHERE (firmy.nazwa = '" + nazwaFirmy + "') AND (faktury.data_zaplaty BETWEEN '" + numerRoku + "-" + numerMiesiaca + "-01' AND '" + numerRoku + "-" + numerMiesiaca + "-" + DateTime.DaysInMonth(numerRoku,numerMiesiaca) + "')";
-            rdr = Zapytanie(zapytanie);
+            //zapytanie = "SELECT SUM(modele.cena * nadajniki.ilosc) FROM faktury LEFT OUTER JOIN nadajniki ON nadajniki.id_faktury = faktury.id LEFT OUTER JOIN firmy ON firmy.id = nadajniki.id_firmy LEFT OUTER JOIN modele ON modele.id = nadajniki.id_modelu WHERE (firmy.nazwa = '" + nazwaFirmy + "') AND (faktury.data_zaplaty BETWEEN '" + numerRoku + "-" + numerMiesiaca + "-01' AND '" + numerRoku + "-" + numerMiesiaca + "-" + DateTime.DaysInMonth(numerRoku,numerMiesiaca) + "')";
+            //rdr = Zapytanie(zapytanie);
 
+            string[][] KwotyNadajnikow = CzytajNadajniki(nazwaFirmy, numerMiesiaca, numerRoku);
+            for (int i = 0; i < KwotyNadajnikow.Length; i++)
+            {
+                cena += int.Parse(KwotyNadajnikow[i][1]) * float.Parse(KwotyNadajnikow[i][2]) * float.Parse(KwotyNadajnikow[i][3]);
+            }
+
+            /*
             if (rdr.Read())
             {
                 if (rdr[0].ToString() == "")
@@ -395,23 +452,103 @@ namespace BNT
 
             if (rdr.Read())
                 cena *= float.Parse(rdr[0].ToString());
-
+            */
 
             return cena.ToString();
 
         }
 
-        private string CzytajNajpozniejszaDateZaplaty(string nazwaFirmy, int numerMiesiaca, int numerRoku)
+        public string[] CzytajNajpozniejszaDateZaplaty(string nazwaFirmy, int numerMiesiaca, int numerRoku)
         {
-            string zapytanie = "SELECT faktury.data_zaplaty FROM faktury LEFT OUTER JOIN nadajniki ON nadajniki.id_faktury = faktury.id " +
+            string zapytanie = "SELECT faktury.data_zaplaty, faktury.id FROM faktury LEFT OUTER JOIN nadajniki ON nadajniki.id_faktury = faktury.id " +
                 "LEFT OUTER JOIN firmy ON firmy.id = nadajniki.id_firmy WHERE (firmy.nazwa = '" + nazwaFirmy + "') AND (faktury.data_zaplaty BETWEEN '" +
                 numerRoku + "-" + numerMiesiaca + "-01' AND '" + numerRoku + "-" + numerMiesiaca + "-" + DateTime.DaysInMonth(numerRoku, numerMiesiaca) + 
                 "') ORDER BY faktury.data_zaplaty DESC";
             SqlCeDataReader rdr = Zapytanie(zapytanie);
+            string[] s = new string[2];
             if (rdr.Read())
-                return rdr[0].ToString().Substring(0, 10);
-            return null;
+            {
+                s[0] = rdr[0].ToString();
+                s[1] = rdr[1].ToString();
+            }
+            return s;
         }
 
+        public string[][] CzytajFirmyBezFaktury()
+        {
+            int licznik = 1;
+            string zapytanie = "SELECT " + "nadajniki.id," + " firmy.nazwa, miasta.nazwa, modele.nazwa, nadajniki.ilosc, nadajniki.ilosc * modele.cena " + 
+                "FROM firmy LEFT OUTER JOIN nadajniki ON firmy.id = nadajniki.id_firmy LEFT OUTER JOIN slupy ON nadajniki.id_slupu = slupy.id " +
+                "LEFT OUTER JOIN modele ON nadajniki.id_modelu = modele.id LEFT OUTER JOIN miasta ON slupy.id_miasta = miasta.id " +
+                "WHERE (nadajniki.id_faktury IS NULL)";
+            SqlCeDataReader rdr = Zapytanie(zapytanie);
+
+            List<string[]> tablica = new List<string[]>();
+
+            while (rdr.Read())
+            {
+                string[] s = new string[6];
+                //s[0] = licznik.ToString();
+                s[0] = rdr[0].ToString();
+                s[1] = rdr[1].ToString();
+                s[2] = rdr[2].ToString();
+                s[3] = rdr[3].ToString();
+                s[4] = rdr[4].ToString();
+                s[5] = rdr[5].ToString();
+                tablica.Add(s);
+                licznik++;
+            }
+
+            return tablica.ToArray();
+        }
+
+        public void StworzRekordFaktury(string data_zaplaty, string stawka)
+        {
+            string zapytanie = "INSERT INTO faktury (data_zaplaty, wartosc) VALUES ('" + data_zaplaty.Substring(0, 10) +"', " + stawka.Replace(',','.') + ")";
+            Zapytanie(zapytanie);
+        }
+
+        private string CzytajOstatniIndeksFaktury()
+        {
+            string zapytanie = "SELECT MAX(id) FROM faktury";
+            SqlCeDataReader rdr = Zapytanie(zapytanie);
+            if (rdr.Read())
+                return rdr[0].ToString();
+            else
+            {
+                MessageBox.Show("Błąd odczytu indeksu faktury!");
+                return null;
+            }
+        }
+
+        public void DolaczNowaFakture(string id_nadajnika)
+        {
+            string indeksNowejFaktury = CzytajOstatniIndeksFaktury();
+            string zapytanie = "UPDATE nadajniki SET id_faktury=" + indeksNowejFaktury + " WHERE nadajniki.id = " + id_nadajnika;
+            Zapytanie(zapytanie);
+        }
+
+        public string[] CzytajFirme(string nazwaFirmy)
+        {
+            string[] s = new string[8];
+            string zapytanie = "SELECT firmy.imie, firmy.nazwisko, firmy.ulica, firmy.kod_pocztowy, miasta.nazwa, " +
+                " firmy.nip, firmy.regon, firmy.telefon FROM firmy LEFT OUTER JOIN miasta ON firmy.id_miasta=miasta.id WHERE firmy.nazwa='" + nazwaFirmy +
+                "'";
+            SqlCeDataReader rdr = Zapytanie(zapytanie);
+
+            if (rdr.Read())
+            {
+                s[0] = rdr[0].ToString();  // imie
+                s[1] = rdr[1].ToString();  // nazwisko
+                s[2] = rdr[2].ToString();  // ulica
+                s[3] = rdr[3].ToString();  // kod_pocztowy
+                s[4] = rdr[4].ToString();  // miasto
+                s[5] = rdr[5].ToString();  // nip
+                s[6] = rdr[6].ToString();  // regon
+                s[7] = rdr[7].ToString();  // telefon
+            }
+
+            return s.ToArray();
+        }
     }
 }

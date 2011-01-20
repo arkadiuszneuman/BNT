@@ -63,9 +63,10 @@ namespace BNT
                     new Modele(dataGridModele, tabModele);
                     break;
                 case 5:
-                    new Faktury(comboFirmy,comboMiesiace,comboRok,buttonGeneruj,dataGridFaktury);
+                    new Faktury(comboFirmy,comboMiesiace,comboRok,buttonPokaz,buttonStworzFakture,dataGridFaktury, radioTabela, radioData);
                     break;
             }
         }
+
     }
 }
