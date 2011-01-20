@@ -35,6 +35,10 @@
             this.labelAdres = new System.Windows.Forms.Label();
             this.labelDataWystawienia = new System.Windows.Forms.Label();
             this.dataGridProdukty = new System.Windows.Forms.DataGridView();
+            this.labelTermin = new System.Windows.Forms.Label();
+            this.labelDoZaplaty = new System.Windows.Forms.Label();
+            this.labelWystawil = new System.Windows.Forms.Label();
+            this.labelOdebral = new System.Windows.Forms.Label();
             this.colLp = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colUsluga = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colSztuk = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -43,10 +47,6 @@
             this.colBrutto = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colVAT = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colNetto = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.labelTermin = new System.Windows.Forms.Label();
-            this.labelDoZaplaty = new System.Windows.Forms.Label();
-            this.labelWystawil = new System.Windows.Forms.Label();
-            this.labelOdebral = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridProdukty)).BeginInit();
             this.SuspendLayout();
             // 
@@ -140,62 +140,6 @@
             this.dataGridProdukty.Size = new System.Drawing.Size(545, 51);
             this.dataGridProdukty.TabIndex = 6;
             // 
-            // colLp
-            // 
-            this.colLp.HeaderText = "Lp";
-            this.colLp.Name = "colLp";
-            this.colLp.ReadOnly = true;
-            this.colLp.Width = 30;
-            // 
-            // colUsluga
-            // 
-            this.colUsluga.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            this.colUsluga.HeaderText = "Nazwa Usługi";
-            this.colUsluga.Name = "colUsluga";
-            this.colUsluga.ReadOnly = true;
-            // 
-            // colSztuk
-            // 
-            this.colSztuk.HeaderText = "Sztuk";
-            this.colSztuk.Name = "colSztuk";
-            this.colSztuk.ReadOnly = true;
-            this.colSztuk.Width = 40;
-            // 
-            // colCenaJedn
-            // 
-            this.colCenaJedn.HeaderText = "Cena Jednost.";
-            this.colCenaJedn.Name = "colCenaJedn";
-            this.colCenaJedn.ReadOnly = true;
-            this.colCenaJedn.Width = 60;
-            // 
-            // colStawka
-            // 
-            this.colStawka.HeaderText = "Stawka";
-            this.colStawka.Name = "colStawka";
-            this.colStawka.ReadOnly = true;
-            this.colStawka.Width = 60;
-            // 
-            // colBrutto
-            // 
-            this.colBrutto.HeaderText = "Cena Brutto";
-            this.colBrutto.Name = "colBrutto";
-            this.colBrutto.ReadOnly = true;
-            this.colBrutto.Width = 60;
-            // 
-            // colVAT
-            // 
-            this.colVAT.HeaderText = "VAT%";
-            this.colVAT.Name = "colVAT";
-            this.colVAT.ReadOnly = true;
-            this.colVAT.Width = 40;
-            // 
-            // colNetto
-            // 
-            this.colNetto.HeaderText = "Cena Netto";
-            this.colNetto.Name = "colNetto";
-            this.colNetto.ReadOnly = true;
-            this.colNetto.Width = 60;
-            // 
             // labelTermin
             // 
             this.labelTermin.AutoSize = true;
@@ -239,6 +183,62 @@
             this.labelOdebral.TabIndex = 10;
             this.labelOdebral.Text = "Fakturę odebrał:\r\n\r\n";
             this.labelOdebral.TextAlign = System.Drawing.ContentAlignment.TopCenter;
+            // 
+            // colLp
+            // 
+            this.colLp.HeaderText = "Lp";
+            this.colLp.Name = "colLp";
+            this.colLp.ReadOnly = true;
+            this.colLp.Width = 20;
+            // 
+            // colUsluga
+            // 
+            this.colUsluga.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.colUsluga.HeaderText = "Nazwa Usługi";
+            this.colUsluga.Name = "colUsluga";
+            this.colUsluga.ReadOnly = true;
+            // 
+            // colSztuk
+            // 
+            this.colSztuk.HeaderText = "Sztuk";
+            this.colSztuk.Name = "colSztuk";
+            this.colSztuk.ReadOnly = true;
+            this.colSztuk.Width = 40;
+            // 
+            // colCenaJedn
+            // 
+            this.colCenaJedn.HeaderText = "Cena Jednost.";
+            this.colCenaJedn.Name = "colCenaJedn";
+            this.colCenaJedn.ReadOnly = true;
+            this.colCenaJedn.Width = 70;
+            // 
+            // colStawka
+            // 
+            this.colStawka.HeaderText = "Stawka";
+            this.colStawka.Name = "colStawka";
+            this.colStawka.ReadOnly = true;
+            this.colStawka.Width = 50;
+            // 
+            // colBrutto
+            // 
+            this.colBrutto.HeaderText = "Cena Brutto";
+            this.colBrutto.Name = "colBrutto";
+            this.colBrutto.ReadOnly = true;
+            this.colBrutto.Width = 70;
+            // 
+            // colVAT
+            // 
+            this.colVAT.HeaderText = "VAT%";
+            this.colVAT.Name = "colVAT";
+            this.colVAT.ReadOnly = true;
+            this.colVAT.Width = 40;
+            // 
+            // colNetto
+            // 
+            this.colNetto.HeaderText = "Cena Netto";
+            this.colNetto.Name = "colNetto";
+            this.colNetto.ReadOnly = true;
+            this.colNetto.Width = 70;
             // 
             // FrmFaktury
             // 
