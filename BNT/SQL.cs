@@ -331,6 +331,111 @@ namespace BNT
             return true;
         }
 
+        public string[][] CzytajFirmy(bool czyWszystkie)
+        {
+            List<string[]> tablica = new List<string[]>();
+
+            string zapytanie = "SELECT f.id, f.nazwa, f.imie, f.nazwisko, f.ulica, f.kod_pocztowy, m.nazwa, f.nip, f.regon, f.telefon FROM firmy f, miasta m WHERE m.id=f.id_miasta";
+            SqlCeDataReader rdr = Zapytanie(zapytanie);
+            while (rdr.Read())
+            {
+                string[] s = new string[11];
+                s[0] = rdr[0].ToString();
+                s[1] = rdr[1].ToString();
+                //s[2] = rdr[2].ToString();
+                s[3] = rdr[2].ToString();
+                s[4] = rdr[3].ToString();
+                s[5] = rdr[4].ToString();
+                s[6] = rdr[5].ToString();
+                s[7] = rdr[6].ToString();
+                s[8] = rdr[7].ToString();
+                s[9] = rdr[8].ToString();
+                s[10] = rdr[9].ToString();
+
+                tablica.Add(s);
+            }
+
+            for (int i = 0; i < tablica.Count; ++i)
+            {
+                string zapytanieFirmy = "SELECT nadajniki.id FROM firmy, nadajniki WHERE firmy.id=nadajniki.id_firmy AND firmy.id=" + tablica[i][0];
+                rdr = Zapytanie(zapytanieFirmy);
+                string firmy = "";
+
+                try
+                {
+                    while (rdr.Read())
+                    {
+                        firmy += rdr[0].ToString() + ", ";
+                    }
+                }
+                catch (SqlCeLockTimeoutException)
+                {
+                    MessageBox.Show("Przekroczono limit czasu");
+                    return tablica.ToArray();
+                }
+
+                if (firmy.Length > 0) //zapisanie nadajnikow
+                    tablica[i][2] = firmy.Remove(firmy.Length - 2); //usuniecie ostatniej spacji i zapisanie firm do tablicy
+                else
+                    tablica[i][2] = "Brak wynajętych słupów";
+            }
+
+
+            return tablica.ToArray();
+        }
+
+        public void DodajFirme(string nazwa, string imie, string nazwisko, string ulica, string kodPocztowy,
+            string miasto, string nip, string regon, string telefon, int[] nadajniki)
+        {
+            
+            
+            string zapytanie = "INSERT INTO firmy (nazwa, imie, nazwisko, ulica, kod_pocztowy, nip, regon, telefon, id_miasta) SELECT '"
+                + nazwa + "', '" + imie + "', '" + nazwisko + "', '" + ulica +
+                "', '" + kodPocztowy + "', '" + nip + "', '" + regon +
+                "', '" + telefon + "', id FROM miasta WHERE (miasta.nazwa='" + miasto + "')";
+
+            Zapytanie(zapytanie);
+
+            //znalezienie idka dodanej firmy
+            string zapytanieFirmy = "SELECT firmy.id FROM firmy WHERE firmy.nazwa='"+nazwa+"'";
+            SqlCeDataReader rdr = Zapytanie(zapytanieFirmy);
+            int id = 0;
+
+            while (rdr.Read())
+            {
+                id = Convert.ToInt32(rdr[0]);
+            }
+
+            foreach (int n in nadajniki)
+            {
+                zapytanie = "UPDATE nadajniki SET id_firmy=" + id + "WHERE id=" + n;
+                Zapytanie(zapytanie);
+            }
+        }
+
+        public void EdytujFirme(int id, int slup, string model, int ilosc)
+        {
+            string zapytanie = "SELECT id FROM modele WHERE nazwa='" + model + "'";
+            SqlCeDataReader rdr = Zapytanie(zapytanie);
+            while (rdr.Read())
+                zapytanie = "UPDATE nadajniki SET id_slupu='" + slup + "', id_modelu='" + rdr[0].ToString() + "', ilosc='"
+                    + ilosc + "' WHERE id=" + id + "";
+            Zapytanie(zapytanie);
+        }
+
+        public bool UsunFirme(int id)
+        {
+            string zapytanie = "UPDATE nadajniki SET id_firmy=NULL WHERE id_firmy=" + id;
+            Zapytanie(zapytanie);
+
+            zapytanie = "DELETE FROM firmy WHERE id=" + id + "";
+            Zapytanie(zapytanie);
+
+            
+
+            return true;
+        }
+
         public string[] CzytajFirmy()
         {
             List<string> tablica = new List<string>();
@@ -387,6 +492,27 @@ namespace BNT
 
             return tablica.ToArray();
 
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="jeden"></param>
+        /// <param name="id">podajemy jesli chcemy od konkretnej firmy, else 0</param>
+        /// <returns></returns>
+        public string[] CzytajNadajniki(bool jeden, int id_firmy)
+        {
+            List<string> tablica = new List<string>();
+            string zapytanie = "SELECT id FROM nadajniki"; //mozna tylko dodawac nadajniki jeszcze nie dodane
+            if (id_firmy != 0)
+                zapytanie += " WHERE id_firmy="+id_firmy;
+            SqlCeDataReader rdr = Zapytanie(zapytanie);
+            while (rdr.Read())
+            {
+                string s = rdr[0].ToString();
+                tablica.Add(s);
+            }
+            return tablica.ToArray();
         }
 
         public string[][] CzytajNadajniki(string nazwaFirmy, int numerMiesiaca, int numerRoku)

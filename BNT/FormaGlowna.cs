@@ -19,8 +19,8 @@ namespace BNT
         public FormaGlowna()
         {
             InitializeComponent();
-            string v = "0.1";
-            Text = "BNT - Baza Nadajników Trakcyjnych v" + v;
+            string v = "0.5";
+            Text = "BNT - Baza Nadajników Transmisyjnych v" + v;
             foreach (string[] miasta in sql.CzytajMiasta(true))
             {
                 new MapBtn(tabMapa, panelMiasto, miasta[0], short.Parse(miasta[1]), short.Parse(miasta[2]));
@@ -61,6 +61,9 @@ namespace BNT
                     break;
                 case 3:
                     new Modele(dataGridModele, tabModele);
+                    break;
+                case 4:
+                    new Firmy(dataGridFirmy, tabFirmy);
                     break;
                 case 5:
                     new Faktury(comboFirmy,comboMiesiace,comboRok,buttonPokaz,buttonStworzFakture,dataGridFaktury, radioTabela, radioData);

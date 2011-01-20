@@ -62,7 +62,11 @@
             this.colZasiegModele = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colCenaModele = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.tabFirmy = new System.Windows.Forms.TabPage();
+            this.dataGridFirmy = new System.Windows.Forms.DataGridView();
             this.tabFaktury = new System.Windows.Forms.TabPage();
+            this.radioTabela = new System.Windows.Forms.RadioButton();
+            this.radioData = new System.Windows.Forms.RadioButton();
+            this.buttonStworzFakture = new System.Windows.Forms.Button();
             this.dataGridFaktury = new System.Windows.Forms.DataGridView();
             this.colLp = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colDataWystawienia = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -75,9 +79,17 @@
             this.napis_rok = new System.Windows.Forms.Label();
             this.napis_miesiac = new System.Windows.Forms.Label();
             this.napis_firma = new System.Windows.Forms.Label();
-            this.buttonStworzFakture = new System.Windows.Forms.Button();
-            this.radioData = new System.Windows.Forms.RadioButton();
-            this.radioTabela = new System.Windows.Forms.RadioButton();
+            this.colIdFirmy = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colNazwaFirmy = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colNrNadFirmy = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colImieFirmy = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colNazwiskoFirmy = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colUlicaFirmy = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colKodFirmy = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colMiastoFirmy = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colNipFirmy = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colRegonFirmy = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colTelFirmy = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.tabControl.SuspendLayout();
             this.tabMapa.SuspendLayout();
             this.panelMiasto.SuspendLayout();
@@ -88,6 +100,8 @@
             ((System.ComponentModel.ISupportInitialize)(this.dataGridNadajniki)).BeginInit();
             this.tabModele.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridModele)).BeginInit();
+            this.tabFirmy.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridFirmy)).BeginInit();
             this.tabFaktury.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridFaktury)).BeginInit();
             this.SuspendLayout();
@@ -410,12 +424,42 @@
             // 
             // tabFirmy
             // 
+            this.tabFirmy.Controls.Add(this.dataGridFirmy);
             this.tabFirmy.Location = new System.Drawing.Point(4, 22);
             this.tabFirmy.Name = "tabFirmy";
             this.tabFirmy.Size = new System.Drawing.Size(556, 499);
             this.tabFirmy.TabIndex = 4;
             this.tabFirmy.Text = "Firmy";
             this.tabFirmy.UseVisualStyleBackColor = true;
+            // 
+            // dataGridFirmy
+            // 
+            this.dataGridFirmy.AllowUserToAddRows = false;
+            this.dataGridFirmy.AllowUserToDeleteRows = false;
+            this.dataGridFirmy.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
+                        | System.Windows.Forms.AnchorStyles.Right)));
+            this.dataGridFirmy.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dataGridFirmy.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.colIdFirmy,
+            this.colNazwaFirmy,
+            this.colNrNadFirmy,
+            this.colImieFirmy,
+            this.colNazwiskoFirmy,
+            this.colUlicaFirmy,
+            this.colKodFirmy,
+            this.colMiastoFirmy,
+            this.colNipFirmy,
+            this.colRegonFirmy,
+            this.colTelFirmy});
+            this.dataGridFirmy.Location = new System.Drawing.Point(3, 3);
+            this.dataGridFirmy.MultiSelect = false;
+            this.dataGridFirmy.Name = "dataGridFirmy";
+            this.dataGridFirmy.ReadOnly = true;
+            this.dataGridFirmy.RowHeadersVisible = false;
+            this.dataGridFirmy.RowTemplate.Resizable = System.Windows.Forms.DataGridViewTriState.False;
+            this.dataGridFirmy.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
+            this.dataGridFirmy.Size = new System.Drawing.Size(545, 459);
+            this.dataGridFirmy.TabIndex = 2;
             // 
             // tabFaktury
             // 
@@ -436,6 +480,39 @@
             this.tabFaktury.TabIndex = 5;
             this.tabFaktury.Text = "Faktury";
             this.tabFaktury.UseVisualStyleBackColor = true;
+            // 
+            // radioTabela
+            // 
+            this.radioTabela.AutoSize = true;
+            this.radioTabela.Enabled = false;
+            this.radioTabela.Location = new System.Drawing.Point(18, 125);
+            this.radioTabela.Name = "radioTabela";
+            this.radioTabela.Size = new System.Drawing.Size(96, 17);
+            this.radioTabela.TabIndex = 10;
+            this.radioTabela.TabStop = true;
+            this.radioTabela.Text = "Szukaj w tabeli";
+            this.radioTabela.UseVisualStyleBackColor = true;
+            // 
+            // radioData
+            // 
+            this.radioData.AutoSize = true;
+            this.radioData.Enabled = false;
+            this.radioData.Location = new System.Drawing.Point(18, 60);
+            this.radioData.Name = "radioData";
+            this.radioData.Size = new System.Drawing.Size(117, 17);
+            this.radioData.TabIndex = 9;
+            this.radioData.TabStop = true;
+            this.radioData.Text = "Szukaj wg miesięcy";
+            this.radioData.UseVisualStyleBackColor = true;
+            // 
+            // buttonStworzFakture
+            // 
+            this.buttonStworzFakture.Location = new System.Drawing.Point(367, 20);
+            this.buttonStworzFakture.Name = "buttonStworzFakture";
+            this.buttonStworzFakture.Size = new System.Drawing.Size(170, 23);
+            this.buttonStworzFakture.TabIndex = 8;
+            this.buttonStworzFakture.Text = "Stwórz fakturę";
+            this.buttonStworzFakture.UseVisualStyleBackColor = true;
             // 
             // dataGridFaktury
             // 
@@ -565,38 +642,73 @@
             this.napis_firma.TabIndex = 0;
             this.napis_firma.Text = "Firma:";
             // 
-            // buttonStworzFakture
+            // colIdFirmy
             // 
-            this.buttonStworzFakture.Location = new System.Drawing.Point(367, 20);
-            this.buttonStworzFakture.Name = "buttonStworzFakture";
-            this.buttonStworzFakture.Size = new System.Drawing.Size(170, 23);
-            this.buttonStworzFakture.TabIndex = 8;
-            this.buttonStworzFakture.Text = "Stwórz fakturę";
-            this.buttonStworzFakture.UseVisualStyleBackColor = true;
+            this.colIdFirmy.HeaderText = "Id";
+            this.colIdFirmy.Name = "colIdFirmy";
+            this.colIdFirmy.ReadOnly = true;
+            this.colIdFirmy.Visible = false;
             // 
-            // radioData
+            // colNazwaFirmy
             // 
-            this.radioData.AutoSize = true;
-            this.radioData.Enabled = false;
-            this.radioData.Location = new System.Drawing.Point(18, 60);
-            this.radioData.Name = "radioData";
-            this.radioData.Size = new System.Drawing.Size(117, 17);
-            this.radioData.TabIndex = 9;
-            this.radioData.TabStop = true;
-            this.radioData.Text = "Szukaj wg miesięcy";
-            this.radioData.UseVisualStyleBackColor = true;
+            this.colNazwaFirmy.HeaderText = "Nazwa";
+            this.colNazwaFirmy.Name = "colNazwaFirmy";
+            this.colNazwaFirmy.ReadOnly = true;
             // 
-            // radioTabela
+            // colNrNadFirmy
             // 
-            this.radioTabela.AutoSize = true;
-            this.radioTabela.Enabled = false;
-            this.radioTabela.Location = new System.Drawing.Point(18, 125);
-            this.radioTabela.Name = "radioTabela";
-            this.radioTabela.Size = new System.Drawing.Size(96, 17);
-            this.radioTabela.TabIndex = 10;
-            this.radioTabela.TabStop = true;
-            this.radioTabela.Text = "Szukaj w tabeli";
-            this.radioTabela.UseVisualStyleBackColor = true;
+            this.colNrNadFirmy.HeaderText = "Nr nadajnika";
+            this.colNrNadFirmy.Name = "colNrNadFirmy";
+            this.colNrNadFirmy.ReadOnly = true;
+            // 
+            // colImieFirmy
+            // 
+            this.colImieFirmy.HeaderText = "Imię";
+            this.colImieFirmy.Name = "colImieFirmy";
+            this.colImieFirmy.ReadOnly = true;
+            // 
+            // colNazwiskoFirmy
+            // 
+            this.colNazwiskoFirmy.HeaderText = "Nazwisko";
+            this.colNazwiskoFirmy.Name = "colNazwiskoFirmy";
+            this.colNazwiskoFirmy.ReadOnly = true;
+            this.colNazwiskoFirmy.Width = 130;
+            // 
+            // colUlicaFirmy
+            // 
+            this.colUlicaFirmy.HeaderText = "Ulica";
+            this.colUlicaFirmy.Name = "colUlicaFirmy";
+            this.colUlicaFirmy.ReadOnly = true;
+            // 
+            // colKodFirmy
+            // 
+            this.colKodFirmy.HeaderText = "Kod Pocztowy";
+            this.colKodFirmy.Name = "colKodFirmy";
+            this.colKodFirmy.ReadOnly = true;
+            // 
+            // colMiastoFirmy
+            // 
+            this.colMiastoFirmy.HeaderText = "Miasto";
+            this.colMiastoFirmy.Name = "colMiastoFirmy";
+            this.colMiastoFirmy.ReadOnly = true;
+            // 
+            // colNipFirmy
+            // 
+            this.colNipFirmy.HeaderText = "Nip";
+            this.colNipFirmy.Name = "colNipFirmy";
+            this.colNipFirmy.ReadOnly = true;
+            // 
+            // colRegonFirmy
+            // 
+            this.colRegonFirmy.HeaderText = "Regon";
+            this.colRegonFirmy.Name = "colRegonFirmy";
+            this.colRegonFirmy.ReadOnly = true;
+            // 
+            // colTelFirmy
+            // 
+            this.colTelFirmy.HeaderText = "Telefon";
+            this.colTelFirmy.Name = "colTelFirmy";
+            this.colTelFirmy.ReadOnly = true;
             // 
             // FormaGlowna
             // 
@@ -619,6 +731,8 @@
             ((System.ComponentModel.ISupportInitialize)(this.dataGridNadajniki)).EndInit();
             this.tabModele.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.dataGridModele)).EndInit();
+            this.tabFirmy.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridFirmy)).EndInit();
             this.tabFaktury.ResumeLayout(false);
             this.tabFaktury.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridFaktury)).EndInit();
@@ -678,6 +792,18 @@
         private System.Windows.Forms.Button buttonStworzFakture;
         private System.Windows.Forms.RadioButton radioTabela;
         private System.Windows.Forms.RadioButton radioData;
+        private System.Windows.Forms.DataGridView dataGridFirmy;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colIdFirmy;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colNazwaFirmy;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colNrNadFirmy;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colImieFirmy;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colNazwiskoFirmy;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colUlicaFirmy;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colKodFirmy;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colMiastoFirmy;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colNipFirmy;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colRegonFirmy;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colTelFirmy;
     }
 }
 
