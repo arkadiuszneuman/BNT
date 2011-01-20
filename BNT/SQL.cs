@@ -128,6 +128,7 @@ namespace BNT
                 string zapytanieFirmy = "SELECT firmy.nazwa FROM firmy, nadajniki WHERE firmy.id IN (SELECT nadajniki.id_firmy FROM nadajniki WHERE nadajniki.id_slupu=" + tablica[i][0] + ") GROUP BY firmy.nazwa";
                 rdr = Zapytanie(zapytanieFirmy);
                 string firmy = "";
+
                 try
                 {
                     while (rdr.Read())
