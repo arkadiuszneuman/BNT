@@ -68,6 +68,13 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Baza_BNTDataSet.xsd</DependentUpon>
     </Compile>
+    <Compile Include="FrmFirmy.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FrmFirmy.Designer.cs">
+      <DependentUpon>FrmFirmy.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Firmy.cs" />
     <Compile Include="FrmNadajniki.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -118,6 +125,9 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Slupy.cs" />
     <Compile Include="SQL.cs" />
+    <EmbeddedResource Include="FrmFirmy.resx">
+      <DependentUpon>FrmFirmy.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="FrmNadajniki.resx">
       <DependentUpon>FrmNadajniki.cs</DependentUpon>
     </EmbeddedResource>
