@@ -6,28 +6,28 @@ using System.Windows.Forms;
 
 namespace BNT
 {
-    class Slupy
+    class Nadajniki
     {
         DataGridView tabelka;
         Button buttonDodaj = new Button();
         Button buttonEdytuj = new Button();
         Button buttonUsun = new Button();
 
-        public Slupy(DataGridView tabelka, TabPage tabSlupy)
+        public Nadajniki(DataGridView tabelka, TabPage tabNadajniki)
         {
             this.tabelka = tabelka;
             SQL sql = new SQL();
-            string[][] dane = sql.CzytajSlupy();
+            string[][] dane = sql.CzytajNadajniki();
             if (dane.Length > 0)
                 tabelka.Rows.Clear();
 
             for (int j = 0; j < dane.Length; ++j)
                 tabelka.Rows.Add(dane[j]);
 
-            StworzPrzyciski(tabSlupy);
+            StworzPrzyciski(tabNadajniki);
         }
 
-        private void StworzPrzyciski(TabPage slupy)
+        private void StworzPrzyciski(TabPage nadajniki)
         {
             // 
             // buttonDodaj
@@ -60,45 +60,38 @@ namespace BNT
             this.buttonUsun.UseVisualStyleBackColor = true;
             this.buttonUsun.Click += new System.EventHandler(this.buttonUsun_Click);
 
-            slupy.Controls.AddRange(new Control[] { buttonDodaj, buttonEdytuj, buttonUsun });
+            nadajniki.Controls.AddRange(new Control[] { buttonDodaj, buttonEdytuj, buttonUsun });
         }
 
         private void buttonDodaj_Click(object sender, EventArgs e)
         {
-            new FrmSlupy(tabelka).ShowDialog();
+            new FrmNadajniki(tabelka).ShowDialog();
         }
 
         private void buttonEdytuj_Click(object sender, EventArgs e)
         {
-            int id = Convert.ToInt32(tabelka.Rows[tabelka.SelectedRows[0].Index].Cells["colNr"].Value);
-            string miasto = tabelka.Rows[tabelka.SelectedRows[0].Index].Cells["colMiasto"].Value.ToString();
-            string wspolrzedne = tabelka.Rows[tabelka.SelectedRows[0].Index].Cells["colWsp"].Value.ToString();
-            string cena = tabelka.Rows[tabelka.SelectedRows[0].Index].Cells["colCena"].Value.ToString();
+            int id = Convert.ToInt32(tabelka.Rows[tabelka.SelectedRows[0].Index].Cells["colNrNadajniki"].Value);
+            string nrSlupu = tabelka.Rows[tabelka.SelectedRows[0].Index].Cells["colNrSlupuNadajniki"].Value.ToString();
+            string model = tabelka.Rows[tabelka.SelectedRows[0].Index].Cells["colModelNadajniki"].Value.ToString();
+            string ilosc = tabelka.Rows[tabelka.SelectedRows[0].Index].Cells["colIloscNadajniki"].Value.ToString();
 
-            new FrmSlupy(miasto, wspolrzedne, cena, tabelka, id).ShowDialog();
+            new FrmNadajniki(nrSlupu, model, int.Parse(ilosc), tabelka, id).ShowDialog();
         }
 
         private void buttonUsun_Click(object sender, EventArgs e)
         {
-            int id = Convert.ToInt32(tabelka.Rows[tabelka.SelectedRows[0].Index].Cells["colNr"].Value);
-            if (MessageBox.Show("Czy chcesz usunać słup nr: " + id + "?", "Usuwanie", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
+            int id = Convert.ToInt32(tabelka.Rows[tabelka.SelectedRows[0].Index].Cells["colNrNadajniki"].Value);
+            if (MessageBox.Show("Czy chcesz usunać nadajnik nr: " + id + "?", "Usuwanie", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
             {
                 SQL sql = new SQL();
-                if (sql.UsunSlup(id))
-                {
+                sql.UsunNadajnik(id);
+                //odswiezenie
+                string[][] dane = sql.CzytajNadajniki();
+                if (dane.Length > 0)
+                    tabelka.Rows.Clear();
 
-                    //odswiezenie
-                    string[][] dane = sql.CzytajSlupy();
-                    if (dane.Length > 0)
-                        tabelka.Rows.Clear();
-
-                    for (int j = 0; j < dane.Length; ++j)
-                        tabelka.Rows.Add(dane[j]);
-                }
-                else
-                {
-                    MessageBox.Show("Najpierw usuń nadajniki należące do tego słupu!", "Błąd", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                }
+                for (int j = 0; j < dane.Length; ++j)
+                    tabelka.Rows.Add(dane[j]);
             }
         }
     }

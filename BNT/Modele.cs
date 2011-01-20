@@ -6,28 +6,28 @@ using System.Windows.Forms;
 
 namespace BNT
 {
-    class Slupy
+    class Modele
     {
         DataGridView tabelka;
         Button buttonDodaj = new Button();
         Button buttonEdytuj = new Button();
         Button buttonUsun = new Button();
 
-        public Slupy(DataGridView tabelka, TabPage tabSlupy)
+        public Modele(DataGridView tabelka, TabPage tabModele)
         {
             this.tabelka = tabelka;
             SQL sql = new SQL();
-            string[][] dane = sql.CzytajSlupy();
+            string[][] dane = sql.CzytajModele(false);
             if (dane.Length > 0)
                 tabelka.Rows.Clear();
 
             for (int j = 0; j < dane.Length; ++j)
                 tabelka.Rows.Add(dane[j]);
 
-            StworzPrzyciski(tabSlupy);
+            StworzPrzyciski(tabModele);
         }
 
-        private void StworzPrzyciski(TabPage slupy)
+        private void StworzPrzyciski(TabPage modele)
         {
             // 
             // buttonDodaj
@@ -60,44 +60,42 @@ namespace BNT
             this.buttonUsun.UseVisualStyleBackColor = true;
             this.buttonUsun.Click += new System.EventHandler(this.buttonUsun_Click);
 
-            slupy.Controls.AddRange(new Control[] { buttonDodaj, buttonEdytuj, buttonUsun });
+            modele.Controls.AddRange(new Control[] { buttonDodaj, buttonEdytuj, buttonUsun });
         }
 
         private void buttonDodaj_Click(object sender, EventArgs e)
         {
-            new FrmSlupy(tabelka).ShowDialog();
+            new FrmModele(tabelka).ShowDialog();
         }
 
         private void buttonEdytuj_Click(object sender, EventArgs e)
         {
-            int id = Convert.ToInt32(tabelka.Rows[tabelka.SelectedRows[0].Index].Cells["colNr"].Value);
-            string miasto = tabelka.Rows[tabelka.SelectedRows[0].Index].Cells["colMiasto"].Value.ToString();
-            string wspolrzedne = tabelka.Rows[tabelka.SelectedRows[0].Index].Cells["colWsp"].Value.ToString();
-            string cena = tabelka.Rows[tabelka.SelectedRows[0].Index].Cells["colCena"].Value.ToString();
+            int id = Convert.ToInt32(tabelka.Rows[tabelka.SelectedRows[0].Index].Cells["colIdModele"].Value);
+            string nazwa = tabelka.Rows[tabelka.SelectedRows[0].Index].Cells["colNazwaModele"].Value.ToString();
+            string zasieg = tabelka.Rows[tabelka.SelectedRows[0].Index].Cells["colZasiegModele"].Value.ToString();
+            string cena = tabelka.Rows[tabelka.SelectedRows[0].Index].Cells["colCenaModele"].Value.ToString();
 
-            new FrmSlupy(miasto, wspolrzedne, cena, tabelka, id).ShowDialog();
+            new FrmModele(nazwa, int.Parse(zasieg), cena, tabelka, id).ShowDialog();
         }
 
         private void buttonUsun_Click(object sender, EventArgs e)
         {
-            int id = Convert.ToInt32(tabelka.Rows[tabelka.SelectedRows[0].Index].Cells["colNr"].Value);
-            if (MessageBox.Show("Czy chcesz usunać słup nr: " + id + "?", "Usuwanie", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
+            int id = Convert.ToInt32(tabelka.Rows[tabelka.SelectedRows[0].Index].Cells["colIdModele"].Value);
+            string nazwa = tabelka.Rows[tabelka.SelectedRows[0].Index].Cells["colNazwaModele"].Value.ToString();
+            
+            if (MessageBox.Show("Czy chcesz usunać model " + nazwa + "?", "Usuwanie", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
             {
                 SQL sql = new SQL();
-                if (sql.UsunSlup(id))
+                if (new SQL().UsunModel(id))
                 {
 
                     //odswiezenie
-                    string[][] dane = sql.CzytajSlupy();
+                    string[][] dane = sql.CzytajNadajniki();
                     if (dane.Length > 0)
                         tabelka.Rows.Clear();
 
                     for (int j = 0; j < dane.Length; ++j)
                         tabelka.Rows.Add(dane[j]);
-                }
-                else
-                {
-                    MessageBox.Show("Najpierw usuń nadajniki należące do tego słupu!", "Błąd", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
             }
         }

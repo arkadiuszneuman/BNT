@@ -56,6 +56,12 @@ namespace BNT
                 case 1: //reakcja na klikniecie na slupy
                     new Slupy(dataGridSlupy, tabSlupy);
                     break;
+                case 2:
+                    new Nadajniki(dataGridNadajniki, tabNadajniki);
+                    break;
+                case 3:
+                    new Modele(dataGridModele, tabModele);
+                    break;
                 case 5:
                     new Faktury(comboFirmy,comboMiesiace,comboRok,buttonPokaz,buttonStworzFakture,dataGridFaktury, radioTabela, radioData);
                     break;
