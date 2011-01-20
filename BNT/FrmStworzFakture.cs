@@ -22,6 +22,7 @@ namespace BNT
 
         private void buttonStworz_Click(object sender, EventArgs e)
         {
+
             sql.StworzRekordFaktury(dateTimeFaktura.Value.Date.ToString(), (((float)numericStawka.Value)/100).ToString());
             sql.DolaczNowaFakture(dataGridStworzFakture.Rows[dataGridStworzFakture.SelectedRows[0].Index].Cells["colLp"].Value.ToString());
             string[][] dane = sql.CzytajFirmyBezFaktury();
