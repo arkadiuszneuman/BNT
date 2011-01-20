@@ -14,6 +14,8 @@ namespace BNT
         SQL sql = new SQL();
         DataGridView tabelka;
         int id = 0;
+        int[] zapamietajNadajniki;
+
         public FrmFirmy(DataGridView tabelka)
         {
             InitializeComponent();
@@ -45,9 +47,12 @@ namespace BNT
             maskedTextBoxRegon.Text = regon;
             maskedTextBoxTelefon.Text = telefon;
 
-            for (int i = 0; i < nadajniki.Split(',').Length; ++i)
+            if (nadajniki != "Brak wynajętych nadajników")
             {
-                listBoxNadajniki.Items.Add(nadajniki.Split(',')[i].Trim());
+                for (int i = 0; i < nadajniki.Split(',').Length; ++i)
+                {
+                    listBoxNadajniki.Items.Add(nadajniki.Split(',')[i].Trim());
+                }
             }
 
             buttonDodajLubZmien.Text = "Edytuj";
@@ -55,6 +60,17 @@ namespace BNT
 
             comboBoxMiasto.SelectedItem = miasto;
             this.tabelka = tabelka;
+
+            //zapamietanie nadajnikow (potrzebne przy updaacie sql'a
+            List<int> nad = new List<int>();
+
+            {
+                for (int i = 0; i < listBoxNadajniki.Items.Count; ++i)
+                {
+                    nad.Add(Convert.ToInt32(listBoxNadajniki.Items[i]));
+                }
+            }
+            zapamietajNadajniki = nad.ToArray();
         }
 
         private void WypelnijCombo()
@@ -104,7 +120,8 @@ namespace BNT
 
             if (buttonDodajLubZmien.Text == "Edytuj")
             {
-                //sql.EdytujSlup(id, comboBoxMiasto.SelectedItem.ToString(), new Point((int)numericN.Value, (int)numericS.Value), numericZl.Value);
+                sql.EdytujFirme(id, textBoxNazwa.Text, textBoxImie.Text, textBoxNazwisko.Text, textBoxUlica.Text, maskedTextBoxKod.Text,
+                    comboBoxMiasto.SelectedItem.ToString(), maskedTextBoxNip.Text, maskedTextBoxRegon.Text, maskedTextBoxTelefon.Text, nadajniki.ToArray(), zapamietajNadajniki);
             }
             else //dodawanie
             {

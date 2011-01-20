@@ -377,7 +377,7 @@ namespace BNT
                 if (firmy.Length > 0) //zapisanie nadajnikow
                     tablica[i][2] = firmy.Remove(firmy.Length - 2); //usuniecie ostatniej spacji i zapisanie firm do tablicy
                 else
-                    tablica[i][2] = "Brak wynajętych słupów";
+                    tablica[i][2] = "Brak wynajętych nadajników";
             }
 
 
@@ -406,6 +406,7 @@ namespace BNT
                 id = Convert.ToInt32(rdr[0]);
             }
 
+            //zmiana tabeli nadajniki przy dodawaniu firmy do nadajnika
             foreach (int n in nadajniki)
             {
                 zapytanie = "UPDATE nadajniki SET id_firmy=" + id + "WHERE id=" + n;
@@ -413,14 +414,30 @@ namespace BNT
             }
         }
 
-        public void EdytujFirme(int id, int slup, string model, int ilosc)
+        public void EdytujFirme(int id, string nazwa, string imie, string nazwisko, string ulica, string kodPocztowy,
+            string miasto, string nip, string regon, string telefon, int[] nadajniki, int[] zapamietaneNadajniki)
         {
-            string zapytanie = "SELECT id FROM modele WHERE nazwa='" + model + "'";
+            string zapytanie = "SELECT id FROM miasta WHERE nazwa='" + miasto + "'";
             SqlCeDataReader rdr = Zapytanie(zapytanie);
             while (rdr.Read())
-                zapytanie = "UPDATE nadajniki SET id_slupu='" + slup + "', id_modelu='" + rdr[0].ToString() + "', ilosc='"
-                    + ilosc + "' WHERE id=" + id + "";
+                zapytanie = "UPDATE firmy SET nazwa='"+nazwa+"', imie='"+imie+"', nazwisko='"+nazwisko+"', ulica='"+ulica+"', kod_pocztowy='"+kodPocztowy+"', nip='"+nip+
+                    "', regon='"+regon+"', telefon='"+telefon+"', id_miasta='"+rdr[0].ToString()+"' WHERE id="+id+"";
+
             Zapytanie(zapytanie);
+          
+            //ustawienie wszystkich na nulle
+            foreach (int zapamietany in zapamietaneNadajniki)
+            {
+                zapytanie = "UPDATE nadajniki SET id_firmy=NULL WHERE id=" + zapamietany;
+                Zapytanie(zapytanie);
+            }
+
+            //ustawienie wlasciwych na odpowiednia wartosc
+            foreach (int n in nadajniki)
+            {
+                zapytanie = "UPDATE nadajniki SET id_firmy=" + id + "WHERE id=" + n;
+                Zapytanie(zapytanie);
+            }
         }
 
         public bool UsunFirme(int id)
@@ -431,8 +448,7 @@ namespace BNT
             zapytanie = "DELETE FROM firmy WHERE id=" + id + "";
             Zapytanie(zapytanie);
 
-            
-
+           
             return true;
         }
 
@@ -503,9 +519,9 @@ namespace BNT
         public string[] CzytajNadajniki(bool jeden, int id_firmy)
         {
             List<string> tablica = new List<string>();
-            string zapytanie = "SELECT id FROM nadajniki"; //mozna tylko dodawac nadajniki jeszcze nie dodane
+            string zapytanie = "SELECT id FROM nadajniki WHERE id_firmy IS NULL"; //mozna tylko dodawac nadajniki jeszcze nie dodane
             if (id_firmy != 0)
-                zapytanie += " WHERE id_firmy="+id_firmy;
+                zapytanie += " AND id_firmy="+id_firmy;
             SqlCeDataReader rdr = Zapytanie(zapytanie);
             while (rdr.Read())
             {
