@@ -29,10 +29,11 @@ namespace BNT
             this.dataGridFaktury = dataGridFaktury;
             this.radioTabela = radioTabela;
             this.radioData = radioData;
+            this.comboFirmy.Items.Clear();
             this.comboFirmy.Items.AddRange(sql.CzytajFirmy());
             this.pierwszyRaz = true;
 
-            this.radioData.Checked = true; 
+            this.radioData.Checked = true;
             this.comboMiesiace.Enabled = false;
             this.comboRok.Enabled = false;
 
@@ -73,16 +74,18 @@ namespace BNT
 
         private void buttonPokaz_Click(object sender, EventArgs e)
         {
+         
             if (radioData.Checked)
                 new FrmFaktury(comboFirmy.SelectedItem.ToString(), comboMiesiace.SelectedIndex + 1, DateTime.Now.Year - (comboRok.Items.Count - (comboRok.SelectedIndex+1))).ShowDialog();
             else
+                if (dataGridFaktury.Rows.Count != 0)
                 new FrmFaktury(comboFirmy.SelectedItem.ToString(), DateTime.Parse(dataGridFaktury.Rows[dataGridFaktury.SelectedRows[0].Index].Cells["colDataWystawienia"].Value.ToString()).Month,  DateTime.Parse(dataGridFaktury.Rows[dataGridFaktury.SelectedRows[0].Index].Cells["colDataWystawienia"].Value.ToString()).Year).ShowDialog();
         }
 
         private void radioTabela_CheckedChanged(object sender, EventArgs e)
         {
             dataGridFaktury.Rows.Clear();
-            if (radioTabela.Checked)
+            if (radioTabela.Checked && (comboFirmy.SelectedItem != null))
             {
                 comboMiesiace.Enabled = false;
                 comboRok.Enabled = false;
@@ -105,6 +108,7 @@ namespace BNT
         {
             if (radioData.Checked)
             {
+                if(comboFirmy.SelectedItem != null)
                 if (sql.CzytajNajpozniejszaDateZaplaty(comboFirmy.SelectedItem.ToString(), comboMiesiace.SelectedIndex + 1, DateTime.Now.Year - (comboRok.Items.Count - (comboRok.SelectedIndex + 1)))[0] == null)
                     this.buttonPokaz.Enabled = false;
                 else
