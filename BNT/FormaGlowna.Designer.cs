@@ -49,47 +49,32 @@
             this.colFirmy = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colPrzychod = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.tabNadajniki = new System.Windows.Forms.TabPage();
-<<<<<<< HEAD
-            this.dataGridView1 = new System.Windows.Forms.DataGridView();
-            this.dataGridViewTextBoxColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dataGridViewTextBoxColumn2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dataGridViewTextBoxColumn3 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dataGridViewTextBoxColumn4 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dataGridViewTextBoxColumn5 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dataGridViewTextBoxColumn6 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-=======
             this.dataGridNadajniki = new System.Windows.Forms.DataGridView();
             this.colNrNadajniki = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colFirmaNadajniki = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colNrSlupuNadajniki = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colModelNadajniki = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colIloscNadajniki = new System.Windows.Forms.DataGridViewTextBoxColumn();
->>>>>>> origin/master
             this.tabModele = new System.Windows.Forms.TabPage();
             this.dataGridModele = new System.Windows.Forms.DataGridView();
             this.tabFirmy = new System.Windows.Forms.TabPage();
             this.tabFaktury = new System.Windows.Forms.TabPage();
-            this.radioData = new System.Windows.Forms.RadioButton();
-            this.radioTabela = new System.Windows.Forms.RadioButton();
-            this.buttonStworzFakture = new System.Windows.Forms.Button();
             this.dataGridFaktury = new System.Windows.Forms.DataGridView();
             this.colLp = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colDataWystawienia = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colMnoznik = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.buttonPokaz = new System.Windows.Forms.Button();
+            this.colPokaz = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.buttonGeneruj = new System.Windows.Forms.Button();
             this.comboRok = new System.Windows.Forms.ComboBox();
             this.comboMiesiace = new System.Windows.Forms.ComboBox();
             this.comboFirmy = new System.Windows.Forms.ComboBox();
             this.napis_rok = new System.Windows.Forms.Label();
             this.napis_miesiac = new System.Windows.Forms.Label();
             this.napis_firma = new System.Windows.Forms.Label();
-<<<<<<< HEAD
-=======
             this.colIdModele = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colNazwaModele = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colZasiegModele = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colCenaModele = new System.Windows.Forms.DataGridViewTextBoxColumn();
->>>>>>> origin/master
             this.tabControl.SuspendLayout();
             this.tabMapa.SuspendLayout();
             this.panelMiasto.SuspendLayout();
@@ -97,13 +82,9 @@
             this.tabSlupy.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridSlupy)).BeginInit();
             this.tabNadajniki.SuspendLayout();
-<<<<<<< HEAD
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
-=======
             ((System.ComponentModel.ISupportInitialize)(this.dataGridNadajniki)).BeginInit();
             this.tabModele.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridModele)).BeginInit();
->>>>>>> origin/master
             this.tabFaktury.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridFaktury)).BeginInit();
             this.SuspendLayout();
@@ -312,69 +293,6 @@
             this.tabNadajniki.Text = "Nadajniki";
             this.tabNadajniki.UseVisualStyleBackColor = true;
             // 
-<<<<<<< HEAD
-            // dataGridView1
-            // 
-            this.dataGridView1.AllowUserToAddRows = false;
-            this.dataGridView1.AllowUserToDeleteRows = false;
-            this.dataGridView1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
-                        | System.Windows.Forms.AnchorStyles.Right)));
-            this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridView1.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
-            this.dataGridViewTextBoxColumn1,
-            this.dataGridViewTextBoxColumn2,
-            this.dataGridViewTextBoxColumn3,
-            this.dataGridViewTextBoxColumn4,
-            this.dataGridViewTextBoxColumn5,
-            this.dataGridViewTextBoxColumn6});
-            this.dataGridView1.Location = new System.Drawing.Point(3, 3);
-            this.dataGridView1.MultiSelect = false;
-            this.dataGridView1.Name = "dataGridView1";
-            this.dataGridView1.ReadOnly = true;
-            this.dataGridView1.RowHeadersVisible = false;
-            this.dataGridView1.RowTemplate.Resizable = System.Windows.Forms.DataGridViewTriState.False;
-            this.dataGridView1.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dataGridView1.Size = new System.Drawing.Size(545, 459);
-            this.dataGridView1.TabIndex = 1;
-            // 
-            // dataGridViewTextBoxColumn1
-            // 
-            this.dataGridViewTextBoxColumn1.HeaderText = "Nr";
-            this.dataGridViewTextBoxColumn1.Name = "dataGridViewTextBoxColumn1";
-            this.dataGridViewTextBoxColumn1.ReadOnly = true;
-            this.dataGridViewTextBoxColumn1.Width = 30;
-            // 
-            // dataGridViewTextBoxColumn2
-            // 
-            this.dataGridViewTextBoxColumn2.HeaderText = "Miasto";
-            this.dataGridViewTextBoxColumn2.Name = "dataGridViewTextBoxColumn2";
-            this.dataGridViewTextBoxColumn2.ReadOnly = true;
-            // 
-            // dataGridViewTextBoxColumn3
-            // 
-            this.dataGridViewTextBoxColumn3.HeaderText = "Współrzędne";
-            this.dataGridViewTextBoxColumn3.Name = "dataGridViewTextBoxColumn3";
-            this.dataGridViewTextBoxColumn3.ReadOnly = true;
-            // 
-            // dataGridViewTextBoxColumn4
-            // 
-            this.dataGridViewTextBoxColumn4.HeaderText = "Cena";
-            this.dataGridViewTextBoxColumn4.Name = "dataGridViewTextBoxColumn4";
-            this.dataGridViewTextBoxColumn4.ReadOnly = true;
-            // 
-            // dataGridViewTextBoxColumn5
-            // 
-            this.dataGridViewTextBoxColumn5.HeaderText = "Firmy";
-            this.dataGridViewTextBoxColumn5.Name = "dataGridViewTextBoxColumn5";
-            this.dataGridViewTextBoxColumn5.ReadOnly = true;
-            this.dataGridViewTextBoxColumn5.Width = 130;
-            // 
-            // dataGridViewTextBoxColumn6
-            // 
-            this.dataGridViewTextBoxColumn6.HeaderText = "Przychód miesięczny";
-            this.dataGridViewTextBoxColumn6.Name = "dataGridViewTextBoxColumn6";
-            this.dataGridViewTextBoxColumn6.ReadOnly = true;
-=======
             // dataGridNadajniki
             // 
             this.dataGridNadajniki.AllowUserToAddRows = false;
@@ -429,7 +347,6 @@
             this.colIloscNadajniki.Name = "colIloscNadajniki";
             this.colIloscNadajniki.ReadOnly = true;
             this.colIloscNadajniki.Width = 130;
->>>>>>> origin/master
             // 
             // tabModele
             // 
@@ -474,11 +391,8 @@
             // 
             // tabFaktury
             // 
-            this.tabFaktury.Controls.Add(this.radioData);
-            this.tabFaktury.Controls.Add(this.radioTabela);
-            this.tabFaktury.Controls.Add(this.buttonStworzFakture);
             this.tabFaktury.Controls.Add(this.dataGridFaktury);
-            this.tabFaktury.Controls.Add(this.buttonPokaz);
+            this.tabFaktury.Controls.Add(this.buttonGeneruj);
             this.tabFaktury.Controls.Add(this.comboRok);
             this.tabFaktury.Controls.Add(this.comboMiesiace);
             this.tabFaktury.Controls.Add(this.comboFirmy);
@@ -492,58 +406,18 @@
             this.tabFaktury.Text = "Faktury";
             this.tabFaktury.UseVisualStyleBackColor = true;
             // 
-            // radioData
-            // 
-            this.radioData.AutoSize = true;
-            this.radioData.Enabled = false;
-            this.radioData.Location = new System.Drawing.Point(18, 50);
-            this.radioData.Name = "radioData";
-            this.radioData.Size = new System.Drawing.Size(101, 17);
-            this.radioData.TabIndex = 10;
-            this.radioData.TabStop = true;
-            this.radioData.Text = "Wybierz miesiąc";
-            this.radioData.UseVisualStyleBackColor = true;
-            // 
-            // radioTabela
-            // 
-            this.radioTabela.AutoSize = true;
-            this.radioTabela.Enabled = false;
-            this.radioTabela.Location = new System.Drawing.Point(18, 110);
-            this.radioTabela.Name = "radioTabela";
-            this.radioTabela.Size = new System.Drawing.Size(96, 17);
-            this.radioTabela.TabIndex = 9;
-            this.radioTabela.TabStop = true;
-            this.radioTabela.Text = "Szukaj w tabeli";
-            this.radioTabela.UseVisualStyleBackColor = true;
-            // 
-            // buttonStworzFakture
-            // 
-            this.buttonStworzFakture.Location = new System.Drawing.Point(367, 15);
-            this.buttonStworzFakture.Name = "buttonStworzFakture";
-            this.buttonStworzFakture.Size = new System.Drawing.Size(170, 23);
-            this.buttonStworzFakture.TabIndex = 8;
-            this.buttonStworzFakture.Text = "Stwórz fakturę";
-            this.buttonStworzFakture.UseVisualStyleBackColor = true;
-            // 
             // dataGridFaktury
             // 
-            this.dataGridFaktury.AllowUserToAddRows = false;
-            this.dataGridFaktury.AllowUserToDeleteRows = false;
-            this.dataGridFaktury.AllowUserToResizeColumns = false;
-            this.dataGridFaktury.AllowUserToResizeRows = false;
             this.dataGridFaktury.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dataGridFaktury.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.colLp,
             this.colDataWystawienia,
-            this.colMnoznik});
+            this.colMnoznik,
+            this.colPokaz});
             this.dataGridFaktury.Enabled = false;
-            this.dataGridFaktury.Location = new System.Drawing.Point(8, 136);
-            this.dataGridFaktury.MultiSelect = false;
+            this.dataGridFaktury.Location = new System.Drawing.Point(8, 104);
             this.dataGridFaktury.Name = "dataGridFaktury";
-            this.dataGridFaktury.ReadOnly = true;
-            this.dataGridFaktury.RowHeadersVisible = false;
-            this.dataGridFaktury.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dataGridFaktury.Size = new System.Drawing.Size(540, 355);
+            this.dataGridFaktury.Size = new System.Drawing.Size(540, 387);
             this.dataGridFaktury.TabIndex = 7;
             // 
             // colLp
@@ -551,7 +425,6 @@
             this.colLp.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.ColumnHeader;
             this.colLp.HeaderText = "Lp";
             this.colLp.Name = "colLp";
-            this.colLp.ReadOnly = true;
             this.colLp.Width = 44;
             // 
             // colDataWystawienia
@@ -559,24 +432,26 @@
             this.colDataWystawienia.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
             this.colDataWystawienia.HeaderText = "Data Wystawienia Faktury";
             this.colDataWystawienia.Name = "colDataWystawienia";
-            this.colDataWystawienia.ReadOnly = true;
             // 
             // colMnoznik
             // 
             this.colMnoznik.HeaderText = "Do zapłaty";
             this.colMnoznik.Name = "colMnoznik";
-            this.colMnoznik.ReadOnly = true;
-            this.colMnoznik.Width = 200;
             // 
-            // buttonPokaz
+            // colPokaz
             // 
-            this.buttonPokaz.Enabled = false;
-            this.buttonPokaz.Location = new System.Drawing.Point(367, 77);
-            this.buttonPokaz.Name = "buttonPokaz";
-            this.buttonPokaz.Size = new System.Drawing.Size(170, 23);
-            this.buttonPokaz.TabIndex = 6;
-            this.buttonPokaz.Text = "Pokaż fakturę";
-            this.buttonPokaz.UseVisualStyleBackColor = true;
+            this.colPokaz.HeaderText = "Pokaż Fakturę";
+            this.colPokaz.Name = "colPokaz";
+            // 
+            // buttonGeneruj
+            // 
+            this.buttonGeneruj.Enabled = false;
+            this.buttonGeneruj.Location = new System.Drawing.Point(367, 58);
+            this.buttonGeneruj.Name = "buttonGeneruj";
+            this.buttonGeneruj.Size = new System.Drawing.Size(170, 23);
+            this.buttonGeneruj.TabIndex = 6;
+            this.buttonGeneruj.Text = "Generuj";
+            this.buttonGeneruj.UseVisualStyleBackColor = true;
             // 
             // comboRok
             // 
@@ -586,7 +461,7 @@
             "2009",
             "2010",
             "2011"});
-            this.comboRok.Location = new System.Drawing.Point(268, 79);
+            this.comboRok.Location = new System.Drawing.Point(269, 60);
             this.comboRok.Name = "comboRok";
             this.comboRok.Size = new System.Drawing.Size(68, 21);
             this.comboRok.TabIndex = 5;
@@ -607,7 +482,7 @@
             "Październik",
             "Listopad",
             "Grudzień"});
-            this.comboMiesiace.Location = new System.Drawing.Point(67, 79);
+            this.comboMiesiace.Location = new System.Drawing.Point(67, 60);
             this.comboMiesiace.Name = "comboMiesiace";
             this.comboMiesiace.Size = new System.Drawing.Size(126, 21);
             this.comboMiesiace.TabIndex = 4;
@@ -617,13 +492,13 @@
             this.comboFirmy.FormattingEnabled = true;
             this.comboFirmy.Location = new System.Drawing.Point(67, 17);
             this.comboFirmy.Name = "comboFirmy";
-            this.comboFirmy.Size = new System.Drawing.Size(269, 21);
+            this.comboFirmy.Size = new System.Drawing.Size(126, 21);
             this.comboFirmy.TabIndex = 3;
             // 
             // napis_rok
             // 
             this.napis_rok.AutoSize = true;
-            this.napis_rok.Location = new System.Drawing.Point(232, 82);
+            this.napis_rok.Location = new System.Drawing.Point(233, 63);
             this.napis_rok.Name = "napis_rok";
             this.napis_rok.Size = new System.Drawing.Size(30, 13);
             this.napis_rok.TabIndex = 2;
@@ -632,7 +507,7 @@
             // napis_miesiac
             // 
             this.napis_miesiac.AutoSize = true;
-            this.napis_miesiac.Location = new System.Drawing.Point(15, 82);
+            this.napis_miesiac.Location = new System.Drawing.Point(15, 63);
             this.napis_miesiac.Name = "napis_miesiac";
             this.napis_miesiac.Size = new System.Drawing.Size(46, 13);
             this.napis_miesiac.TabIndex = 1;
@@ -647,8 +522,6 @@
             this.napis_firma.TabIndex = 0;
             this.napis_firma.Text = "Firma:";
             // 
-<<<<<<< HEAD
-=======
             // colIdModele
             // 
             this.colIdModele.HeaderText = "Id";
@@ -674,7 +547,6 @@
             this.colCenaModele.Name = "colCenaModele";
             this.colCenaModele.ReadOnly = true;
             // 
->>>>>>> origin/master
             // FormaGlowna
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -693,13 +565,9 @@
             this.tabSlupy.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.dataGridSlupy)).EndInit();
             this.tabNadajniki.ResumeLayout(false);
-<<<<<<< HEAD
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
-=======
             ((System.ComponentModel.ISupportInitialize)(this.dataGridNadajniki)).EndInit();
             this.tabModele.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.dataGridModele)).EndInit();
->>>>>>> origin/master
             this.tabFaktury.ResumeLayout(false);
             this.tabFaktury.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridFaktury)).EndInit();
@@ -732,30 +600,19 @@
         private System.Windows.Forms.Label napis_miesiac;
         private System.Windows.Forms.Label napis_firma;
         private System.Windows.Forms.ComboBox comboMiesiace;
-        private System.Windows.Forms.Button buttonPokaz;
+        private System.Windows.Forms.Button buttonGeneruj;
         private System.Windows.Forms.ComboBox comboRok;
         private System.Windows.Forms.DataGridView dataGridFaktury;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colLp;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colDataWystawienia;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colMnoznik;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colPokaz;
         private System.Windows.Forms.DataGridViewTextBoxColumn colNr;
         private System.Windows.Forms.DataGridViewTextBoxColumn colMiasto;
         private System.Windows.Forms.DataGridViewTextBoxColumn colWsp;
         private System.Windows.Forms.DataGridViewTextBoxColumn colCena;
         private System.Windows.Forms.DataGridViewTextBoxColumn colFirmy;
         private System.Windows.Forms.DataGridViewTextBoxColumn colPrzychod;
-<<<<<<< HEAD
-        private System.Windows.Forms.DataGridView dataGridView1;
-        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn1;
-        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn2;
-        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn3;
-        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn4;
-        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn5;
-        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn6;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colLp;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colDataWystawienia;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colMnoznik;
-        private System.Windows.Forms.Button buttonStworzFakture;
-        private System.Windows.Forms.RadioButton radioData;
-        private System.Windows.Forms.RadioButton radioTabela;
-=======
         private System.Windows.Forms.DataGridView dataGridNadajniki;
         private System.Windows.Forms.DataGridViewTextBoxColumn colNrNadajniki;
         private System.Windows.Forms.DataGridViewTextBoxColumn colFirmaNadajniki;
@@ -767,7 +624,6 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn colNazwaModele;
         private System.Windows.Forms.DataGridViewTextBoxColumn colZasiegModele;
         private System.Windows.Forms.DataGridViewTextBoxColumn colCenaModele;
->>>>>>> origin/master
     }
 }
 
