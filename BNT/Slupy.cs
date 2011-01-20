@@ -17,6 +17,13 @@ namespace BNT
         {
             this.tabelka = tabelka;
             
+            SQL sql = new SQL();
+		    string[][] dane = sql.CzytajSlupy();
+		    if (dane.Length > 0)
+		        tabelka.Rows.Clear();
+		
+		    for (int j = 0; j < dane.Length; ++j)
+		        tabelka.Rows.Add(dane[j]);
 
             StworzPrzyciski(tabSlupy);
         }
