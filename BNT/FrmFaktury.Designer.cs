@@ -35,10 +35,6 @@
             this.labelAdres = new System.Windows.Forms.Label();
             this.labelDataWystawienia = new System.Windows.Forms.Label();
             this.dataGridProdukty = new System.Windows.Forms.DataGridView();
-            this.labelTermin = new System.Windows.Forms.Label();
-            this.labelDoZaplaty = new System.Windows.Forms.Label();
-            this.labelWystawil = new System.Windows.Forms.Label();
-            this.labelOdebral = new System.Windows.Forms.Label();
             this.colLp = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colUsluga = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colSztuk = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -47,6 +43,10 @@
             this.colBrutto = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colVAT = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colNetto = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.labelTermin = new System.Windows.Forms.Label();
+            this.labelDoZaplaty = new System.Windows.Forms.Label();
+            this.labelWystawil = new System.Windows.Forms.Label();
+            this.labelOdebral = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridProdukty)).BeginInit();
             this.SuspendLayout();
             // 
@@ -140,50 +140,6 @@
             this.dataGridProdukty.Size = new System.Drawing.Size(545, 51);
             this.dataGridProdukty.TabIndex = 6;
             // 
-            // labelTermin
-            // 
-            this.labelTermin.AutoSize = true;
-            this.labelTermin.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
-            this.labelTermin.Location = new System.Drawing.Point(68, 376);
-            this.labelTermin.Name = "labelTermin";
-            this.labelTermin.Size = new System.Drawing.Size(134, 16);
-            this.labelTermin.TabIndex = 7;
-            this.labelTermin.Text = "Termin płatności: ";
-            // 
-            // labelDoZaplaty
-            // 
-            this.labelDoZaplaty.AutoSize = true;
-            this.labelDoZaplaty.BackColor = System.Drawing.Color.White;
-            this.labelDoZaplaty.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
-            this.labelDoZaplaty.ForeColor = System.Drawing.SystemColors.ControlText;
-            this.labelDoZaplaty.Location = new System.Drawing.Point(359, 376);
-            this.labelDoZaplaty.Name = "labelDoZaplaty";
-            this.labelDoZaplaty.Size = new System.Drawing.Size(93, 16);
-            this.labelDoZaplaty.TabIndex = 8;
-            this.labelDoZaplaty.Text = "Do zapłaty: ";
-            // 
-            // labelWystawil
-            // 
-            this.labelWystawil.AutoSize = true;
-            this.labelWystawil.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.25F);
-            this.labelWystawil.Location = new System.Drawing.Point(56, 711);
-            this.labelWystawil.Name = "labelWystawil";
-            this.labelWystawil.Size = new System.Drawing.Size(121, 64);
-            this.labelWystawil.TabIndex = 9;
-            this.labelWystawil.Text = "Fakturę wystawił:\r\n\r\nŁukasz Andrzejak\r\nArkadiusz Neuman";
-            this.labelWystawil.TextAlign = System.Drawing.ContentAlignment.TopCenter;
-            // 
-            // labelOdebral
-            // 
-            this.labelOdebral.AutoSize = true;
-            this.labelOdebral.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.25F);
-            this.labelOdebral.Location = new System.Drawing.Point(390, 711);
-            this.labelOdebral.Name = "labelOdebral";
-            this.labelOdebral.Size = new System.Drawing.Size(109, 32);
-            this.labelOdebral.TabIndex = 10;
-            this.labelOdebral.Text = "Fakturę odebrał:\r\n\r\n";
-            this.labelOdebral.TextAlign = System.Drawing.ContentAlignment.TopCenter;
-            // 
             // colLp
             // 
             this.colLp.HeaderText = "Lp";
@@ -240,12 +196,56 @@
             this.colNetto.ReadOnly = true;
             this.colNetto.Width = 70;
             // 
+            // labelTermin
+            // 
+            this.labelTermin.AutoSize = true;
+            this.labelTermin.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
+            this.labelTermin.Location = new System.Drawing.Point(68, 376);
+            this.labelTermin.Name = "labelTermin";
+            this.labelTermin.Size = new System.Drawing.Size(134, 16);
+            this.labelTermin.TabIndex = 7;
+            this.labelTermin.Text = "Termin płatności: ";
+            // 
+            // labelDoZaplaty
+            // 
+            this.labelDoZaplaty.AutoSize = true;
+            this.labelDoZaplaty.BackColor = System.Drawing.Color.White;
+            this.labelDoZaplaty.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
+            this.labelDoZaplaty.ForeColor = System.Drawing.SystemColors.ControlText;
+            this.labelDoZaplaty.Location = new System.Drawing.Point(359, 376);
+            this.labelDoZaplaty.Name = "labelDoZaplaty";
+            this.labelDoZaplaty.Size = new System.Drawing.Size(93, 16);
+            this.labelDoZaplaty.TabIndex = 8;
+            this.labelDoZaplaty.Text = "Do zapłaty: ";
+            // 
+            // labelWystawil
+            // 
+            this.labelWystawil.AutoSize = true;
+            this.labelWystawil.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.25F);
+            this.labelWystawil.Location = new System.Drawing.Point(68, 637);
+            this.labelWystawil.Name = "labelWystawil";
+            this.labelWystawil.Size = new System.Drawing.Size(121, 64);
+            this.labelWystawil.TabIndex = 9;
+            this.labelWystawil.Text = "Fakturę wystawił:\r\n\r\nŁukasz Andrzejak\r\nArkadiusz Neuman";
+            this.labelWystawil.TextAlign = System.Drawing.ContentAlignment.TopCenter;
+            // 
+            // labelOdebral
+            // 
+            this.labelOdebral.AutoSize = true;
+            this.labelOdebral.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.25F);
+            this.labelOdebral.Location = new System.Drawing.Point(394, 637);
+            this.labelOdebral.Name = "labelOdebral";
+            this.labelOdebral.Size = new System.Drawing.Size(109, 32);
+            this.labelOdebral.TabIndex = 10;
+            this.labelOdebral.Text = "Fakturę odebrał:\r\n\r\n";
+            this.labelOdebral.TextAlign = System.Drawing.ContentAlignment.TopCenter;
+            // 
             // FrmFaktury
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.White;
-            this.ClientSize = new System.Drawing.Size(620, 862);
+            this.ClientSize = new System.Drawing.Size(620, 746);
             this.Controls.Add(this.labelOdebral);
             this.Controls.Add(this.labelWystawil);
             this.Controls.Add(this.labelDoZaplaty);

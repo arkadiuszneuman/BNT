@@ -11,12 +11,20 @@ namespace BNT
     public class SQL
     {
         SqlCeConnection cn = new SqlCeConnection("Data Source=..\\..\\Baza_BNT.sdf;Persist Security Info=False;");
+        string stringObslugiBledu = "Błąd bazy!";
 
         ~SQL()
         {
             cn.Close();
         }
-        
+
+        private void Restart()
+        {
+            this.cn.Close();
+            this.cn = new SqlCeConnection("Data Source=..\\..\\Baza_BNT.sdf;Persist Security Info=True;");
+            this.cn.Open();
+        }
+
         public SQL()
         {
             cn.Open();
@@ -112,46 +120,50 @@ namespace BNT
             
             string zapytanie = "SELECT slupy.id, miasta.nazwa, slupy.wsp_x, slupy.wsp_y, slupy.cena FROM slupy, miasta WHERE slupy.id_miasta=miasta.id";
             SqlCeDataReader rdr = Zapytanie(zapytanie);
-            while (rdr.Read())
+            try
             {
-                string[] s = new string[6];
-                s[0] = rdr[0].ToString();
-                s[1] = rdr[1].ToString();
-                s[2] = rdr[2].ToString()+";"+rdr[3].ToString(); //wspolrzedne x i y w jednej kolumnie beda
-                s[3] = rdr[4].ToString() + " zł";
-                
-                tablica.Add(s);
-            }
-            
-            for (int i = 0; i < tablica.Count; ++i)
-            {
-                string zapytanieFirmy = "SELECT firmy.nazwa FROM firmy, nadajniki WHERE firmy.id IN (SELECT nadajniki.id_firmy FROM nadajniki WHERE nadajniki.id_slupu=" + tablica[i][0] + ") GROUP BY firmy.nazwa";
-                rdr = Zapytanie(zapytanieFirmy);
-                string firmy = "";
-
-                try
+                while (rdr.Read())
                 {
-                    while (rdr.Read())
+                    string[] s = new string[6];
+                    s[0] = rdr[0].ToString();
+                    s[1] = rdr[1].ToString();
+                    s[2] = rdr[2].ToString() + ";" + rdr[3].ToString(); //wspolrzedne x i y w jednej kolumnie beda
+                    s[3] = rdr[4].ToString() + " zł";
+
+                    tablica.Add(s);
+                }
+
+                for (int i = 0; i < tablica.Count; ++i)
+                {
+                    string zapytanieFirmy = "SELECT firmy.nazwa FROM firmy, nadajniki WHERE firmy.id IN (SELECT nadajniki.id_firmy FROM nadajniki WHERE nadajniki.id_slupu=" + tablica[i][0] + ") GROUP BY firmy.nazwa";
+                    rdr = Zapytanie(zapytanieFirmy);
+                    string firmy = "";
+
                     {
-                        firmy += rdr[0].ToString() + ", ";
+                        while (rdr.Read())
+                        {
+                            firmy += rdr[0].ToString() + ", ";
+                        }
                     }
-                }
-                catch (SqlCeLockTimeoutException)
-                {
-                    MessageBox.Show("Przekroczono limit czasu");
-                    return tablica.ToArray();
-                }
 
-                if (firmy.Length > 0) //zapisanie firm
-                    tablica[i][4] = firmy.Remove(firmy.Length - 2); //usuniecie ostatniej spacji i zapisanie firm do tablicy
-                else
-                    tablica[i][4] = "Nikt nie dzierżawi";
+                    if (firmy.Length > 0) //zapisanie firm
+                        tablica[i][4] = firmy.Remove(firmy.Length - 2); //usuniecie ostatniej spacji i zapisanie firm do tablicy
+                    else
+                        tablica[i][4] = "Nikt nie dzierżawi";
 
-                //zapisanie ceny
-                if (firmy.Length > 0)
-                    tablica[i][5] = (float.Parse(tablica[i][3].Remove(tablica[i][3].Length - 3)) * (firmy.Split(',').Length - 1)).ToString() + " zł";
-                else
-                    tablica[i][5] = "0 zł";
+                    //zapisanie ceny
+                    if (firmy.Length > 0)
+                        //tablica[i][5] = (float.Parse(tablica[i][3].Remove(tablica[i][3].Length - 3)) * (firmy.Split(',').Length - 1)).ToString() + " zł";
+                        tablica[i][5] = (float.Parse(CzytajDochodSlupa(tablica[i][0])) + float.Parse(tablica[i][3].Remove(tablica[i][3].Length -2))).ToString("F") + " zł";
+                    else
+                        tablica[i][5] = "0 zł";
+                }
+            }
+            catch (SqlCeLockTimeoutException)
+            {
+                MessageBox.Show(stringObslugiBledu);
+                Restart();
+                return tablica.ToArray();
             }
 
             return tablica.ToArray();
@@ -554,6 +566,22 @@ namespace BNT
             return tablica.ToArray();
         }
 
+
+        public string CzytajDochodSlupa(string idSlupu)
+        {
+            string zapytanie = "SELECT SUM(modele.cena*nadajniki.ilosc) FROM slupy LEFT OUTER JOIN nadajniki " +
+                "ON slupy.id = nadajniki.id_slupu LEFT OUTER JOIN modele ON modele.id = nadajniki.id_modelu WHERE (slupy.id = " + idSlupu + ")";
+
+            List<string[]> tablica = new List<string[]>();
+            SqlCeDataReader rdr = Zapytanie(zapytanie);
+            string s = "";
+            if (rdr.Read())
+            {
+                s = rdr[0].ToString();
+            }
+
+            return s;
+        }
 
         private string CzytajKwoteMiesieczna(string nazwaFirmy, int numerMiesiaca, int numerRoku)
         {

@@ -15,6 +15,7 @@ namespace BNT
         //MapBtn m;
         SQL sql = new SQL();
         bool dodawajMiasto = false;
+        List<MapBtn> buttony = new List<MapBtn>();
 
         public FormaGlowna()
         {
@@ -23,7 +24,7 @@ namespace BNT
             Text = "BNT - Baza Nadajników Transmisyjnych v" + v;
             foreach (string[] miasta in sql.CzytajMiasta(true))
             {
-                new MapBtn(tabMapa, panelMiasto, miasta[0], short.Parse(miasta[1]), short.Parse(miasta[2]));
+                buttony.Add(new MapBtn(tabMapa, panelMiasto, miasta[0], short.Parse(miasta[1]), short.Parse(miasta[2])));
             }
             pictureBoxMapa.SendToBack();
         }
@@ -41,11 +42,20 @@ namespace BNT
                 NazwaMiasta dialog = new NazwaMiasta();
                 if (dialog.ShowDialog() == System.Windows.Forms.DialogResult.OK)
                 {
+                    foreach (MapBtn b in buttony)
+                        b.Usun();
+
                     sql.DodajMiasto(dialog.Nazwa, new Point(((MouseEventArgs)e).X, ((MouseEventArgs)e).Y));
+
+                    foreach (string[] miasta in sql.CzytajMiasta(true))
+                    {
+                        buttony.Add(new MapBtn(tabMapa, panelMiasto, miasta[0], short.Parse(miasta[1]), short.Parse(miasta[2])));
+                    }
+
+                    pictureBoxMapa.SendToBack();
+                    dodawajMiasto = false;
                 }
             }
-
-            Text = ((MouseEventArgs)e).X.ToString() + " " + ((MouseEventArgs)e).Y.ToString();
         }
 
         //tutaj dodawac swoje klasy, reakcja na zmiane karty (zakladki)
@@ -66,6 +76,13 @@ namespace BNT
                     new Firmy(dataGridFirmy, tabFirmy);
                     break;
                 case 5:
+                    comboFirmy.SelectedIndex = -1;
+                    comboMiesiace.SelectedIndex = 0;
+                    comboRok.SelectedIndex = -1;
+                    radioData.Enabled = false;
+                    radioTabela.Enabled = false;
+                    buttonPokaz.Enabled = false;
+                    radioData.Checked = true;
                     new Faktury(comboFirmy,comboMiesiace,comboRok,buttonPokaz,buttonStworzFakture,dataGridFaktury, radioTabela, radioData);
                     break;
             }

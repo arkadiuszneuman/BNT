@@ -340,10 +340,17 @@ namespace BNT
             this.nazwaMiasta.AutoSize = true;
             this.nazwaMiasta.Visible = false;
             this.tabPage = tab;
+            nazwaMiasta.BringToFront();
             tab.Controls.Add(ikona);
             tab.Controls.Add(nazwaMiasta);
 
             MyszPoza(null, null);
+        }
+
+        public void Usun()
+        {
+            tabPage.Controls.Remove(ikona);
+            tabPage.Controls.Remove(nazwaMiasta);
         }
 
         private void WypelnijPanel()

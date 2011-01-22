@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Windows.Forms;
+using System.Data.SqlServerCe;
 
 namespace BNT
 {
@@ -30,7 +31,14 @@ namespace BNT
             this.radioTabela = radioTabela;
             this.radioData = radioData;
             this.comboFirmy.Items.Clear();
-            this.comboFirmy.Items.AddRange(sql.CzytajFirmy());
+            try
+            {
+                this.comboFirmy.Items.AddRange(sql.CzytajFirmy());
+            }
+            catch (SqlCeLockTimeoutException)
+            {
+                MessageBox.Show("Błąd Bazy!");
+            }
             this.pierwszyRaz = true;
 
             this.radioData.Checked = true;
@@ -74,7 +82,7 @@ namespace BNT
 
         private void buttonPokaz_Click(object sender, EventArgs e)
         {
-         
+         if(comboFirmy.SelectedIndex != -1)
             if (radioData.Checked)
                 new FrmFaktury(comboFirmy.SelectedItem.ToString(), comboMiesiace.SelectedIndex + 1, DateTime.Now.Year - (comboRok.Items.Count - (comboRok.SelectedIndex+1))).ShowDialog();
             else
@@ -91,9 +99,16 @@ namespace BNT
                 comboRok.Enabled = false;
                 buttonPokaz.Enabled = true;
                 dataGridFaktury.Enabled = true;
-                string[][] dane = sql.CzytajFaktury(comboFirmy.SelectedItem.ToString());
-                for (int j = 0; j < dane.Length; ++j)
-                    dataGridFaktury.Rows.Add(dane[j]);
+                try
+                {
+                    string[][] dane = sql.CzytajFaktury(comboFirmy.SelectedItem.ToString());
+                    for (int j = 0; j < dane.Length; ++j)
+                        dataGridFaktury.Rows.Add(dane[j]);
+                }
+                catch (SqlCeLockTimeoutException)
+                {
+                    MessageBox.Show("Błąd Bazy!");
+                }
             }
             else
             {
@@ -109,10 +124,17 @@ namespace BNT
             if (radioData.Checked)
             {
                 if(comboFirmy.SelectedItem != null)
-                if (sql.CzytajNajpozniejszaDateZaplaty(comboFirmy.SelectedItem.ToString(), comboMiesiace.SelectedIndex + 1, DateTime.Now.Year - (comboRok.Items.Count - (comboRok.SelectedIndex + 1)))[0] == null)
-                    this.buttonPokaz.Enabled = false;
-                else
-                    this.buttonPokaz.Enabled = true;
+                    try
+                    {
+                        if (sql.CzytajNajpozniejszaDateZaplaty(comboFirmy.SelectedItem.ToString(), comboMiesiace.SelectedIndex + 1, DateTime.Now.Year - (comboRok.Items.Count - (comboRok.SelectedIndex + 1)))[0] == null)
+                            this.buttonPokaz.Enabled = false;
+                        else
+                            this.buttonPokaz.Enabled = true;
+                    }
+                    catch (SqlCeLockTimeoutException)
+                    {
+                        MessageBox.Show("Błąd Bazy!");
+                    }
             }
             else
                 this.buttonPokaz.Enabled = true;

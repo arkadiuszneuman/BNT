@@ -63,6 +63,17 @@
             this.colCenaModele = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.tabFirmy = new System.Windows.Forms.TabPage();
             this.dataGridFirmy = new System.Windows.Forms.DataGridView();
+            this.colIdFirmy = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colNazwaFirmy = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colNrNadFirmy = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colImieFirmy = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colNazwiskoFirmy = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colUlicaFirmy = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colKodFirmy = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colMiastoFirmy = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colNipFirmy = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colRegonFirmy = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colTelFirmy = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.tabFaktury = new System.Windows.Forms.TabPage();
             this.radioTabela = new System.Windows.Forms.RadioButton();
             this.radioData = new System.Windows.Forms.RadioButton();
@@ -79,17 +90,6 @@
             this.napis_rok = new System.Windows.Forms.Label();
             this.napis_miesiac = new System.Windows.Forms.Label();
             this.napis_firma = new System.Windows.Forms.Label();
-            this.colIdFirmy = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colNazwaFirmy = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colNrNadFirmy = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colImieFirmy = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colNazwiskoFirmy = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colUlicaFirmy = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colKodFirmy = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colMiastoFirmy = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colNipFirmy = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colRegonFirmy = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colTelFirmy = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.tabControl.SuspendLayout();
             this.tabMapa.SuspendLayout();
             this.panelMiasto.SuspendLayout();
@@ -461,6 +461,74 @@
             this.dataGridFirmy.Size = new System.Drawing.Size(545, 459);
             this.dataGridFirmy.TabIndex = 2;
             // 
+            // colIdFirmy
+            // 
+            this.colIdFirmy.HeaderText = "Id";
+            this.colIdFirmy.Name = "colIdFirmy";
+            this.colIdFirmy.ReadOnly = true;
+            this.colIdFirmy.Visible = false;
+            // 
+            // colNazwaFirmy
+            // 
+            this.colNazwaFirmy.HeaderText = "Nazwa";
+            this.colNazwaFirmy.Name = "colNazwaFirmy";
+            this.colNazwaFirmy.ReadOnly = true;
+            // 
+            // colNrNadFirmy
+            // 
+            this.colNrNadFirmy.HeaderText = "Nr nadajnika";
+            this.colNrNadFirmy.Name = "colNrNadFirmy";
+            this.colNrNadFirmy.ReadOnly = true;
+            // 
+            // colImieFirmy
+            // 
+            this.colImieFirmy.HeaderText = "Imię";
+            this.colImieFirmy.Name = "colImieFirmy";
+            this.colImieFirmy.ReadOnly = true;
+            // 
+            // colNazwiskoFirmy
+            // 
+            this.colNazwiskoFirmy.HeaderText = "Nazwisko";
+            this.colNazwiskoFirmy.Name = "colNazwiskoFirmy";
+            this.colNazwiskoFirmy.ReadOnly = true;
+            this.colNazwiskoFirmy.Width = 130;
+            // 
+            // colUlicaFirmy
+            // 
+            this.colUlicaFirmy.HeaderText = "Ulica";
+            this.colUlicaFirmy.Name = "colUlicaFirmy";
+            this.colUlicaFirmy.ReadOnly = true;
+            // 
+            // colKodFirmy
+            // 
+            this.colKodFirmy.HeaderText = "Kod Pocztowy";
+            this.colKodFirmy.Name = "colKodFirmy";
+            this.colKodFirmy.ReadOnly = true;
+            // 
+            // colMiastoFirmy
+            // 
+            this.colMiastoFirmy.HeaderText = "Miasto";
+            this.colMiastoFirmy.Name = "colMiastoFirmy";
+            this.colMiastoFirmy.ReadOnly = true;
+            // 
+            // colNipFirmy
+            // 
+            this.colNipFirmy.HeaderText = "Nip";
+            this.colNipFirmy.Name = "colNipFirmy";
+            this.colNipFirmy.ReadOnly = true;
+            // 
+            // colRegonFirmy
+            // 
+            this.colRegonFirmy.HeaderText = "Regon";
+            this.colRegonFirmy.Name = "colRegonFirmy";
+            this.colRegonFirmy.ReadOnly = true;
+            // 
+            // colTelFirmy
+            // 
+            this.colTelFirmy.HeaderText = "Telefon";
+            this.colTelFirmy.Name = "colTelFirmy";
+            this.colTelFirmy.ReadOnly = true;
+            // 
             // tabFaktury
             // 
             this.tabFaktury.Controls.Add(this.radioTabela);
@@ -575,6 +643,7 @@
             // 
             // comboRok
             // 
+            this.comboRok.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.comboRok.Enabled = false;
             this.comboRok.FormattingEnabled = true;
             this.comboRok.Items.AddRange(new object[] {
@@ -588,6 +657,7 @@
             // 
             // comboMiesiace
             // 
+            this.comboMiesiace.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.comboMiesiace.Enabled = false;
             this.comboMiesiace.Items.AddRange(new object[] {
             "Styczeń",
@@ -609,6 +679,8 @@
             // 
             // comboFirmy
             // 
+            this.comboFirmy.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.Suggest;
+            this.comboFirmy.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems;
             this.comboFirmy.FormattingEnabled = true;
             this.comboFirmy.Location = new System.Drawing.Point(67, 22);
             this.comboFirmy.Name = "comboFirmy";
@@ -641,74 +713,6 @@
             this.napis_firma.Size = new System.Drawing.Size(35, 13);
             this.napis_firma.TabIndex = 0;
             this.napis_firma.Text = "Firma:";
-            // 
-            // colIdFirmy
-            // 
-            this.colIdFirmy.HeaderText = "Id";
-            this.colIdFirmy.Name = "colIdFirmy";
-            this.colIdFirmy.ReadOnly = true;
-            this.colIdFirmy.Visible = false;
-            // 
-            // colNazwaFirmy
-            // 
-            this.colNazwaFirmy.HeaderText = "Nazwa";
-            this.colNazwaFirmy.Name = "colNazwaFirmy";
-            this.colNazwaFirmy.ReadOnly = true;
-            // 
-            // colNrNadFirmy
-            // 
-            this.colNrNadFirmy.HeaderText = "Nr nadajnika";
-            this.colNrNadFirmy.Name = "colNrNadFirmy";
-            this.colNrNadFirmy.ReadOnly = true;
-            // 
-            // colImieFirmy
-            // 
-            this.colImieFirmy.HeaderText = "Imię";
-            this.colImieFirmy.Name = "colImieFirmy";
-            this.colImieFirmy.ReadOnly = true;
-            // 
-            // colNazwiskoFirmy
-            // 
-            this.colNazwiskoFirmy.HeaderText = "Nazwisko";
-            this.colNazwiskoFirmy.Name = "colNazwiskoFirmy";
-            this.colNazwiskoFirmy.ReadOnly = true;
-            this.colNazwiskoFirmy.Width = 130;
-            // 
-            // colUlicaFirmy
-            // 
-            this.colUlicaFirmy.HeaderText = "Ulica";
-            this.colUlicaFirmy.Name = "colUlicaFirmy";
-            this.colUlicaFirmy.ReadOnly = true;
-            // 
-            // colKodFirmy
-            // 
-            this.colKodFirmy.HeaderText = "Kod Pocztowy";
-            this.colKodFirmy.Name = "colKodFirmy";
-            this.colKodFirmy.ReadOnly = true;
-            // 
-            // colMiastoFirmy
-            // 
-            this.colMiastoFirmy.HeaderText = "Miasto";
-            this.colMiastoFirmy.Name = "colMiastoFirmy";
-            this.colMiastoFirmy.ReadOnly = true;
-            // 
-            // colNipFirmy
-            // 
-            this.colNipFirmy.HeaderText = "Nip";
-            this.colNipFirmy.Name = "colNipFirmy";
-            this.colNipFirmy.ReadOnly = true;
-            // 
-            // colRegonFirmy
-            // 
-            this.colRegonFirmy.HeaderText = "Regon";
-            this.colRegonFirmy.Name = "colRegonFirmy";
-            this.colRegonFirmy.ReadOnly = true;
-            // 
-            // colTelFirmy
-            // 
-            this.colTelFirmy.HeaderText = "Telefon";
-            this.colTelFirmy.Name = "colTelFirmy";
-            this.colTelFirmy.ReadOnly = true;
             // 
             // FormaGlowna
             // 
